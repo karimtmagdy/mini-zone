@@ -3,7 +3,6 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@/components/ui/chart";
 import {
   Area,
@@ -14,50 +13,36 @@ import {
   Bar,
   BarChart,
 } from "recharts";
-import { ShoppingCart, ShoppingBag, Target, TrendingUp } from "lucide-react";
+import {
+  PageHead,
+  PageHeadTitle,
+  PageHeadGroup,
+  PageHeadDescription,
+} from "@/components/ui/head-page";
+import {
+  chartConfig,
+  deviceSales,
+  salesTrends,
+} from "@/core/data/insights-data-sales";
+import { Icon } from "@/assets/icon/icons";
 
 export default function SalesKpiInsightsPage() {
-  const salesTrends = [
-    { day: "Mon", orders: 120, revenue: 12000 },
-    { day: "Tue", orders: 150, revenue: 15000 },
-    { day: "Wed", orders: 180, revenue: 18000 },
-    { day: "Thu", orders: 140, revenue: 14000 },
-    { day: "Fri", orders: 200, revenue: 20000 },
-    { day: "Sat", orders: 250, revenue: 25000 },
-    { day: "Sun", orders: 220, revenue: 22000 },
-  ];
-
-  const deviceSales = [
-    { device: "Mobile", sales: 1500, fill: "hsl(var(--primary))" },
-    { device: "Desktop", sales: 800, fill: "hsl(var(--secondary))" },
-    { device: "Tablet", sales: 200, fill: "hsl(var(--accent))" },
-  ];
-
-  const chartConfig = {
-    revenue: {
-      label: "Revenue",
-      color: "hsl(var(--primary))",
-    },
-    orders: {
-      label: "Orders",
-      color: "hsl(var(--secondary))",
-    },
-  } satisfies ChartConfig;
-
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Sales Performance</h1>
-        <p className="text-muted-foreground italic">
-          Monitor transaction volume, conversion rates, and sales trends.
-        </p>
-      </div>
+      <PageHead>
+        <PageHeadGroup>
+          <PageHeadTitle>Sales Performance</PageHeadTitle>
+          <PageHeadDescription>
+            Monitor transaction volume, conversion rates, and sales trends.
+          </PageHeadDescription>
+        </PageHeadGroup>
+      </PageHead>
 
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
-            <ShoppingCart className="text-primary h-4 w-4" />
+            <Icon.ShoppingCartIcon className="text-primary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">1,284</div>
@@ -71,7 +56,7 @@ export default function SalesKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Conversion Rate
             </CardTitle>
-            <Target className="h-4 w-4 text-emerald-500" />
+            <Icon.TargetIcon className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">4.2%</div>
@@ -83,7 +68,7 @@ export default function SalesKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Repeat Purchase
             </CardTitle>
-            <ShoppingBag className="h-4 w-4 text-blue-500" />
+            <Icon.ShoppingBagIcon className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">18%</div>
@@ -96,7 +81,7 @@ export default function SalesKpiInsightsPage() {
         <Card className="col-span-4 transition-all hover:shadow-md">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="text-primary h-5 w-5" />
+              <Icon.TrendingUpIcon className="text-primary h-5 w-5" />
               Weekly Sales Trend
             </CardTitle>
           </CardHeader>

@@ -18,18 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {
-  MoreHorizontal,
-  Search,
-  FileText,
-  Truck,
-  User,
-  Trash2,
-  Eye,
-  Filter,
-  Download,
-  Calendar,
-} from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function OrdersPage() {
   const [search, setSearch] = useState("");
@@ -94,11 +83,11 @@ export default function OrdersPage() {
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" className="flex items-center gap-2">
-            <Download className="h-4 w-4" />
+            <Icon.DownloadIcon className="h-4 w-4" />
             Export
           </Button>
           <Button className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
+            <Icon.CalendarIcon className="h-4 w-4" />
             View Calendar
           </Button>
         </div>
@@ -106,7 +95,7 @@ export default function OrdersPage() {
 
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div className="relative w-full md:w-96">
-          <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+          <Icon.SearchIcon className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
           <Input
             placeholder="Search by order ID or customer..."
             className="pl-10"
@@ -120,7 +109,7 @@ export default function OrdersPage() {
             size="sm"
             className="flex items-center gap-2"
           >
-            <Filter className="h-4 w-4" />
+            <Icon.FilterIcon className="h-4 w-4" />
             More Filters
           </Button>
         </div>
@@ -150,7 +139,7 @@ export default function OrdersPage() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <User className="text-muted-foreground h-3.5 w-3.5" />
+                    <Icon.UserIcon className="text-muted-foreground h-3.5 w-3.5" />
                     <span className="text-sm font-medium">
                       {order.customer}
                     </span>
@@ -191,23 +180,23 @@ export default function OrdersPage() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="icon">
-                        <MoreHorizontal className="h-4 w-4" />
+                        <Icon.MoreHorizontalIcon className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Order Options</DropdownMenuLabel>
                       <DropdownMenuItem className="flex items-center gap-2">
-                        <Eye className="h-4 w-4" /> View Details
+                        <Icon.EyeIcon className="h-4 w-4" /> View Details
                       </DropdownMenuItem>
                       <DropdownMenuItem className="flex items-center gap-2">
-                        <FileText className="h-4 w-4" /> Generate Invoice
+                        <Icon.FileTextIcon className="h-4 w-4" /> Generate Invoice
                       </DropdownMenuItem>
                       <DropdownMenuItem className="text-primary flex items-center gap-2">
-                        <Truck className="h-4 w-4" /> Update Status
+                        <Icon.TruckIcon className="h-4 w-4" /> Update Status
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive flex items-center gap-2">
-                        <Trash2 className="h-4 w-4" /> Delete Record
+                        <Icon.Trash2Icon className="h-4 w-4" /> Delete Record
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

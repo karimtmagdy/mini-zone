@@ -7,8 +7,8 @@ import {
   SidebarMenu,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Settings } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { Icon } from "@/assets/icon/icons";
 
 export default function CrudSidebar({
   settingsMenuItems,
@@ -31,9 +31,9 @@ export default function CrudSidebar({
         isActive={isSettingsOpen || isSettingsActive}
         className={isSettingsOpen || isSettingsActive ? "text-primary" : ""}
       >
-        <Settings className="h-5 w-5" />
+        <Icon.SettingsIcon className="h-5 w-5" />
         <span>Settings</span>
-        <ChevronDown
+        <Icon.ChevronDownIcon
           className={cn(
             "ml-auto h-4 w-4 transition-transform",
             isSettingsOpen || isSettingsActive ? "rotate-180" : "",

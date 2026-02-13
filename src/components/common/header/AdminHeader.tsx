@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import RootHeader from "./RootHeader";
-import { Bell, HelpCircle, Settings } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import BreadcrumbHeader from "@/components/admin/sidebar/BreadcrumbSidebar";
-import { ToggleThemeIndicator } from "../toggle";
+import { ToggleAdminIndicator, ToggleThemeIndicator, ToggleUserMenuIndicator } from "../toggle";
+import { Icon } from "@/assets/icon/icons";
 
 export function AdminHeader() {
   return (
@@ -24,7 +24,7 @@ export function AdminHeader() {
           name="help-button"
           aria-label="help-button"
         >
-          <HelpCircle className="h-4 w-4" />
+          <Icon.HelpCircleIcon className="h-4 w-4" />
         </Button>
         <Button
           variant="ghost"
@@ -33,7 +33,7 @@ export function AdminHeader() {
           name="notification-button"
           aria-label="notification-button"
         >
-          <Bell className="h-4 w-4" />
+          <Icon.BellIcon className="h-4 w-4" />
           <span className="bg-primary absolute top-1.5 right-1.5 h-2 w-2 rounded-full" />
         </Button>
         <Button
@@ -43,11 +43,11 @@ export function AdminHeader() {
           name="settings-button"
           aria-label="settings-button"
         >
-          <Settings className="h-4 w-4" />
+          <Icon.SettingsIcon className="h-4 w-4" />
         </Button>
         <ToggleThemeIndicator />
-        {/* <ToggleUserMenuIndicator /> */}
-        {/* <ToggleAdminIndicator /> */}
+        <ToggleUserMenuIndicator />
+        <ToggleAdminIndicator />
       </div>
     </RootHeader>
   );

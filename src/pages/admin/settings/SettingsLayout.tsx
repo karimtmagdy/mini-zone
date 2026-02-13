@@ -1,13 +1,7 @@
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import {
-  User,
-  ShieldCheck,
-  Palette,
-  BellRing,
-  Globe,
-  Database,
-} from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
+
 import {
   PATH_SETTINGS_PROFILE,
   PATH_SETTINGS_SECURITY,
@@ -15,12 +9,25 @@ import {
 } from "@/lib/links/paths.routes";
 
 const settingsNavItems = [
-  { name: "My Profile", href: PATH_SETTINGS_PROFILE, icon: User },
-  { name: "Security & Login", href: PATH_SETTINGS_SECURITY, icon: ShieldCheck },
-  { name: "Theme & Interface", href: PATH_SETTINGS_APPEARANCE, icon: Palette },
-  { name: "Notifications", href: "#", icon: BellRing, disabled: true },
-  { name: "Localization", href: "#", icon: Globe, disabled: true },
-  { name: "Data Persistence", href: "#", icon: Database, disabled: true },
+  { name: "My Profile", href: PATH_SETTINGS_PROFILE, icon: Icon.UserIcon },
+  {
+    name: "Security & Login",
+    href: PATH_SETTINGS_SECURITY,
+    icon: Icon.ShieldCheckIcon,
+  },
+  {
+    name: "Theme & Interface",
+    href: PATH_SETTINGS_APPEARANCE,
+    icon: Icon.PaletteIcon,
+  },
+  { name: "Notifications", href: "#", icon: Icon.BellRingIcon, disabled: true },
+  { name: "Localization", href: "#", icon: Icon.GlobeIcon, disabled: true },
+  {
+    name: "Data Persistence",
+    href: "#",
+    icon: Icon.DatabaseIcon,
+    disabled: true,
+  },
 ];
 
 export default function SettingsLayout() {

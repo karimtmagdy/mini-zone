@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { KeyRound, Smartphone, History, ShieldAlert } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Icon } from "@/assets/icon/icons";
 
 export default function SecuritySettingsPage() {
   return (
@@ -20,7 +20,7 @@ export default function SecuritySettingsPage() {
         <div className="bg-muted/30 flex items-center justify-between rounded-xl border border-dashed p-4">
           <div className="flex items-center gap-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
-              <Smartphone className="h-5 w-5" />
+              <Icon.SmartphoneIcon className="h-5 w-5" />
             </div>
             <div>
               <p className="text-sm font-semibold">Two-Factor Authentication</p>
@@ -42,7 +42,7 @@ export default function SecuritySettingsPage() {
               <Input type="password" value="••••••••••••••••" disabled />
             </div>
             <Button variant="outline" size="sm" className="gap-2">
-              <KeyRound className="h-3.5 w-3.5" /> Rotate Password
+              <Icon.KeyRoundIcon className="h-3.5 w-3.5" /> Rotate Password
             </Button>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function SecuritySettingsPage() {
                 className="hover:bg-muted/50 flex items-center justify-between rounded-lg p-2 text-sm transition-colors"
               >
                 <div className="flex items-center gap-3">
-                  <History className="h-4 w-4 opacity-50" />
+                  <Icon.HistoryIcon className="h-4 w-4 opacity-50" />
                   <div>
                     <span className="font-medium">{sess.device}</span>
                     <span className="text-muted-foreground ml-2 text-xs">
@@ -88,7 +88,7 @@ export default function SecuritySettingsPage() {
 
         <div className="flex items-center justify-between border-t pt-6">
           <div className="text-destructive flex items-center gap-3">
-            <ShieldAlert className="h-5 w-5" />
+            <Icon.ShieldAlertIcon className="h-5 w-5" />
             <div className="text-sm">
               <p className="font-bold">Advanced Guardhouse</p>
               <p className="text-xs opacity-70">

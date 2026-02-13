@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/map";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Truck, Package, Clock, ShieldCheck } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function OrderTrackingPage() {
   const activeDeliveries = [
@@ -53,7 +53,7 @@ export default function OrderTrackingPage() {
         </div>
         <div className="flex gap-3">
           <Badge variant="success" className="gap-2">
-            <ShieldCheck className="h-3 w-3" /> System Online
+            <Icon.ShieldCheckIcon className="h-3 w-3" /> System Online
           </Badge>
           <Badge variant="info" className="gap-2">
             Live Updates
@@ -66,7 +66,7 @@ export default function OrderTrackingPage() {
         <Card className="bg-primary/5 border-primary/20">
           <CardHeader className="pb-2">
             <CardTitle className="text-muted-foreground flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
-              <Truck className="text-primary h-3.5 w-3.5" /> Active Fleet
+              <Icon.TruckIcon className="text-primary h-3.5 w-3.5" /> Active Fleet
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -80,7 +80,7 @@ export default function OrderTrackingPage() {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-muted-foreground flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
-              <Package className="h-3.5 w-3.5 text-blue-500" /> Pending Dispatch
+              <Icon.PackageIcon className="h-3.5 w-3.5 text-blue-500" /> Pending Dispatch
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -94,7 +94,7 @@ export default function OrderTrackingPage() {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-muted-foreground flex items-center gap-2 text-xs font-bold tracking-wider uppercase">
-              <Clock className="h-3.5 w-3.5 text-amber-500" /> Avg. Fulfillment
+              <Icon.ClockIcon className="h-3.5 w-3.5 text-amber-500" /> Avg. Fulfillment
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -143,7 +143,7 @@ export default function OrderTrackingPage() {
                   <MarkerContent>
                     <div className="group relative">
                       <div className="bg-primary flex h-10 w-10 animate-bounce items-center justify-center rounded-2xl shadow-xl ring-4 ring-white transition-all hover:scale-110">
-                        <Truck className="text-primary-foreground h-5 w-5" />
+                        <Icon.TruckIcon className="text-primary-foreground h-5 w-5" />
                       </div>
                       <div className="absolute -top-1 -right-1 h-3 w-3 animate-ping rounded-full bg-emerald-500" />
                     </div>
@@ -247,7 +247,7 @@ export default function OrderTrackingPage() {
           <Card className="border-none bg-linear-to-br from-indigo-600 to-indigo-700 text-white shadow-lg shadow-indigo-500/20">
             <CardContent className="p-6">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md">
-                <ShieldCheck className="h-6 w-6" />
+                <Icon.ShieldCheckIcon className="h-6 w-6" />
               </div>
               <h3 className="mb-2 text-xl font-bold italic">Secure Tracking</h3>
               <p className="text-xs leading-relaxed text-indigo-100 opacity-80">

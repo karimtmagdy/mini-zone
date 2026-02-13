@@ -18,18 +18,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {
-  MoreHorizontal,
-  Search,
-  PackagePlus,
-  Tag,
-  Layers,
-  Trash2,
-  Edit,
-  Filter,
-  Eye,
-  ArrowUpDown,
-} from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
+
 
 export default function ProductsPage() {
   const [search, setSearch] = useState("");
@@ -95,14 +85,14 @@ export default function ProductsPage() {
           </p>
         </div>
         <Button className="flex items-center gap-2">
-          <PackagePlus className="h-4 w-4" />
+          <Icon.PackagePlusIcon className="h-4 w-4" />
           Add New Product
         </Button>
       </div>
 
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div className="relative w-full md:w-96">
-          <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+          <Icon.SearchIcon className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
           <Input
             placeholder="Search products by name or category..."
             className="pl-10"
@@ -116,7 +106,7 @@ export default function ProductsPage() {
             size="sm"
             className="flex items-center gap-2"
           >
-            <Filter className="h-4 w-4" />
+            <Icon.FilterIcon className="h-4 w-4" />
             Filter
           </Button>
           <Button
@@ -124,7 +114,7 @@ export default function ProductsPage() {
             size="sm"
             className="flex items-center gap-2"
           >
-            <ArrowUpDown className="h-4 w-4" />
+            <Icon.ArrowUpDownIcon className="h-4 w-4" />
             Sort
           </Button>
         </div>
@@ -151,7 +141,7 @@ export default function ProductsPage() {
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <div className="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border">
-                      <Tag className="text-muted-foreground h-5 w-5" />
+                      <Icon.TagIcon className="text-muted-foreground h-5 w-5" />
                     </div>
                     <div className="flex min-w-0 flex-col">
                       <span className="truncate font-semibold">
@@ -165,7 +155,7 @@ export default function ProductsPage() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-2">
-                    <Layers className="text-muted-foreground h-3.5 w-3.5" />
+                    <Icon.LayersIcon className="text-muted-foreground h-3.5 w-3.5" />
                     <span className="text-sm">{product.category}</span>
                   </div>
                 </TableCell>
@@ -200,21 +190,21 @@ export default function ProductsPage() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="icon">
-                        <MoreHorizontal className="h-4 w-4" />
+                        <Icon.MoreHorizontalIcon className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem className="flex items-center gap-2">
-                        <Eye className="text-primary h-4 w-4" /> View Details
+                        <Icon.EyeIcon className="text-primary h-4 w-4" /> View Details
                       </DropdownMenuItem>
                       <DropdownMenuItem className="flex items-center gap-2">
-                        <Edit className="h-4 w-4 text-orange-500" /> Edit
+                        <Icon.EditIcon className="h-4 w-4 text-orange-500" /> Edit
                         Product
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive flex items-center gap-2">
-                        <Trash2 className="h-4 w-4" /> Delete
+                        <Icon.Trash2Icon className="h-4 w-4" /> Delete
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -9,12 +8,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
 
-export function ForgotPasswordForm({
-  className,
-  ...props
-}: React.ComponentProps<"form">) {
+export function ForgotPasswordForm({ ...props }: React.ComponentProps<"form">) {
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form {...props}>
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>

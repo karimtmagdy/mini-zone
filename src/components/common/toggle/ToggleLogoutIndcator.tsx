@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { LogOut } from "lucide-react";
-
+import { Icon } from "@/assets/icon/icons";
 export default function ToggleLogoutIndcator() {
   return (
     <Button
@@ -11,7 +10,7 @@ export default function ToggleLogoutIndcator() {
       variant="secondary"
     >
       <DropdownMenuItem>
-        <LogOut />
+        <Icon.LogOutIcon />
         Log out
       </DropdownMenuItem>
     </Button>

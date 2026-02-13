@@ -16,8 +16,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Plus, ChevronsUpDown } from "lucide-react";
-
+import { Icon } from "@/assets/icon/icons";
 export default function TopSidebar({
   teams,
 }: {
@@ -53,7 +52,7 @@ export default function TopSidebar({
                   </span>
                   <span className="truncate text-xs">{activeTeam.plan}</span>
                 </div>
-                <ChevronsUpDown className="ml-auto" />
+                <Icon.ChevronsUpDownIcon className="ml-auto" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -81,7 +80,7 @@ export default function TopSidebar({
               <DropdownMenuSeparator />
               <DropdownMenuItem className="gap-2 p-2">
                 <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                  <Plus className="size-4" />
+                  <Icon.PlusIcon className="size-4" />
                 </div>
                 <div className="text-muted-foreground font-medium">
                   Add team

@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Sun, Moon, Monitor, Type, Maximize2, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function AppearanceSettingsPage() {
   const [theme, setTheme] = useState("system");
@@ -26,19 +26,19 @@ export default function AppearanceSettingsPage() {
               {
                 id: "light",
                 name: "Light Mode",
-                icon: Sun,
+                icon: Icon.SunIcon,
                 desc: "Classic high-contrast",
               },
               {
                 id: "dark",
                 name: "Dark Nebula",
-                icon: Moon,
+                icon: Icon.MoonIcon,
                 desc: "Eye-soothing professional",
               },
               {
                 id: "system",
                 name: "Dynamic Sync",
-                icon: Monitor,
+                icon: Icon.MonitorIcon,
                 desc: "Follow OS preferences",
               },
             ].map((t) => (
@@ -54,7 +54,7 @@ export default function AppearanceSettingsPage() {
               >
                 {theme === t.id && (
                   <div className="bg-primary text-primary-foreground absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full">
-                    <Check className="h-3 w-3" />
+                    <Icon.CheckIcon className="h-3 w-3" />
                   </div>
                 )}
                 <t.icon
@@ -78,7 +78,7 @@ export default function AppearanceSettingsPage() {
               Typography scale
             </Label>
             <div className="flex items-center gap-4">
-              <Type className="h-4 w-4 opacity-50" />
+              <Icon.TypeIcon className="h-4 w-4 opacity-50" />
               <div className="bg-muted h-2 flex-1 overflow-hidden rounded-full">
                 <div className="bg-primary h-full w-[60%]" />
               </div>
@@ -119,7 +119,7 @@ export default function AppearanceSettingsPage() {
         <div className="flex items-center justify-between border-t pt-8">
           <div className="flex items-center gap-3">
             <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
-              <Maximize2 className="h-5 w-5" />
+              <Icon.Maximize2Icon className="h-5 w-5" />
             </div>
             <div className="text-sm">
               <p className="font-bold">Fullscreen Experience</p>

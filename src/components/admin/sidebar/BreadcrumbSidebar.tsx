@@ -32,7 +32,6 @@ export default function BreadcrumbSidebar() {
   };
 
   const allCrumbs = [homeCrumb, ...crumbs.filter((c) => c.path !== "/admin")];
-  console.log(allCrumbs);
   return (
     <Breadcrumb>
       <BreadcrumbList>

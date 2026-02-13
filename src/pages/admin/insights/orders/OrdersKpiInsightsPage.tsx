@@ -17,7 +17,7 @@ import {
   PieChart,
   Tooltip,
 } from "recharts";
-import { ShoppingCart, Truck, Clock, CheckCircle } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function OrdersKpiInsightsPage() {
   const orderStats = [
@@ -57,7 +57,7 @@ export default function OrdersKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Pending</CardTitle>
-            <Clock className="text-warning h-4 w-4 font-bold" />
+            <Icon.ClockIcon className="text-warning h-4 w-4 font-bold" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">15</div>
@@ -66,7 +66,7 @@ export default function OrdersKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Processing</CardTitle>
-            <ShoppingCart className="text-primary h-4 w-4" />
+            <Icon.ShoppingCartIcon className="text-primary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">25</div>
@@ -75,7 +75,7 @@ export default function OrdersKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Shipped</CardTitle>
-            <Truck className="text-secondary h-4 w-4" />
+            <Icon.TruckIcon className="text-secondary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">45</div>
@@ -84,7 +84,7 @@ export default function OrdersKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Delivered</CardTitle>
-            <CheckCircle className="h-4 w-4 text-emerald-500" />
+            <Icon.CheckCircle2Icon className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">110</div>

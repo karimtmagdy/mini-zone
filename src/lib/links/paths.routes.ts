@@ -31,3 +31,12 @@ export const PATH_SETTINGS_APPEARANCE = "/admin/settings/appearance";
 
 export const PATH_CUSTOMERS = "/admin/management/customers";
 export const PATH_REPORTS = "/admin/reports";
+
+
+export const PATH_SIGNIN = "/auth/login";
+export const PATH_SIGNUP = "/auth/register";
+export const PATH_FORGOT_PASSWORD = "/auth/forgot-password";
+export const PATH_RESET_PASSWORD = "/auth/reset-password";
+export const PATH_VERIFY_EMAIL = "/auth/verify-email";
+export const PATH_ME = "/users/me";
+

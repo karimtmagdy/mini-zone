@@ -17,7 +17,7 @@ import {
   PieChart,
   Tooltip,
 } from "recharts";
-import { DollarSign, TrendingUp, CreditCard, Wallet } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function RevenueKpisInsightsPage() {
   const revenueData = [
@@ -58,7 +58,7 @@ export default function RevenueKpisInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Monthly Revenue
             </CardTitle>
-            <DollarSign className="text-primary h-4 w-4" />
+            <Icon.DollarSignIcon className="text-primary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">$67,432.00</div>
@@ -70,7 +70,7 @@ export default function RevenueKpisInsightsPage() {
         <Card className="border-l-4 border-l-emerald-500">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total Profit</CardTitle>
-            <TrendingUp className="h-4 w-4 text-emerald-500" />
+            <Icon.TrendingUpIcon className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">$24,150.50</div>
@@ -82,7 +82,7 @@ export default function RevenueKpisInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Avg. Order Value
             </CardTitle>
-            <CreditCard className="h-4 w-4 text-blue-500" />
+            <Icon.CreditCardIcon className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">$124.50</div>
@@ -95,7 +95,7 @@ export default function RevenueKpisInsightsPage() {
         <Card className="col-span-4 transition-all hover:shadow-md">
           <CardHeader>
             <CardTitle className="text-primary flex items-center gap-2">
-              <Wallet className="h-5 w-5" />
+              <Icon.WalletIcon className="h-5 w-5" />
               Monthly Growth
             </CardTitle>
           </CardHeader>

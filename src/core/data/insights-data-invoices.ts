@@ -1,0 +1,42 @@
+export const invoices = [
+  {
+    id: "INV-001",
+    customer: "John Doe",
+    date: "2024-03-20",
+    amount: "$450.00",
+    status: "Paid",
+    method: "Credit Card",
+  },
+  {
+    id: "INV-002",
+    customer: "Jane Smith",
+    date: "2024-03-21",
+    amount: "$1,200.00",
+    status: "Pending",
+    method: "Bank Transfer",
+  },
+  {
+    id: "INV-003",
+    customer: "Acme Corp",
+    date: "2024-03-22",
+    amount: "$890.00",
+    status: "Overdue",
+    method: "PayPal",
+  },
+  {
+    id: "INV-004",
+    customer: "Sarah Wilson",
+    date: "2024-03-23",
+    amount: "$124.50",
+    status: "Paid",
+    method: "Apple Pay",
+  },
+  {
+    id: "INV-005",
+    customer: "Tech Solutions",
+    date: "2024-03-24",
+    amount: "$2,400.00",
+    status: "Refunded",
+    method: "Credit Card",
+  },
+];

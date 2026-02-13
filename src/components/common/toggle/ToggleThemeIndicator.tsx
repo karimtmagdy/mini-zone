@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-// import { Icon } from "@/assets/icon/icons";
+import { Icon } from "@/assets/icon/icons";
 import { useTheme } from "@/context/ThemeContext";
-import { SunIcon, MoonIcon } from "lucide-react";
 export default function ToggleThemeIndicator() {
   const { theme, setTheme } = useTheme();
   return (
@@ -12,7 +11,7 @@ export default function ToggleThemeIndicator() {
       aria-label="toggle-theme-indicator"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
-      {theme === "light" ? <SunIcon /> : <MoonIcon />}
+      {theme === "light" ? <Icon.SunIcon /> : <Icon.MoonIcon />}
     </Button>
   );
 }

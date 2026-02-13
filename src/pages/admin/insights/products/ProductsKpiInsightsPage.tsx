@@ -17,7 +17,7 @@ import {
   AreaChart,
   CartesianGrid,
 } from "recharts";
-import { Package, AlertTriangle, CheckCircle2, TrendingUp } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function ProductsKpiInsightsPage() {
   const inventoryData = [
@@ -58,7 +58,7 @@ export default function ProductsKpiInsightsPage() {
         <Card className="shadow-xs">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total SKUs</CardTitle>
-            <Package className="text-muted-foreground h-4 w-4" />
+            <Icon.PackageIcon className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">507</div>
@@ -72,7 +72,7 @@ export default function ProductsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Low Stock Alerts
             </CardTitle>
-            <AlertTriangle className="h-4 w-4 text-orange-500" />
+            <Icon.AlertTriangleIcon className="h-4 w-4 text-orange-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-orange-600">45</div>
@@ -86,7 +86,7 @@ export default function ProductsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Healthy Inventory
             </CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+            <Icon.CheckCircle2Icon className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-emerald-600">89%</div>
@@ -101,7 +101,7 @@ export default function ProductsKpiInsightsPage() {
         <Card className="col-span-4 transition-all hover:shadow-md">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="text-primary h-5 w-5" />
+              <Icon.TrendingUpIcon className="text-primary h-5 w-5" />
               Stock Level Trends
             </CardTitle>
           </CardHeader>

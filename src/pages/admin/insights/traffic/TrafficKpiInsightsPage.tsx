@@ -6,7 +6,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import { Line, LineChart, XAxis, YAxis, CartesianGrid } from "recharts";
-import { Globe, MousePointer2, Clock, Share2 } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function TrafficKpiInsightsPage() {
   const visitorData = [
@@ -49,7 +49,7 @@ export default function TrafficKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
-            <Globe className="text-primary h-4 w-4" />
+            <Icon.GlobeIcon className="text-primary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">42.5k</div>
@@ -59,7 +59,7 @@ export default function TrafficKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Bounce Rate</CardTitle>
-            <MousePointer2 className="h-4 w-4 text-orange-500" />
+            <Icon.MousePointer2Icon className="h-4 w-4 text-orange-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">34.2%</div>
@@ -69,7 +69,7 @@ export default function TrafficKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Avg. Duration</CardTitle>
-            <Clock className="h-4 w-4 text-blue-500" />
+            <Icon.ClockIcon className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">4m 32s</div>
@@ -79,7 +79,7 @@ export default function TrafficKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Social Shares</CardTitle>
-            <Share2 className="h-4 w-4 text-pink-500" />
+            <Icon.Share2Icon className="h-4 w-4 text-pink-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">1,204</div>

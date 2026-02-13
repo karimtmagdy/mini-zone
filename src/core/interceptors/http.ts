@@ -1,0 +1,13 @@
+import axios from "axios";
+
+export const http = axios.create({
+  //   baseURL: import.meta.env.DEV
+  //     ? import.meta.env.VITE_DEV_URL
+  //     : import.meta.env.VITE_PROD_URL,
+  baseURL: import.meta.env.VITE_PROD_URL,
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  withCredentials: true,
+});

@@ -7,13 +7,13 @@ import {
   SidebarGroup,
   SidebarGroupContent,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Users, Package } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom"; // Import useLocation
 import { cn } from "@/lib/utils";
-import ButtomSideBar from "../sidebar/ButtomSideBar";
+// import ButtomSideBar from "../sidebar/ButtomSideBar";
 import ApplicationSidebar from "./ApplicationSidebar";
 import CrudSidebar from "./CrudSidebar";
 // import TopSidebar from "./TopSidebar";
+import { Icon } from "@/assets/icon/icons";
 
 function SidebarLink({
   to,
@@ -42,16 +42,16 @@ export function AppSidebars() {
   const location = useLocation(); // Get current location
 
   const mainNavigation = [
-    { title: "Dashboard", icon: LayoutDashboard, url: "/admin/dashboard" }, // Changed URL to /admin
-    { title: "Overview", icon: LayoutDashboard, url: "/admin/overview" },
-    { title: "Users", icon: Users, url: "/admin/users" },
-    { title: "Products", icon: Package, url: "/admin/products" },
+    { title: "Dashboard", icon: Icon.LayoutDashboardIcon, url: "/admin/dashboard" }, // Changed URL to /admin
+    { title: "Overview", icon: Icon.LayoutDashboardIcon, url: "/admin/overview" },
+    { title: "Users", icon: Icon.UsersIcon, url: "/admin/users" },
+    { title: "Products", icon: Icon.PackageIcon, url: "/admin/products" },
   ];
 
   const settingsMenuItems = [
-    { title: "Users", icon: Users, url: "/admin/settings/users" },
-    { title: "Products", icon: Package, url: "/admin/settings/products" },
-    { title: "Orders", icon: Package, url: "/admin/settings/orders" },
+    { title: "Users", icon: Icon.UsersIcon, url: "/admin/settings/users" },
+    { title: "Products", icon: Icon.PackageIcon, url: "/admin/settings/products" },
+    { title: "Orders", icon: Icon.PackageIcon, url: "/admin/settings/orders" },
   ];
 
   // Determine if any settings child route is active

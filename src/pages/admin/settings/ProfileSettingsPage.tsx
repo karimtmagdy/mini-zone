@@ -1,7 +1,8 @@
+import UserAvatar from "@/components/common/UserAvatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Camera, Mail, MapPin, Briefcase, Save } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function ProfileSettingsPage() {
   return (
@@ -15,11 +16,9 @@ export default function ProfileSettingsPage() {
 
       <div className="flex flex-col items-start gap-8 md:flex-row">
         <div className="group relative">
-          <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-indigo-500/30 bg-indigo-500/10">
-            <span className="text-2xl font-bold text-indigo-600">KA</span>
-          </div>
+          <UserAvatar className="h-24 w-24" />
           <button className="bg-primary text-primary-foreground absolute -right-2 -bottom-2 rounded-lg p-1.5 shadow-lg transition-transform hover:scale-110">
-            <Camera className="h-4 w-4" />
+            <Icon.CameraIcon className="h-4 w-4" />
           </button>
         </div>
         <div className="w-full flex-1 space-y-4">
@@ -35,7 +34,7 @@ export default function ProfileSettingsPage() {
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="email" className="flex items-center gap-2">
-              <Mail className="h-3.5 w-3.5 opacity-60" /> Email Address
+              <Icon.MailIcon className="h-3.5 w-3.5 opacity-60" /> Email Address
             </Label>
             <Input id="email" defaultValue="admin@mini-zone.com" disabled />
             <p className="text-muted-foreground text-[10px] font-semibold uppercase">
@@ -49,13 +48,13 @@ export default function ProfileSettingsPage() {
         <div className="space-y-4">
           <div className="space-y-1.5 text-sm">
             <Label htmlFor="role" className="flex items-center gap-2">
-              <Briefcase className="h-4 w-4 opacity-70" /> Professional Role
+              <Icon.BriefcaseIcon className="h-4 w-4 opacity-70" /> Professional Role
             </Label>
             <Input id="role" defaultValue="Senior Systems Administrator" />
           </div>
           <div className="space-y-1.5 text-sm">
             <Label htmlFor="location" className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 opacity-70" /> Operational Base
+              <Icon.MapPinIcon className="h-4 w-4 opacity-70" /> Operational Base
             </Label>
             <Input id="location" defaultValue="New York, NY" />
           </div>
@@ -64,7 +63,7 @@ export default function ProfileSettingsPage() {
 
       <div className="flex justify-end pt-6">
         <Button className="gap-2 px-8">
-          <Save className="h-4 w-4" /> Save Global Changes
+          <Icon.SaveIcon className="h-4 w-4" /> Save Global Changes
         </Button>
       </div>
     </div>

@@ -1,40 +1,126 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
 } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
+import { useAuthFormLogin } from "@/hooks/use-auth";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import { Controller } from "react-hook-form";
+import { useShow } from "@/hooks/use-click";
+import ToggleShowPasswordIndicator from "@/components/common/toggle/ToggleShowPasswordIndicator";
+import { Icon } from "@/assets/icon/icons";
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"form">) {
+export function LoginForm({ ...props }: React.ComponentProps<"form">) {
+  const { form, onSubmit, loginMutation } = useAuthFormLogin();
+  const { show, toggle } = useShow();
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form onSubmit={form.handleSubmit(onSubmit)} {...props}>
+      <FieldGroup className="gap-2">
+        {form.formState.errors.root && (
+          <FieldError className="bg-destructive/10 mb-2 rounded-lg p-2 text-center font-bold italic">
+            {form.formState.errors.root.message}
+          </FieldError>
+        )}
+        <Controller
+          name="email"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <InputGroup>
+                <InputGroupInput
+                  {...field}
+                  type="email"
+                  id="email"
+                  aria-invalid={fieldState.invalid}
+                  autoComplete="off"
+                  placeholder="Enter your email"
+                />
+                <InputGroupAddon>
+                  <Icon.MailIcon />
+                </InputGroupAddon>
+              </InputGroup>
+              <div className="min-h-6">
+                {fieldState.invalid ? (
+                  <FieldError errors={[fieldState.error]} />
+                ) : (
+                  <FieldDescription className="**:flex **:items-center **:gap-1">
+                    {field.value ? (
+                      <span className="text-green-500">
+                        <Icon.CircleCheckIcon className="size-3" /> Looks good.
+                      </span>
+                    ) : (
+                      <span>
+                        <Icon.InfoIcon className="size-3" /> Enter your email to
+                        continue.
+                      </span>
+                    )}
+                  </FieldDescription>
+                )}
+              </div>
+            </Field>
+          )}
+        />
+        <Controller
+          name="password"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <div className="flex items-center justify-between">
+                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <Link
+                  to="/auth/forgot-password"
+                  className="hover:text-primary text-foreground text-sm hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+              <InputGroup>
+                <InputGroupInput
+                  {...field}
+                  type={show ? "text" : "password"}
+                  id="password"
+                  aria-invalid={fieldState.invalid}
+                  autoComplete="off"
+                  placeholder="••••••"
+                />
+                <ToggleShowPasswordIndicator show={show} toggle={toggle} />
+              </InputGroup>
+              <div className="min-h-6">
+                {fieldState.invalid ? (
+                  <FieldError errors={[fieldState.error]} />
+                ) : (
+                  <FieldDescription className="**:flex **:items-center **:gap-1">
+                    {field.value ? (
+                      <span className="text-green-500">
+                        <Icon.CircleCheckIcon className="size-3" /> You're all set.
+                      </span>
+                    ) : (
+                      <span>
+                        <Icon.InfoIcon className="size-3" /> Secure your access.
+                      </span>
+                    )}
+                  </FieldDescription>
+                )}
+              </div>
+            </Field>
+          )}
+        />
+      </FieldGroup>
       <FieldGroup>
         <Field>
-          <FieldLabel htmlFor="email">Email</FieldLabel>
-          <Input id="email" type="email" placeholder="m@example.com" required />
-        </Field>
-        <Field>
-          <div className="flex items-center">
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-            <Link
-              to="/auth/forgot-password"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
-            >
-              Forgot your password?
-            </Link>
-          </div>
-          <Input id="password" type="password" required />
-        </Field>
-        <Field>
-          <Button type="submit">Login</Button>
+          <Button type="submit">
+            {loginMutation.isPending ? "Logging in..." : "Login"}
+          </Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
@@ -45,7 +131,7 @@ export function LoginForm({
                 fill="currentColor"
               />
             </svg>
-            Login with GitHub
+            Continue with Google
           </Button>
           <FieldDescription className="text-center">
             Don&apos;t have an account?{" "}

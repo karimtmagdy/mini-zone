@@ -9,7 +9,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
 import {
   Collapsible,
   CollapsibleContent,
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/collapsible";
 // import { NavLink, useLocation } from "react-router-dom";
 // import { cn } from "@/lib/utils";
+import { type LucideIcon, Icon } from "@/assets/icon/icons";
 import { NavItem } from "@/components/ui/nav-item";
 export default function NavMain({
   main,
@@ -53,7 +53,7 @@ export default function NavMain({
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
-                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  <Icon.ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -95,4 +95,3 @@ export default function NavMain({
     </SidebarGroup>
   );
 }
-

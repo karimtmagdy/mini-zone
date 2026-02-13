@@ -6,7 +6,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import { Bar, BarChart, XAxis, YAxis, CartesianGrid } from "recharts";
-import { Bell, Mail, MessageSquare, Send } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function NotificationsKpiInsightsPage() {
   const deliveryData = [
@@ -43,7 +43,7 @@ export default function NotificationsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Email Open Rate
             </CardTitle>
-            <Mail className="h-4 w-4 text-blue-500" />
+            <Icon.MailIcon className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">24.8%</div>
@@ -57,7 +57,7 @@ export default function NotificationsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Push Click-through
             </CardTitle>
-            <Bell className="h-4 w-4 text-orange-500" />
+            <Icon.BellIcon className="h-4 w-4 text-orange-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">8.4%</div>
@@ -69,7 +69,7 @@ export default function NotificationsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Total Messages
             </CardTitle>
-            <Send className="text-primary h-4 w-4" />
+            <Icon.SendIcon className="text-primary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">22.4k</div>
@@ -81,7 +81,7 @@ export default function NotificationsKpiInsightsPage() {
       <Card className="transition-all hover:shadow-md">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <MessageSquare className="text-primary h-5 w-5" />
+            <Icon.MessageSquareIcon className="text-primary h-5 w-5" />
             Delivery Performance by Channel
           </CardTitle>
         </CardHeader>

@@ -14,7 +14,7 @@ import {
   Line,
   LineChart,
 } from "recharts";
-import { Users, UserPlus, UserCheck, TrendingUp } from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
 
 export default function UsersKpiInsightsPage() {
   const activityData = [
@@ -61,7 +61,7 @@ export default function UsersKpiInsightsPage() {
             <CardTitle className="text-sm font-medium">
               Total registered
             </CardTitle>
-            <Users className="text-muted-foreground h-4 w-4" />
+            <Icon.UsersIcon className="text-muted-foreground h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">12,842</div>
@@ -73,7 +73,7 @@ export default function UsersKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">New this week</CardTitle>
-            <UserPlus className="text-primary h-4 w-4" />
+            <Icon.UserPlusIcon className="text-primary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">573</div>
@@ -83,7 +83,7 @@ export default function UsersKpiInsightsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Active now</CardTitle>
-            <UserCheck className="h-4 w-4 text-emerald-500" />
+            <Icon.UserCheckIcon className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">1,204</div>
@@ -96,7 +96,7 @@ export default function UsersKpiInsightsPage() {
         <Card className="col-span-4 transition-all hover:shadow-md">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="text-primary h-5 w-5" />
+              <Icon.TrendingUpIcon className="text-primary h-5 w-5" />
               Daily Active Users
             </CardTitle>
           </CardHeader>

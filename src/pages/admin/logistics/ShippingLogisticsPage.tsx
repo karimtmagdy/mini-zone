@@ -18,18 +18,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import {
-  MoreHorizontal,
-  Search,
-  Truck,
-  Package,
-  MapPin,
-  Calendar,
-  ExternalLink,
-  Navigation,
-  CheckCircle2,
-  Clock,
-} from "lucide-react";
+import { Icon } from "@/assets/icon/icons";
+
 
 export default function ShippingLogisticsPage() {
   const [search, setSearch] = useState("");
@@ -95,7 +85,7 @@ export default function ShippingLogisticsPage() {
           </p>
         </div>
         <Button className="flex items-center gap-2">
-          <Truck className="h-4 w-4" />
+          <Icon.TruckIcon className="h-4 w-4" />
           Manage Carriers
         </Button>
       </div>
@@ -103,26 +93,26 @@ export default function ShippingLogisticsPage() {
       <div className="grid gap-4 md:grid-cols-4">
         <div className="bg-card rounded-xl border p-4 shadow-xs">
           <div className="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
-            <Package className="text-primary h-4 w-4" /> Active Shipments
+            <Icon.PackageIcon className="text-primary h-4 w-4" /> Active Shipments
           </div>
           <div className="text-2xl font-bold">128</div>
         </div>
         <div className="bg-card rounded-xl border p-4 shadow-xs">
           <div className="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
-            <Clock className="h-4 w-4 text-amber-500" /> Average Lead Time
+            <Icon.ClockIcon className="h-4 w-4 text-amber-500" /> Average Lead Time
           </div>
           <div className="text-2xl font-bold">3.2 Days</div>
         </div>
         <div className="bg-card rounded-xl border p-4 shadow-xs">
           <div className="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" /> Delivery
+            <Icon.CheckCircleIcon className="h-4 w-4 text-emerald-500" /> Delivery
             Success
           </div>
           <div className="text-2xl font-bold">99.4%</div>
         </div>
         <div className="bg-card rounded-xl border p-4 shadow-xs">
           <div className="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
-            <Navigation className="h-4 w-4 text-blue-500" /> Carrier Hubs
+            <Icon.NavigationIcon className="h-4 w-4 text-blue-500" /> Carrier Hubs
           </div>
           <div className="text-2xl font-bold">12</div>
         </div>
@@ -130,7 +120,7 @@ export default function ShippingLogisticsPage() {
 
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div className="relative w-full md:w-96">
-          <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+          <Icon.SearchIcon className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
           <Input
             placeholder="Search by Shipment ID or Tracking Number..."
             className="pl-10"
@@ -172,7 +162,7 @@ export default function ShippingLogisticsPage() {
                 </TableCell>
                 <TableCell>
                   <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
-                    <MapPin className="h-3.5 w-3.5" />
+                    <Icon.MapPinIcon className="h-3.5 w-3.5" />
                     {shp.destination}
                   </div>
                 </TableCell>
@@ -195,7 +185,7 @@ export default function ShippingLogisticsPage() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-1.5 text-xs">
-                    <Calendar className="text-muted-foreground h-3.5 w-3.5" />
+                    <Icon.CalendarIcon className="text-muted-foreground h-3.5 w-3.5" />
                     {shp.eta}
                   </div>
                 </TableCell>
@@ -203,16 +193,16 @@ export default function ShippingLogisticsPage() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="icon">
-                        <MoreHorizontal className="h-4 w-4" />
+                        <Icon.MoreHorizontalIcon className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Logistics</DropdownMenuLabel>
                       <DropdownMenuItem className="focus:text-primary flex items-center gap-2">
-                        <Navigation className="h-4 w-4" /> Live Tracking
+                        <Icon.NavigationIcon className="h-4 w-4" /> Live Tracking
                       </DropdownMenuItem>
                       <DropdownMenuItem className="flex items-center gap-2">
-                        <ExternalLink className="h-4 w-4" /> Carrier Site
+                        <Icon.ExternalLinkIcon className="h-4 w-4" /> Carrier Site
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem className="text-destructive flex items-center gap-2">

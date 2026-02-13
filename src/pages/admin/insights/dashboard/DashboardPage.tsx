@@ -1,20 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  DollarSign,
-  Users,
-  CreditCard,
-  Activity,
-  ArrowUpRight,
-  ArrowDownRight,
-  TrendingUp,
-  AlertTriangle,
-  Package,
-  History,
-  Navigation,
-  ShieldAlert,
-  X,
-} from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,6 +16,7 @@ import {
 } from "@/components/ui/chart";
 import { Area, AreaChart, XAxis, YAxis, CartesianGrid } from "recharts";
 import { cn } from "@/lib/utils";
+import { Icon } from "@/assets/icon/icons";
 
 interface OrderDetail {
   id: string;
@@ -100,28 +87,28 @@ export default function DashboardPage() {
       value: "$45,231.89",
       change: "+20.1%",
       trend: "up",
-      icon: DollarSign,
+      icon: Icon.DollarSignIcon,
     },
     {
       title: "Active Users",
       value: "+2350",
       change: "+180.1%",
       trend: "up",
-      icon: Users,
+      icon: Icon.UsersIcon,
     },
     {
       title: "Sales",
       value: "+12,234",
       change: "+19%",
       trend: "up",
-      icon: CreditCard,
+      icon: Icon.CreditCardIcon,
     },
     {
       title: "Active Now",
       value: "+573",
       change: "-201",
       trend: "down",
-      icon: Activity,
+      icon: Icon.ActivityIcon,
     },
   ];
 
@@ -149,9 +136,9 @@ export default function DashboardPage() {
               <div className="text-2xl font-bold">{stat.value}</div>
               <div className="flex items-center gap-1 pt-1">
                 {stat.trend === "up" ? (
-                  <ArrowUpRight className="h-4 w-4 text-emerald-500" />
+                  <Icon.ArrowUpRightIcon className="h-4 w-4 text-emerald-500" />
                 ) : (
-                  <ArrowDownRight className="h-4 w-4 text-rose-500" />
+                  <Icon.ArrowDownRightIcon className="h-4 w-4 text-rose-500" />
                 )}
                 <span
                   className={
@@ -417,7 +404,7 @@ export default function DashboardPage() {
             <div className="bg-background group cursor-pointer rounded-2xl border p-4 shadow-sm transition-transform hover:scale-[1.02]">
               <div className="mb-2 flex items-start justify-between">
                 <div className="bg-primary/10 flex size-10 items-center justify-center rounded-xl">
-                  <TrendingUp className="text-primary size-5" />
+                  <Icon.TrendingUpIcon className="text-primary size-5" />
                 </div>
                 <Badge variant="success">+12.4%</Badge>
               </div>
@@ -431,7 +418,7 @@ export default function DashboardPage() {
             <div className="bg-background group cursor-pointer rounded-2xl border p-4 shadow-sm transition-transform hover:scale-[1.02]">
               <div className="mb-2 flex items-start justify-between">
                 <div className="flex size-10 items-center justify-center rounded-xl bg-blue-500/10">
-                  <Activity className="size-5 text-blue-500" />
+                  <Icon.ActivityIcon className="size-5 text-blue-500" />
                 </div>
                 <Badge variant="info">Active</Badge>
               </div>
@@ -512,7 +499,7 @@ export default function DashboardPage() {
                       </p>
                       {item.status === "Critical Issue" && (
                         <span className="flex animate-pulse items-center gap-1 text-[9px] font-black text-rose-600 uppercase italic">
-                          <AlertTriangle className="size-3" /> System Anomaly
+                          <Icon.AlertTriangleIcon className="size-3" /> System Anomaly
                         </span>
                       )}
                     </div>
@@ -547,7 +534,7 @@ export default function DashboardPage() {
                         : "bg-primary text-primary-foreground",
                     )}
                   >
-                    <Package className="size-5" />
+                    <Icon.PackageIcon className="size-5" />
                   </div>
                   <div>
                     <CardTitle className="text-lg font-black italic">
@@ -564,14 +551,14 @@ export default function DashboardPage() {
                   onClick={() => setSelectedOrder(null)}
                   className="rounded-full"
                 >
-                  <X className="size-4" />
+                  <Icon.XIcon className="size-4" />
                 </Button>
               </CardHeader>
               <CardContent className="space-y-8 pt-6">
                 {selectedOrder.status === "Critical Issue" && (
                   <div className="animate-pulse rounded-2xl border-2 border-white/20 bg-rose-500 p-4 text-white shadow-lg shadow-rose-500/20">
                     <div className="mb-1 flex items-center gap-2">
-                      <ShieldAlert className="size-4" />
+                      <Icon.ShieldAlertIcon className="size-4" />
                       <h4 className="text-xs font-black tracking-widest text-white uppercase italic">
                         Critical Alert
                       </h4>
@@ -601,7 +588,7 @@ export default function DashboardPage() {
 
                 <div className="space-y-3">
                   <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-black tracking-tighter uppercase italic">
-                    <History className="size-3" /> Tactical Audit Trail
+                    <Icon.HistoryIcon className="size-3" /> Tactical Audit Trail
                   </div>
                   <div className="ml-1.5 space-y-3 border-l-2 border-dashed pl-4">
                     {selectedOrder.timeline.map((step: string, i: number) => (
@@ -615,7 +602,7 @@ export default function DashboardPage() {
 
                 <div className="space-y-3">
                   <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-black tracking-tighter uppercase italic">
-                    <Package className="size-3" /> Manifest Payload
+                    <Icon.PackageIcon className="size-3" /> Manifest Payload
                   </div>
                   <div className="bg-background space-y-2 rounded-2xl border p-3 shadow-inner">
                     {selectedOrder.items.map((item: string, i: number) => (
@@ -639,7 +626,7 @@ export default function DashboardPage() {
 
                 <div className="grid grid-cols-3 gap-2 pt-4">
                   <Button className="h-10 rounded-2xl text-[9px] font-black tracking-widest uppercase italic shadow-lg">
-                    <Navigation className="mr-1 size-3" /> Re-route
+                    <Icon.NavigationIcon className="mr-1 size-3" /> Re-route
                   </Button>
                   <Button
                     variant="outline"
@@ -659,7 +646,7 @@ export default function DashboardPage() {
           ) : (
             <Card className="bg-muted/5 group col-span-3 flex h-full flex-col items-center justify-center border-2 border-dashed p-12 text-center shadow-sm">
               <div className="bg-muted mb-6 flex size-16 items-center justify-center rounded-3xl shadow-inner transition-transform duration-500 group-hover:scale-110">
-                <Activity className="text-muted-foreground/40 size-8" />
+                <Icon.ActivityIcon className="text-muted-foreground/40 size-8" />
               </div>
               <h3 className="mb-2 text-lg font-black italic opacity-60">
                 Selection Required

@@ -14,16 +14,9 @@ import {
   DropdownMenuTrigger,
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
-
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  Sparkles,
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Icon } from "@/assets/icon/icons";
 import { ToggleLogoutIndcator } from "@/components/common/toggle";
+import UserAvatar from "@/components/common/UserAvatar";
 
 export default function ButtomSideBar({
   user,
@@ -44,17 +37,14 @@ export default function ButtomSideBar({
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground md:h-8 md:p-0"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
+                <UserAvatar />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="truncate text-xs">{user.email}</span>
                 </div>
-                <ChevronsUpDown className="ml-auto size-4" />
+                <Icon.ChevronsUpDownIcon className="ml-auto size-4" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -65,10 +55,7 @@ export default function ButtomSideBar({
             >
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                  <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                  </Avatar>
+                  <UserAvatar />
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
                     <span className="truncate text-xs">{user.email}</span>
@@ -78,22 +65,22 @@ export default function ButtomSideBar({
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem className="cursor-pointer">
-                  <Sparkles className="text-primary mr-2 size-4" />
+                  <Icon.SparklesIcon className="text-primary mr-2 size-4" />
                   Upgrade to Pro
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem className="cursor-pointer">
-                  <BadgeCheck className="mr-2 size-4" />
+                  <Icon.BadgeCheckIcon className="mr-2 size-4" />
                   Account
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer">
-                  <CreditCard className="mr-2 size-4" />
+                  <Icon.CreditCardIcon className="mr-2 size-4" />
                   Billing
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer">
-                  <Bell className="mr-2 size-4" />
+                  <Icon.BellIcon className="mr-2 size-4" />
                   Notifications
                 </DropdownMenuItem>
               </DropdownMenuGroup>

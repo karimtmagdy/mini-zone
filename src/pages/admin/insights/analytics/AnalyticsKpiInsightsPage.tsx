@@ -1,14 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Download,
-  Calendar,
-  Filter,
-  TrendingUp,
-  Target,
-  ArrowUpRight,
-} from "lucide-react";
+
 import { Badge } from "@/components/ui/badge";
+import { Icon } from "@/assets/icon/icons";
 
 export default function AnalyticsKpiInsightsPage() {
   return (
@@ -24,11 +18,11 @@ export default function AnalyticsKpiInsightsPage() {
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
-            <Calendar className="mr-2 h-4 w-4" />
+            <Icon.CalendarIcon className="mr-2 h-4 w-4" />
             Last 30 Days
           </Button>
           <Button size="sm">
-            <Download className="mr-2 h-4 w-4" />
+            <Icon.DownloadIcon className="mr-2 h-4 w-4" />
             Export Report
           </Button>
         </div>
@@ -40,12 +34,12 @@ export default function AnalyticsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium italic">
               Conversion Rate
             </CardTitle>
-            <Target className="text-primary h-4 w-4" />
+            <Icon.TargetIcon className="text-primary h-4 w-4" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">3.24%</div>
             <div className="mt-2 flex items-center gap-1 text-xs font-medium text-emerald-500">
-              <ArrowUpRight className="h-4 w-4" />
+              <Icon.ArrowUpRightIcon className="h-4 w-4" />
               <span>+1.2% from last week</span>
             </div>
           </CardContent>
@@ -56,7 +50,7 @@ export default function AnalyticsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium italic">
               Avg. Order Value
             </CardTitle>
-            <TrendingUp className="h-4 w-4 text-emerald-500" />
+            <Icon.TrendingUpIcon className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">$124.50</div>
@@ -72,7 +66,7 @@ export default function AnalyticsKpiInsightsPage() {
             <CardTitle className="text-sm font-medium italic">
               Returning Customers
             </CardTitle>
-            <Filter className="h-4 w-4 text-blue-500" />
+            <Icon.FilterIcon className="h-4 w-4 text-blue-500" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">24%</div>
@@ -89,7 +83,7 @@ export default function AnalyticsKpiInsightsPage() {
       <Card className="bg-muted/30 flex min-h-[400px] items-center justify-center border-dashed">
         <div className="flex max-w-sm flex-col items-center gap-4 text-center">
           <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded-full">
-            <TrendingUp className="text-primary h-6 w-6" />
+            <Icon.TrendingUpIcon className="text-primary h-6 w-6" />
           </div>
           <h3 className="text-lg font-semibold italic">
             Interactive Charts Coming Soon
