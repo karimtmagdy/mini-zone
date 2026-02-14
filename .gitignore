@@ -26,6 +26,4 @@ dist-ssr
 /.agents
 /src/components/component-example.tsx
 /src/components/example.tsx
-/src/components/ui/sonner.tsx
 /src/components/admin/trash
-/src/components/ui/combobox.tsx

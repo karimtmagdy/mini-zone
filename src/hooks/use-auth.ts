@@ -126,7 +126,8 @@ export function useAuthGetMe() {
   const { data, isLoading } = useGetMe();
   const token = storageUtils.getToken();
   const localUser = storageUtils.getUser();
-  const user = data?.data || localUser;
+  // data is now ResponseType<UserDto> directly (status, message, data)
+  const user = (data?.status === "success" ? data.data : null) || localUser;
 
   // Truly authenticated only if we have a token AND (a successful query OR local data while loading)
   const isAuthenticated = (!!token && !!data) || !!localUser;

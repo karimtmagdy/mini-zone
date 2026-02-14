@@ -96,8 +96,11 @@ import {
   FolderPlusIcon,
   AwardIcon,
   ColumnsIcon,
+  Loader2Icon,
 } from "lucide-react";
+
 export const Icon = {
+  Loader2Icon,
   MoreHorizontalIcon,
   SearchIcon,
   FileTextIcon,

@@ -39,4 +39,5 @@ export const PATH_FORGOT_PASSWORD = "/auth/forgot-password";
 export const PATH_RESET_PASSWORD = "/auth/reset-password";
 export const PATH_VERIFY_EMAIL = "/auth/verify-email";
 export const PATH_ME = "/users/me";
+export const PATH_REFRESH_TOKEN = "/users/refresh-token";
 

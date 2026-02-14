@@ -1,7 +1,11 @@
 import type { ResponseType } from "@/contract/global.dto";
 import type { UserDto } from "@/contract/user.dto";
 import { http } from "@/core/interceptors/http";
-import { PATH_ME, PATH_SIGNIN } from "@/lib/links/paths.routes";
+import {
+  PATH_ME,
+  PATH_REFRESH_TOKEN,
+  PATH_SIGNIN,
+} from "@/lib/links/paths.routes";
 import type { FormSignInSchema } from "@/schema/user.schema";
 
 export const authApi = {
@@ -14,8 +18,8 @@ export const authApi = {
       PATH_SIGNIN,
       data,
     );
-    // console.log(res)
-    return res;
+    console.log("✅ Login Response:", res.data);
+    return res.data;
   },
   //   logout: async () => {
   //     const res = await http.post(PATH_SIGNOUT);
@@ -40,19 +44,19 @@ export const authApi = {
   //     );
   //     return res;
   //   },
-  //   refresh: async () => {
-  //     const res = (await http.post<ResponseDto<{ token: string }>>(
-  //       PATH_REFRESH_TOKEN,
-  //     )) as unknown as ResponseDto<{ token: string }>;
-  //     return res;
-  //   },
+  refresh: async () => {
+    const res = (await http.post<ResponseType<{ token: string }>>(
+      PATH_REFRESH_TOKEN,
+    )) as unknown as ResponseType<{ token: string }>;
+    return res;
+  },
   //   verifyEmail: async (data: FormVerifyEmailSchema) => {
   //     const res = await http.post("/auth/verify-email", data);
   //     return res.data;
   //   },
   getMe: async () => {
-    const res = await http.get<ResponseType<{ user: UserDto }>>(PATH_ME);
-    console.log(res);
-    return res;
+    const res = await http.get<ResponseType<UserDto>>(PATH_ME);
+    console.log("✅ GetMe Response:", res.data);
+    return res.data;
   },
 };

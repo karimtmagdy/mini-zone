@@ -21,9 +21,9 @@ export function useLogin() {
     mutationKey: ["login"],
     mutationFn: authApi.login,
     onSuccess: (response) => {
-      const payload = response.data;
-      if (payload.status === "success") {
-        const { token, user } = payload.data;
+      // response is now ResponseType<{ token: string; user: UserDto }> directly
+      if (response.status === "success") {
+        const { token, user } = response.data;
         storageUtils.setToken(token);
         storageUtils.setUser(user);
         qc.setQueryData(["user"], user);

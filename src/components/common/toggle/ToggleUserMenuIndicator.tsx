@@ -23,7 +23,7 @@ export default function ToggleUserMenuIndicator() {
             {isAuthenticated && user ? (
               <Avatar>
                 <AvatarFallback>
-                  {user?.username.slice(0, 2).toUpperCase()}
+                  {user?.username?.slice(0, 2).toUpperCase()}
                 </AvatarFallback>
                 <AvatarImage src={user?.image?.secureUrl} alt={user?.slug} />
               </Avatar>

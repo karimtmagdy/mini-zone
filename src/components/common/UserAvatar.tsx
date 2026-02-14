@@ -8,7 +8,7 @@ export default function UserAvatar({ className }: { className?: string }) {
     <Avatar className={cn(className)}>
       <AvatarImage src={user?.image?.secureUrl} alt={user?.slug} />
       <AvatarFallback>
-        {user?.username.slice(0, 2).toUpperCase()}
+        {user?.username?.slice(0, 2).toUpperCase()}
       </AvatarFallback>
     </Avatar>
   );
