@@ -3,7 +3,11 @@ import RootHeader from "./RootHeader";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import BreadcrumbHeader from "@/components/admin/sidebar/BreadcrumbSidebar";
-import { ToggleAdminIndicator, ToggleThemeIndicator, ToggleUserMenuIndicator } from "../toggle";
+import {
+  ToggleAdminIndicator,
+  ToggleThemeIndicator,
+  ToggleUserMenuIndicator,
+} from "../toggle";
 import { Icon } from "@/assets/icon/icons";
 
 export function AdminHeader() {
@@ -25,16 +29,6 @@ export function AdminHeader() {
           aria-label="help-button"
         >
           <Icon.HelpCircleIcon className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="relative"
-          name="notification-button"
-          aria-label="notification-button"
-        >
-          <Icon.BellIcon className="h-4 w-4" />
-          <span className="bg-primary absolute top-1.5 right-1.5 h-2 w-2 rounded-full" />
         </Button>
         <Button
           variant="ghost"

@@ -1,12 +1,38 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+  FieldTitle,
+} from "@/components/ui/field";
 import { Icon } from "@/assets/icon/icons";
+import { useTheme, type Theme } from "@/context/ThemeContext";
+import { Progress } from "@/components/ui/progress";
+const themeOptions = [
+  {
+    id: "light" as const,
+    name: "Light Mode",
+    icon: Icon.SunIcon,
+    desc: "Classic high-contrast brightness",
+  },
+  {
+    id: "dark" as const,
+    name: "Dark Mode",
+    icon: Icon.MoonIcon,
+    desc: "Eye-soothing professional dark theme",
+  },
+  {
+    id: "system" as const,
+    name: "System",
+    icon: Icon.MonitorIcon,
+    desc: "Follow your OS preferences",
+  },
+];
 
 export default function AppearanceSettingsPage() {
-  const [theme, setTheme] = useState("system");
-
   return (
     <div className="space-y-10">
       <div>
@@ -18,60 +44,9 @@ export default function AppearanceSettingsPage() {
         </p>
       </div>
 
-      <div className="space-y-8">
-        <div>
-          <Label className="mb-4 block text-sm font-bold">Interface Mode</Label>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {[
-              {
-                id: "light",
-                name: "Light Mode",
-                icon: Icon.SunIcon,
-                desc: "Classic high-contrast",
-              },
-              {
-                id: "dark",
-                name: "Dark Nebula",
-                icon: Icon.MoonIcon,
-                desc: "Eye-soothing professional",
-              },
-              {
-                id: "system",
-                name: "Dynamic Sync",
-                icon: Icon.MonitorIcon,
-                desc: "Follow OS preferences",
-              },
-            ].map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setTheme(t.id)}
-                className={cn(
-                  "relative flex flex-col gap-3 rounded-xl border-2 p-4 text-left transition-all",
-                  theme === t.id
-                    ? "border-primary bg-primary/5 shadow-inner"
-                    : "bg-muted/20 hover:bg-muted/40 border-transparent",
-                )}
-              >
-                {theme === t.id && (
-                  <div className="bg-primary text-primary-foreground absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full">
-                    <Icon.CheckIcon className="h-3 w-3" />
-                  </div>
-                )}
-                <t.icon
-                  className={cn(
-                    "h-6 w-6",
-                    theme === t.id ? "text-primary" : "text-muted-foreground",
-                  )}
-                />
-                <div>
-                  <p className="text-sm font-bold">{t.name}</p>
-                  <p className="text-muted-foreground text-xs">{t.desc}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
+      <RadioGroupChoiceCardTheme />
 
+      <div className="space-y-8">
         <div className="space-y-6 border-t pt-8">
           <div>
             <Label className="mb-2 block text-sm font-bold">
@@ -79,9 +54,7 @@ export default function AppearanceSettingsPage() {
             </Label>
             <div className="flex items-center gap-4">
               <Icon.TypeIcon className="h-4 w-4 opacity-50" />
-              <div className="bg-muted h-2 flex-1 overflow-hidden rounded-full">
-                <div className="bg-primary h-full w-[60%]" />
-              </div>
+              <Progress value={50} />
               <span className="font-mono text-xs font-bold">110%</span>
             </div>
           </div>
@@ -133,6 +106,36 @@ export default function AppearanceSettingsPage() {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+function RadioGroupChoiceCardTheme() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <div className="space-y-1">
+      <Label className="mb-4 block text-sm font-bold">Theme Preference</Label>
+      <RadioGroup
+        value={theme}
+        onValueChange={(value) => setTheme(value as Theme)}
+        className="flex flex-col @2xl:flex-row"
+      >
+        {themeOptions.map((option) => (
+          <FieldLabel key={option.id} htmlFor={option.id}>
+            <Field orientation="horizontal">
+              <FieldContent>
+                <FieldTitle className="flex items-center gap-2">
+                  <option.icon />
+                  {option.name}
+                </FieldTitle>
+                <FieldDescription>{option.desc}</FieldDescription>
+              </FieldContent>
+              <RadioGroupItem value={option.id} id={option.id} />
+            </Field>
+          </FieldLabel>
+        ))}
+      </RadioGroup>
     </div>
   );
 }

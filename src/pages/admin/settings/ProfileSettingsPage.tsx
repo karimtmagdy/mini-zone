@@ -3,8 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Icon } from "@/assets/icon/icons";
-
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
+import { useAuthGetMe } from "@/hooks/use-auth";
 export default function ProfileSettingsPage() {
+  const { user } = useAuthGetMe();
   return (
     <div className="space-y-10">
       <div>
@@ -25,18 +33,32 @@ export default function ProfileSettingsPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-1.5">
               <Label htmlFor="fname">First Name</Label>
-              <Input id="fname" defaultValue="Karim" />
+              <Input id="fname" defaultValue={user?.first} />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="lname">Last Name</Label>
-              <Input id="lname" defaultValue="Admin" />
+              <Input id="lname" defaultValue={user?.last} />
             </div>
           </div>
+
           <div className="space-y-1.5">
-            <Label htmlFor="email" className="flex items-center gap-2">
-              <Icon.MailIcon className="h-3.5 w-3.5 opacity-60" /> Email Address
-            </Label>
-            <Input id="email" defaultValue="admin@mini-zone.com" disabled />
+            <Label htmlFor="email">Email Address</Label>
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupButton>
+                  <InputGroupText>
+                    <Icon.MailIcon className="h-3.5 w-3.5 opacity-60" />
+                  </InputGroupText>
+                </InputGroupButton>
+              </InputGroupAddon>
+              <InputGroupInput
+                id="email"
+                type="email"
+                defaultValue={user?.email}
+                value={user?.email}
+                disabled
+              />
+            </InputGroup>
             <p className="text-muted-foreground text-[10px] font-semibold uppercase">
               Contact support to change email
             </p>
@@ -47,14 +69,13 @@ export default function ProfileSettingsPage() {
       <div className="grid grid-cols-1 gap-8 border-t pt-6 font-medium md:grid-cols-2">
         <div className="space-y-4">
           <div className="space-y-1.5 text-sm">
-            <Label htmlFor="role" className="flex items-center gap-2">
-              <Icon.BriefcaseIcon className="h-4 w-4 opacity-70" /> Professional Role
-            </Label>
+            <Label htmlFor="role">Professional Role</Label>
             <Input id="role" defaultValue="Senior Systems Administrator" />
           </div>
           <div className="space-y-1.5 text-sm">
             <Label htmlFor="location" className="flex items-center gap-2">
-              <Icon.MapPinIcon className="h-4 w-4 opacity-70" /> Operational Base
+              <Icon.MapPinIcon className="h-4 w-4 opacity-70" /> Operational
+              Base
             </Label>
             <Input id="location" defaultValue="New York, NY" />
           </div>

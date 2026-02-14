@@ -50,8 +50,9 @@ export const authApi = {
   //     const res = await http.post("/auth/verify-email", data);
   //     return res.data;
   //   },
-    getMe: async () => {
-      const res = await http.get<UserDto>(PATH_ME);
-      return res;
-    },
+  getMe: async () => {
+    const res = await http.get<ResponseType<{ user: UserDto }>>(PATH_ME);
+    console.log(res);
+    return res;
+  },
 };
