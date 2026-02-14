@@ -1,13 +1,12 @@
+import { HaveAccount } from "@/components/atoms/forms";
 import { Button } from "@/components/ui/button";
 import {
   Field,
-  FieldDescription,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
 
 export function RegisterForm({ ...props }: React.ComponentProps<"form">) {
   return (
@@ -39,12 +38,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<"form">) {
             </svg>
             Register with GitHub
           </Button>
-          <FieldDescription className="text-center">
-            Already have an account?{" "}
-            <Link to="/auth/login" className="underline underline-offset-4">
-              Login
-            </Link>
-          </FieldDescription>
+          <HaveAccount />
         </Field>
       </FieldGroup>
     </form>

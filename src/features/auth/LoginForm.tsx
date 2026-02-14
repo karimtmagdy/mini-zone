@@ -1,27 +1,22 @@
 import { Button } from "@/components/ui/button";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
-  FieldLabel,
   FieldSeparator,
 } from "@/components/ui/field";
 import { Link } from "react-router-dom";
 import { useAuthFormLogin } from "@/hooks/use-auth";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group";
 import { Controller } from "react-hook-form";
-import { useShow } from "@/hooks/use-click";
-import ToggleShowPasswordIndicator from "@/components/common/toggle/ToggleShowPasswordIndicator";
-import { Icon } from "@/assets/icon/icons";
+import {
+  EmailField,
+  PasswordField,
+  FieldStatus,
+  HaveAccount,
+} from "@/components/atoms/forms";
 
 export function LoginForm({ ...props }: React.ComponentProps<"form">) {
   const { form, onSubmit, loginMutation } = useAuthFormLogin();
-  const { show, toggle } = useShow();
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} {...props}>
       <FieldGroup className="gap-2">
@@ -33,92 +28,43 @@ export function LoginForm({ ...props }: React.ComponentProps<"form">) {
         <Controller
           name="email"
           control={form.control}
-          render={({ field, fieldState }) => (
+          render={({ fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <InputGroup>
-                <InputGroupInput
-                  {...field}
-                  type="email"
-                  id="email"
-                  aria-invalid={fieldState.invalid}
-                  autoComplete="off"
-                  placeholder="Enter your email"
-                />
-                <InputGroupAddon>
-                  <Icon.MailIcon />
-                </InputGroupAddon>
-              </InputGroup>
-              <div className="min-h-6">
-                {fieldState.invalid ? (
-                  <FieldError errors={[fieldState.error]} />
-                ) : (
-                  <FieldDescription className="**:flex **:items-center **:gap-1">
-                    {field.value ? (
-                      <span className="text-green-500">
-                        <Icon.CircleCheckIcon className="size-3" /> Looks good.
-                      </span>
-                    ) : (
-                      <span>
-                        <Icon.InfoIcon className="size-3" /> Enter your email to
-                        continue.
-                      </span>
-                    )}
-                  </FieldDescription>
-                )}
-              </div>
+              <EmailField control={form.control} name="email" />
+              <FieldStatus
+                control={form.control}
+                name="email"
+                textInfo="Enter your email to continue."
+                textGreat="Looks good."
+              />
             </Field>
           )}
         />
         <Controller
           name="password"
           control={form.control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <div className="flex items-center justify-between">
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Link
-                  to="/auth/forgot-password"
-                  className="hover:text-primary text-foreground text-sm hover:underline"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-              <InputGroup>
-                <InputGroupInput
-                  {...field}
-                  type={show ? "text" : "password"}
-                  id="password"
-                  aria-invalid={fieldState.invalid}
-                  autoComplete="off"
-                  placeholder="••••••"
-                />
-                <ToggleShowPasswordIndicator show={show} toggle={toggle} />
-              </InputGroup>
-              <div className="min-h-6">
-                {fieldState.invalid ? (
-                  <FieldError errors={[fieldState.error]} />
-                ) : (
-                  <FieldDescription className="**:flex **:items-center **:gap-1">
-                    {field.value ? (
-                      <span className="text-green-500">
-                        <Icon.CircleCheckIcon className="size-3" /> You're all set.
-                      </span>
-                    ) : (
-                      <span>
-                        <Icon.InfoIcon className="size-3" /> Secure your access.
-                      </span>
-                    )}
-                  </FieldDescription>
-                )}
-              </div>
+          render={({ fieldState }) => (
+            <Field data-invalid={fieldState.invalid} className="relative">
+              <Link
+                to="/auth/forgot-password"
+                className="hover:text-primary text-foreground absolute top-0 right-0 !w-fit text-right text-sm hover:underline"
+              >
+                Forgot password?
+              </Link>
+              <PasswordField control={form.control} name="password" />
+              <FieldStatus
+                control={form.control}
+                name="password"
+                textInfo="Secure your access."
+                textGreat="You're all set."
+              />
             </Field>
           )}
         />
       </FieldGroup>
       <FieldGroup>
         <Field>
-          <Button type="submit">
+          <Button type="submit" disabled={loginMutation.isPending}>
             {loginMutation.isPending ? "Logging in..." : "Login"}
           </Button>
         </Field>
@@ -133,12 +79,7 @@ export function LoginForm({ ...props }: React.ComponentProps<"form">) {
             </svg>
             Continue with Google
           </Button>
-          <FieldDescription className="text-center">
-            Don&apos;t have an account?{" "}
-            <Link to="/auth/register" className="underline underline-offset-4">
-              Sign up
-            </Link>
-          </FieldDescription>
+          <HaveAccount />
         </Field>
       </FieldGroup>
     </form>

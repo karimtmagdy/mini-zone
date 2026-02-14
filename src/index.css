@@ -135,4 +135,12 @@
   svg {
     @apply size-4;
   }
+  input:-webkit-autofill {
+    -webkit-text-fill-color: hsl(var(--foreground));
+    box-shadow: 0 0 0px 1000px hsl(var(--background)) inset;
+  }
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: hsl(var(--foreground));
+    box-shadow: 0 0 0px 1000px hsl(var(--background)) inset;
+  }
 }
