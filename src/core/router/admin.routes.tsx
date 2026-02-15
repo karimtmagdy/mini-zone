@@ -33,7 +33,7 @@ import CategoriesPage from "@/pages/admin/categories/CategoriesPage";
 import CouponsPage from "@/pages/admin/coupons/CouponsPage";
 import AnalyticsKpiInsightsPage from "@/pages/admin/insights/analytics/AnalyticsKpiInsightsPage";
 import DashboardPage from "@/pages/admin/insights/dashboard/DashboardPage";
-import ActivityLogsPage from "@/pages/admin/insights/logs/ActivityLogsPage";
+import ActivityLogsPage from "@/pages/admin/insights/activity/ActivityLogsPage";
 import NotificationsKpiInsightsPage from "@/pages/admin/insights/notifications/NotificationsKpiInsightsPage";
 import OrdersKpiInsightsPage from "@/pages/admin/insights/orders/OrdersKpiInsightsPage";
 import ProductsKpiInsightsPage from "@/pages/admin/insights/products/ProductsKpiInsightsPage";
