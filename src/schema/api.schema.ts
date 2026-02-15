@@ -1,35 +1,50 @@
 import { z } from "zod";
-
+export const paginationSchema = z.object({
+  page: z.coerce.number().int().positive().min(1).default(1),
+  limit: z.coerce.number().int().positive().min(1).max(50).default(10),
+  total: z.coerce.number().int().positive().default(0),
+  pages: z.coerce.number().int().positive().default(0),
+  results: z.coerce.number().int().positive().default(0),
+});
+export const baseResponseSchema = z.object({
+  status: z.enum(["success", "fail", "error"]),
+  message: z.string().optional(),
+  // meta: paginationSchema.optional(),
+});
+export const globalResponseSchema = baseResponseSchema.extend({
+  data: z.unknown().optional(),
+});
+export const globalResponseWithPaginationSchema = baseResponseSchema.extend({
+  data: z.unknown().optional(),
+  meta: paginationSchema.optional(),
+});
+export const errorResponseSchema = baseResponseSchema.extend({
+  status: z.literal("error"),
+  error: z.object({
+    code: z.string(),
+    details: z.any().optional(),
+  }),
+});
 // Generic factory function that creates a success response schema
-export const createSuccessResponse = <T extends z.ZodTypeAny>(dataSchema: T) =>
+export const createSuccessResponse = <T extends z.ZodType>(dataSchema: T) =>
   z.object({
     status: z.literal("success"),
     data: dataSchema,
-    message: z.string(),
+    message: z.string().optional(),
+    // meta: paginationSchema.optional(),
   });
-
-// Standardized error response schema
-export const errorResponseSchema = z.object({
-  status: z.enum(["error", "fail"]),
-  message: z.string(),
-  error: z.string().optional(),
-});
-
-// Generic API response factory (Discriminated Union)
-export const createApiResponseSchema = <T extends z.ZodTypeAny>(
+export const createSuccessResponseWithPagination = <T extends z.ZodType>(
   dataSchema: T,
 ) =>
+  z.object({
+    status: z.literal("success"),
+    data: dataSchema,
+    message: z.string().optional(),
+    meta: paginationSchema.optional(),
+  });
+// Generic API response factory (Discriminated Union)
+export const createApiResponseSchema = <T extends z.ZodType>(dataSchema: T) =>
   z.discriminatedUnion("status", [
     createSuccessResponse(dataSchema),
     errorResponseSchema,
   ]);
-
-export type ErrorResponse = z.infer<typeof errorResponseSchema>;
-
-export type SuccessResponse<T> = {
-  status: "success";
-  message: string;
-  data: T;
-};
-
-export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;

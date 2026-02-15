@@ -9,12 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { createUserZod, type CreateUser } from "@/schema/user.schema";
 
-export function useGetUsers(params: {
-  page: number;
-  limit: number;
-  search?: string;
-}) {
-  const query = useUsers(params);
+export function useGetUsers() {
+  const query = useUsers();
   return query;
 }
 export function useGetUser(id: string) {

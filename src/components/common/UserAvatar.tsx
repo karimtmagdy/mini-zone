@@ -6,7 +6,7 @@ export default function UserAvatar({ className }: { className?: string }) {
   const { user } = useAuthGetMe();
   return (
     <Avatar className={cn(className)}>
-      <AvatarImage src={user?.image?.secureUrl} alt={user?.slug} />
+      <AvatarImage src={user?.image?.url} alt={user?.slug} />
       <AvatarFallback>
         {user?.username?.slice(0, 2).toUpperCase()}
       </AvatarFallback>

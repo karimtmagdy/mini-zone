@@ -1,13 +1,12 @@
 import type { UserDto } from "@/contract/user.dto";
 import type { CreateUser, UpdateUser } from "@/schema/user.schema";
 import { http } from "../interceptors/http";
-import type { ResponseType } from "@/contract/global.dto";
-export const usersApi = {
-  list: async (params: { page: number; limit: number; search?: string }) => {
+import type { ApiResponse, ApiResponseWithPagination } from "@/contract/global.dto";
+export const usersApi = { 
+
+  list: async () => {
     try {
-      const response = await http.get<ResponseType<UserDto[]>>("/admin/users", {
-        params, // ✅ Uncommented to send query parameters
-      });
+      const response = await http.get<ApiResponseWithPagination<UserDto[]>>("/admin/users");
       console.log("✅ Full Response:", response);
       console.log("✅ Response Data:", response.data);
       console.log("✅ Status:", response.status);
@@ -21,7 +20,7 @@ export const usersApi = {
   },
 
   create: async (payload: CreateUser) => {
-    const response = await http.post<ResponseType<UserDto>>(
+    const response = await http.post<ApiResponse<UserDto>>(
       "/admin/users",
       payload,
     );
@@ -29,7 +28,7 @@ export const usersApi = {
   },
 
   update: async (id: string, payload: UpdateUser) => {
-    const response = await http.patch<ResponseType<UserDto>>(
+    const response = await http.patch<ApiResponse<UserDto>>(
       `/admin/users/${id}`,
       payload,
     );

@@ -31,6 +31,8 @@ import {
 import { useGetUsers } from "@/hooks/use-users";
 // import { useDebounce } from "@/hooks/use-debounce";
 import { usersColumns } from "./UsersColumns";
+import type { UserDto } from "@/contract/user.dto";
+import { NoResultsFound } from "@/components/atoms/admin/table";
 
 export default function UsersPage() {
   // const [search, setSearch] = React.useState(
@@ -41,22 +43,24 @@ export default function UsersPage() {
   //   ),
   // );
   // const debouncedSearch = useDebounce(search, 300);
-  const { data, isFetching } = useGetUsers({
-    page: 1,
-    limit: 10,
-    // search: debouncedSearch,
-  });
-
+  const { data, isFetching } = useGetUsers();
   // data is ResponseType<UserDto[]> - check status before accessing data
-  const usersData = data?.status === "success" ? data.data : [];
-
+  let userData: UserDto[] = [];
+  if (data?.status === "success") {
+    userData = data.data as UserDto[];
+  }
+  console.log("Users Data:", userData);
   const columnsTable = React.useMemo(() => usersColumns, []);
-  console.log("Users Data:", usersData);
+
   const table = useReactTable({
     getCoreRowModel: getCoreRowModel(),
-    data: usersData,
+    data: userData,
     columns: columnsTable,
   });
+  // const tableMemo = React.useMemo(() => {
+  //   return table;
+  // }, [table]);
+  console.count("UsersPage Render");
 
   // const filteredUsers = usersData.filter(
   //   (user) =>
@@ -131,15 +135,19 @@ export default function UsersPage() {
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
+          {table.getRowModel().rows.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <NoResultsFound loading={isFetching} name="users" table={table} />
+          )}
         </TableBody>
       </Table>
     </div>

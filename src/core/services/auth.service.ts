@@ -1,4 +1,4 @@
-import type { ResponseType } from "@/contract/global.dto";
+// import type { ApiResponse } from "@/contract/global.dto";
 import type { UserDto } from "@/contract/user.dto";
 import { http } from "@/core/interceptors/http";
 import {
@@ -6,6 +6,7 @@ import {
   PATH_REFRESH_TOKEN,
   PATH_SIGNIN,
 } from "@/lib/links/paths.routes";
+import type { ApiResponse } from "@/contract/global.dto";
 import type { FormSignInSchema } from "@/schema/user.schema";
 
 export const authApi = {
@@ -14,12 +15,12 @@ export const authApi = {
   //   return res;
   // },
   login: async (data: FormSignInSchema) => {
-    const res = await http.post<ResponseType<{ token: string; user: UserDto }>>(
+    const res = await http.post<ApiResponse<{ token: string; user: UserDto }>>(
       PATH_SIGNIN,
       data,
-    );
-    console.log("✅ Login Response:", res.data);
-    return res.data;
+    ); //as unknown as ApiResponse<{ token: string; user: UserDto }>;
+    // console.log("✅ Login Response:", res);
+    return res;
   },
   //   logout: async () => {
   //     const res = await http.post(PATH_SIGNOUT);
@@ -45,9 +46,9 @@ export const authApi = {
   //     return res;
   //   },
   refresh: async () => {
-    const res = (await http.post<ResponseType<{ token: string }>>(
-      PATH_REFRESH_TOKEN,
-    )) as unknown as ResponseType<{ token: string }>;
+    const res =
+      await http.post<ApiResponse<{ token: string }>>(PATH_REFRESH_TOKEN); //as unknown as ApiResponse<{ token: string }>;
+    console.log("✅ Refresh:", res);
     return res;
   },
   //   verifyEmail: async (data: FormVerifyEmailSchema) => {
@@ -55,8 +56,8 @@ export const authApi = {
   //     return res.data;
   //   },
   getMe: async () => {
-    const res = await http.get<ResponseType<UserDto>>(PATH_ME);
+    const res = await http.get<ApiResponse<UserDto>>(PATH_ME); //as unknown as ApiResponse<UserDto>;
     console.log("✅ GetMe Response:", res.data);
-    return res.data;
+    return res;
   },
 };

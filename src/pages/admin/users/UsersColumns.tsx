@@ -3,6 +3,12 @@ import type { UserDto } from "@/contract/user.dto";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/assets/icon/icons";
+import { DataTableCellViewer } from "@/components/atoms/admin/table";
+import {
+  formatRelativeTime,
+  formatShortDate,
+  formatTimestamp,
+} from "@/lib/date";
 
 export const usersColumns: ColumnDef<UserDto>[] = [
   {
@@ -29,7 +35,9 @@ export const usersColumns: ColumnDef<UserDto>[] = [
 
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return <DataTableCellViewer column={column} title="email" />;
+    },
     cell: ({ row }) => {
       const email = row.original.email;
       const username = row.original.username;
@@ -46,12 +54,16 @@ export const usersColumns: ColumnDef<UserDto>[] = [
   },
   {
     accessorKey: "role",
-    header: "Role",
+    header: ({ column }) => {
+      return <DataTableCellViewer column={column} title="role" />;
+    },
     cell: ({ row }) => row.original.role,
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+      return <DataTableCellViewer column={column} title="status" />;
+    },
     cell: ({ row }) => {
       const status = row.original.status;
       return (
@@ -68,9 +80,15 @@ export const usersColumns: ColumnDef<UserDto>[] = [
   },
   {
     accessorKey: "activeAt",
-    header: ({ table, column, header }) => (
-      <span className="hidden @2xl:flex">Active At</span>
-    ),
+    header: ({ column }) => {
+      return (
+        <DataTableCellViewer
+          column={column}
+          title="activeAt"
+          className="hidden @2xl:flex"
+        />
+      );
+    },
     cell: ({ row }) => {
       const activeAt = row.original.activeAt;
       return activeAt ? (
@@ -88,13 +106,59 @@ export const usersColumns: ColumnDef<UserDto>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
-    cell: ({ row }) => row.original.createdAt,
+    header: ({ column }) => {
+      return <DataTableCellViewer column={column} title="createdAt" />;
+    },
+    cell: ({ row }) => {
+      const date = new Date(row.original.createdAt);
+      return (
+        <div className="flex items-center gap-2">
+          <Icon.CalendarIcon />
+          <div className="flex flex-col -space-y-1">
+            <span className="text-sm">{formatShortDate(date)}</span>
+            <span className="text-muted-foreground text-xs">
+              {formatTimestamp(date, "h:mm a")}
+            </span>
+          </div>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "updatedAt",
-    header: "Updated At",
-    cell: ({ row }) => row.original.updatedAt,
+    header: ({ column }) => {
+      return (
+        <DataTableCellViewer
+          column={column}
+          title="updatedAt"
+          className="hidden @2xl:flex"
+        />
+      );
+    },
+    cell: ({ row }) => {
+      const createdAt = row.original.createdAt;
+      const updatedAt = row.original.updatedAt;
+      if (createdAt === updatedAt) {
+        return (
+          <small className="text-muted-foreground hidden w-full select-none @2xl:flex @2xl:justify-center">
+            --
+          </small>
+        );
+      }
+      const date = new Date(updatedAt);
+      return (
+        <div className="hidden @2xl:flex @2xl:items-center @2xl:gap-2">
+          <Icon.CalendarIcon />
+          <div className="flex flex-col -space-y-1">
+            <span className="text-sm">{formatShortDate(date)}</span>
+            <span className="text-muted-foreground text-xs">
+              {formatRelativeTime(date)}
+            </span>
+          </div>
+        </div>
+      );
+    },
+    sortingFn: "datetime",
   },
   {
     accessorKey: "actions",

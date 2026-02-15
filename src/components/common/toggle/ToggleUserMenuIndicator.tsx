@@ -25,7 +25,7 @@ export default function ToggleUserMenuIndicator() {
                 <AvatarFallback>
                   {user?.username?.slice(0, 2).toUpperCase()}
                 </AvatarFallback>
-                <AvatarImage src={user?.image?.secureUrl} alt={user?.slug} />
+                <AvatarImage src={user?.image?.url} alt={user?.slug} />
               </Avatar>
             ) : (
               <Icon.UserCircleIcon />
@@ -33,7 +33,7 @@ export default function ToggleUserMenuIndicator() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className={cn(isAuthenticated ? "w-56" : "w-20", "space-y-1")}
+          className={cn(isAuthenticated && user ? "w-56" : "w-20", "space-y-1")}
           align="end"
           sideOffset={10}
         >

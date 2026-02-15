@@ -8,10 +8,10 @@ export const queryClient = new QueryClient({
       retry: 1,
       refetchOnWindowFocus: false,
       placeholderData: keepPreviousData,
-      refetchOnMount: true,
-      refetchOnReconnect: true,
+      // refetchOnMount: true,
+      // refetchOnReconnect: true,
       // refetchInterval: 5000,
-      refetchIntervalInBackground: false,
+      // refetchIntervalInBackground: false,
     },
     mutations: {
       retry: 1,

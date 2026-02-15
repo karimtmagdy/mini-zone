@@ -21,15 +21,16 @@ export function useLogin() {
     mutationKey: ["login"],
     mutationFn: authApi.login,
     onSuccess: (response) => {
-      // response is now ResponseType<{ token: string; user: UserDto }> directly
-      if (response.status === "success") {
-        const { token, user } = response.data;
+
+      if (response.data.status === "success") {
+        const { token, user } = response.data.data;
         storageUtils.setToken(token);
         storageUtils.setUser(user);
         qc.setQueryData(["user"], user);
         qc.invalidateQueries({ queryKey: ["user"] });
         if (user.role === "admin") navigate("/admin");
         else navigate("/");
+        toast.success(response?.data?.message as string);
       }
     },
     onError: (error: any) => {
@@ -109,6 +110,6 @@ export function useGetMe() {
   return useQuery({
     queryKey: ["user"],
     queryFn: authApi.getMe,
-    enabled: !!hasToken && !!storageUtils.getUser(),
+    enabled: !!hasToken //&& !!storageUtils.getUser(),
   });
 }

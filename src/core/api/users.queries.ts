@@ -8,15 +8,16 @@ import { usersApi } from "@/core/services/users.service";
 import type { UpdateUser } from "@/schema/user.schema";
 
 const USERS_KEY = ["users"];
+const usersKeys = {
+  all: ["users"] as const,
+  list: (params: { page: number; limit: number; search?: string }) =>
+    [...usersKeys.all, params.page, params.limit, params.search] as const,
+};
 
-export function useUsers(params: {
-  page: number;
-  limit: number;
-  search?: string;
-}) {
+export function useUsers( ) {
   return useQuery({
-    queryKey: [...USERS_KEY, params],
-    queryFn: () => usersApi.list(params),
+    queryKey: usersKeys.all,
+    queryFn: () => usersApi.list( ),
     placeholderData: keepPreviousData,
     // enabled: !!params,
   });

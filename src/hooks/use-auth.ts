@@ -34,13 +34,13 @@ export function useAuthFormLogin() {
     await loginMutation.mutateAsync(data);
     // try {
     //   const response =
-      
+
     //   // Handle business logic errors in 200/Success responses if applicable
     //   const result = response.data;
     //   if (result.status !== "success") {
     //     const msg = result.message || "Authentication failed";
     //     const target = msg.toLowerCase();
-        
+
     //     if (target.includes("email") || target.includes("user")) {
     //       form.setError("email", { message: msg });
     //     } else if (target.includes("password")) {
@@ -127,7 +127,7 @@ export function useAuthGetMe() {
   const token = storageUtils.getToken();
   const localUser = storageUtils.getUser();
   // data is now ResponseType<UserDto> directly (status, message, data)
-  const user = (data?.status === "success" ? data.data : null) || localUser;
+  const user = data?.data?.status === "success" ? data.data.data : null;
 
   // Truly authenticated only if we have a token AND (a successful query OR local data while loading)
   const isAuthenticated = (!!token && !!data) || !!localUser;
