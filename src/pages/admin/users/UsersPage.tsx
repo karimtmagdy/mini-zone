@@ -44,12 +44,14 @@ export default function UsersPage() {
   // );
   // const debouncedSearch = useDebounce(search, 300);
   const { data, isFetching } = useGetUsers();
-  // data is ResponseType<UserDto[]> - check status before accessing data
-  let userData: UserDto[] = [];
-  if (data?.status === "success") {
-    userData = data.data as UserDto[];
-  }
-  console.log("Users Data:", userData);
+
+  const userData = React.useMemo(() => {
+    if (data?.status === "success") {
+      return data.data as UserDto[];
+    }
+    return [];
+  }, [data]);
+
   const columnsTable = React.useMemo(() => usersColumns, []);
 
   const table = useReactTable({
@@ -57,9 +59,6 @@ export default function UsersPage() {
     data: userData,
     columns: columnsTable,
   });
-  // const tableMemo = React.useMemo(() => {
-  //   return table;
-  // }, [table]);
   console.count("UsersPage Render");
 
   // const filteredUsers = usersData.filter(
