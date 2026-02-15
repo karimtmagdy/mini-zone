@@ -1,12 +1,4 @@
 import * as React from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/assets/icon/icons";
 import {
@@ -23,16 +15,13 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useGetUsers } from "@/hooks/use-users";
 // import { useDebounce } from "@/hooks/use-debounce";
 import { usersColumns } from "./UsersColumns";
-import type { UserDto } from "@/contract/user.dto";
-import { NoResultsFound } from "@/components/atoms/admin/table";
+import { DataGlobalTable } from "@/components/atoms/admin/table";
+import { useTable } from "@/hooks/use-table";
+// import type { UserDto } from "@/contract/user.dto";
 
 export default function UsersPage() {
   // const [search, setSearch] = React.useState(
@@ -43,14 +32,31 @@ export default function UsersPage() {
   //   ),
   // );
   // const debouncedSearch = useDebounce(search, 300);
-  const { data, isFetching } = useGetUsers();
+  const [{ pageIndex, pageSize }, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  const query = useGetUsers({
+    page: pageIndex + 1,
+    limit: pageSize,
+  });
 
   const userData = React.useMemo(() => {
-    if (data?.status === "success") {
-      return data.data as UserDto[];
+    const res = query.data;
+    if (res && res.status === "success") {
+      return (res as any).data;
     }
     return [];
-  }, [data]);
+  }, [query.data]);
+
+  const totalRows = React.useMemo(() => {
+    const res = query.data;
+    if (res && res.status === "success" && (res as any).meta) {
+      return (res as any).meta.total;
+    }
+    return 0;
+  }, [query.data]);
 
   const columnsTable = React.useMemo(() => usersColumns, []);
 
@@ -58,9 +64,29 @@ export default function UsersPage() {
     getCoreRowModel: getCoreRowModel(),
     data: userData,
     columns: columnsTable,
+    manualPagination: true,
+    rowCount: totalRows,
+    state: {
+      pagination: {
+        pageIndex,
+        pageSize,
+      },
+    },
+    onPaginationChange: setPagination,
   });
   console.count("UsersPage Render");
-
+  const tabl = useTable({
+    data: userData,
+    columns: columnsTable,
+    manualPagination: true,
+    rowCount: totalRows,
+    state: {
+      pagination: {
+        pageIndex,
+        pageSize,
+      },
+    },
+  });
   // const filteredUsers = usersData.filter(
   //   (user) =>
   //     user.username.toLowerCase().includes(search.toLowerCase()) ||
@@ -88,11 +114,11 @@ export default function UsersPage() {
           <InputGroup className="w-full @lg:w-sm">
             <InputGroupAddon>
               <InputGroupButton>
-                {isFetching ? (
+                {/* {isFetching ? (
                   <Icon.Loader2Icon className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Icon.SearchIcon />
-                )}
+                ) : ( */}
+                <Icon.SearchIcon />
+                {/*  )} */}
               </InputGroupButton>
             </InputGroupAddon>
             <InputGroupInput
@@ -116,39 +142,7 @@ export default function UsersPage() {
           </div>
         </PageHeadActions>
       </PageHead>
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </TableHead>
-              ))}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <NoResultsFound loading={isFetching} name="users" table={table} />
-          )}
-        </TableBody>
-      </Table>
+      <DataGlobalTable table={tabl} name="users" query={query} />
     </div>
   );
 }

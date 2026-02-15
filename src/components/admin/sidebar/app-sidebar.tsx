@@ -3,7 +3,7 @@ import * as React from "react";
 import { Sidebar, SidebarContent, SidebarRail } from "@/components/ui/sidebar";
 
 import TopSidebar from "./TopSidebar";
-import ButtomSideBar from "./ButtomSideBar";
+import NavUser from "./NavUser";
 import NavProjects from "./NavProjects";
 import NavMain from "./NavMain";
 import { data } from "@/lib/links/data-sidebar-admin";
@@ -16,7 +16,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain main={data.main} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
-      <ButtomSideBar user={data.user} />
+      <NavUser />
       <SidebarRail />
     </Sidebar>
   );

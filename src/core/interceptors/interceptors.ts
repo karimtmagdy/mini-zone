@@ -2,7 +2,7 @@ import type { AxiosInstance } from "axios";
 import { PATH_REFRESH_TOKEN, PATH_SIGNIN } from "@/lib/links/paths.routes";
 import { storageUtils } from "@/lib/tokens";
 import { authApi } from "@/core/services/auth.service";
-
+import { cookiesService }from '@/lib/cookies'
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
@@ -86,6 +86,7 @@ export function setupInterceptors(axiosInstance: AxiosInstance) {
           processQueue(refreshError, null);
           storageUtils.removeToken();
           storageUtils.removeUser();
+          cookiesService.remove()
 
           return Promise.reject(refreshError);
         } finally {

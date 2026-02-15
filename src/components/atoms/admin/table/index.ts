@@ -1,6 +1,6 @@
 export { default as DataTableCellViewer } from "./DataTableCellViewer";
 export { default as NoResultsFound } from "./NoResultsFound";
-// export { default as DataGlobalTable } from "./DataGlobalTable";
+export { default as DataGlobalTable } from "./DataGlobalTable";
 // export { default as DataTableViewColumns } from "./DataTableViewColumns";
 // export { default as MetaTableHeader } from "./MetaTableHeader";
 // export { default as RefreshingDataTable } from "./RefreshingDataTable";
@@ -9,3 +9,6 @@ export { default as NoResultsFound } from "./NoResultsFound";
 // export { default as DataRowActions } from "./DataRowActions";
 // export { default as TobbarDataTableFected } from "./TobbarDataTableFected";
 // // export { default as ToolbarViewOptions } from "@/app/admin/table/ToolbarViewOptions";
+export { default as DataTableRowHeader } from "./DataTableRowHeader";
+export { default as DataTableRowBody } from "./DataTableRowBody";
+export { default as DataPaginationTable } from "./DataPaginationTable";

@@ -96,8 +96,9 @@ export function PageHeadTitle({
     <Comp
       ref={ref}
       className={cn(
-        "text-foreground text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl",
-        "from-foreground to-foreground/70 bg-linear-to-br bg-clip-text text-transparent",
+        "text-xl font-bold tracking-tight @md:text-2xl @lg:text-3xl",
+        // "text-foreground text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl",
+        // "from-foreground to-foreground/70 bg-linear-to-br bg-clip-text text-transparent",
         className,
       )}
       {...props}
@@ -108,20 +109,17 @@ export function PageHeadTitle({
 export function PageHeadDescription({
   className,
   asChild = false,
-  italic = false,
   ref,
   ...props
 }: React.ComponentPropsWithRef<"p"> & {
   asChild?: boolean;
-  italic?: boolean;
 }) {
   const Comp = asChild ? Slot.Root : "p";
   return (
     <Comp
       ref={ref}
       className={cn(
-        "text-muted-foreground max-w-[700px] text-sm/relaxed text-pretty sm:text-base/relaxed",
-        italic && "italic",
+        "text-xxs/relaxed text-muted-foreground max-w-lg tracking-widest text-pretty @md:text-xs/relaxed @lg:text-sm/relaxed",
         className,
       )}
       {...props}

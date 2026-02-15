@@ -102,11 +102,20 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
   EyeOffIcon,
+  ChevronsLeftIcon,
+  ChevronLeftIcon,
+  ChevronsRightIcon,
+  TrendingDownIcon,
 } from "lucide-react";
 
 export const Icon = {
   EyeOffIcon,
+  TrendingUpIcon,
+  TrendingDownIcon,
   ArrowDownIcon,
+  ChevronsLeftIcon,
+  ChevronLeftIcon,
+  ChevronsRightIcon,
   ArrowUpIcon,
   Loader2Icon,
   MoreHorizontalIcon,
@@ -190,7 +199,6 @@ export const Icon = {
   ShoppingCartIcon,
   ShoppingBagIcon,
   TargetIcon,
-  TrendingUpIcon,
   CircleCheckIcon,
   InfoIcon,
   MailIcon,

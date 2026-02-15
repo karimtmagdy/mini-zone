@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardAction,
+  CardFooter,
+} from "@/components/ui/card";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,6 +25,14 @@ import {
 import { Area, AreaChart, XAxis, YAxis, CartesianGrid } from "recharts";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/assets/icon/icons";
+import SectionCardDashBaord from "./SectionCardDashBaord";
+import {
+  PageHead,
+  PageHeadDescription,
+  PageHeadGroup,
+  PageHeadRow,
+  PageHeadTitle,
+} from "@/components/ui/head-page";
 
 interface OrderDetail {
   id: string;
@@ -81,81 +97,19 @@ export default function DashboardPage() {
     },
   ];
 
-  const stats = [
-    {
-      title: "Total Revenue",
-      value: "$45,231.89",
-      change: "+20.1%",
-      trend: "up",
-      icon: Icon.DollarSignIcon,
-    },
-    {
-      title: "Active Users",
-      value: "+2350",
-      change: "+180.1%",
-      trend: "up",
-      icon: Icon.UsersIcon,
-    },
-    {
-      title: "Sales",
-      value: "+12,234",
-      change: "+19%",
-      trend: "up",
-      icon: Icon.CreditCardIcon,
-    },
-    {
-      title: "Active Now",
-      value: "+573",
-      change: "-201",
-      trend: "down",
-      icon: Icon.ActivityIcon,
-    },
-  ];
-
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Dashboard Overview
-        </h1>
-        <p className="text-muted-foreground">
-          Welcome back! Here's what's happening with your store today.
-        </p>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat, i) => (
-          <Card key={i} className="hover:border-primary/50 transition-colors">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
-                {stat.title}
-              </CardTitle>
-              <stat.icon className="text-muted-foreground h-4 w-4" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
-              <div className="flex items-center gap-1 pt-1">
-                {stat.trend === "up" ? (
-                  <Icon.ArrowUpRightIcon className="h-4 w-4 text-emerald-500" />
-                ) : (
-                  <Icon.ArrowDownRightIcon className="h-4 w-4 text-rose-500" />
-                )}
-                <span
-                  className={
-                    stat.trend === "up" ? "text-emerald-500" : "text-rose-500"
-                  }
-                >
-                  {stat.change}
-                </span>
-                <span className="text-muted-foreground ml-1 text-xs">
-                  from last month
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
+      <PageHead>
+        <PageHeadRow>
+          <PageHeadGroup>
+            <PageHeadTitle>Dashboard Overview</PageHeadTitle>
+            <PageHeadDescription>
+              Welcome back! Here's what's happening with your store today.
+            </PageHeadDescription>
+          </PageHeadGroup>
+        </PageHeadRow>
+      </PageHead>
+      <SectionCardDashBaord />
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="group col-span-4 h-[500px] overflow-hidden shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -499,7 +453,8 @@ export default function DashboardPage() {
                       </p>
                       {item.status === "Critical Issue" && (
                         <span className="flex animate-pulse items-center gap-1 text-[9px] font-black text-rose-600 uppercase italic">
-                          <Icon.AlertTriangleIcon className="size-3" /> System Anomaly
+                          <Icon.AlertTriangleIcon className="size-3" /> System
+                          Anomaly
                         </span>
                       )}
                     </div>

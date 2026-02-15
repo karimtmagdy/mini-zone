@@ -32,7 +32,6 @@ export const usersColumns: ColumnDef<UserDto>[] = [
     enableSorting: false, //disable sorting
     enableHiding: false, //hide column
   },
-
   {
     accessorKey: "email",
     header: ({ column }) => {
@@ -57,7 +56,22 @@ export const usersColumns: ColumnDef<UserDto>[] = [
     header: ({ column }) => {
       return <DataTableCellViewer column={column} title="role" />;
     },
-    cell: ({ row }) => row.original.role,
+    cell: ({ row }) => {
+      const role = row.original.role;
+      return (
+        <Badge
+          variant={
+            "admin" === role
+              ? "outline"
+              : role === "user"
+                ? "secondary"
+                : "default"
+          }
+        >
+          {role}
+        </Badge>
+      );
+    },
   },
   {
     accessorKey: "status",
@@ -67,7 +81,15 @@ export const usersColumns: ColumnDef<UserDto>[] = [
     cell: ({ row }) => {
       const status = row.original.status;
       return (
-        <Badge variant={status === "active" ? "default" : "destructive"}>
+        <Badge
+          variant={
+            status === "active"
+              ? "default"
+              : status === "archived"
+                ? "destructive"
+                : "secondary"
+          }
+        >
           {status}
         </Badge>
       );
@@ -161,8 +183,10 @@ export const usersColumns: ColumnDef<UserDto>[] = [
     sortingFn: "datetime",
   },
   {
-    accessorKey: "actions",
-    header: "Actions",
+    id: "actions",
+    header: () => (
+      <span className="flex justify-center select-none">Actions</span>
+    ),
   },
 ];
 {
