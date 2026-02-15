@@ -33,11 +33,11 @@ export default function ProfileSettingsPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-1.5">
               <Label htmlFor="fname">First Name</Label>
-              <Input id="fname" defaultValue={user?.first} />
+              <Input id="fname" defaultValue={user?.name?.first} />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="lname">Last Name</Label>
-              <Input id="lname" defaultValue={user?.last} />
+              <Input id="lname" defaultValue={user?.name?.last} />
             </div>
           </div>
 
