@@ -32,11 +32,10 @@ export type UserRole = (typeof USER_ROLES)[number];
 
 export type UserDto = At & {
   id: string;
-  // id: string | ObjectId;
   username: string;
   slug?: string;
   email: string;
-  password: string; 
+  password: string;
   name?: {
     first: string;
     last: string;

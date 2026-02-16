@@ -31,17 +31,6 @@ const settingsNavItems = [
   },
 ];
 
-function PageHeader({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div>
-      <h2 className="text-foreground text-3xl font-bold tracking-tight">
-        {title}
-      </h2>
-      <p className="text-muted-foreground italic">{desc}</p>
-    </div>
-  );
-}
-
 export default function SettingsLayout() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,51 +42,70 @@ export default function SettingsLayout() {
 
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader
-        title="Global Settings"
-        desc="Configure your administrative experience and security preferences."
-      />
-
-      {/* Tab-based Navigation */}
-      <Tabs value={activeTab}>
-        <TabsList className=" ">
-          {settingsNavItems
-            .filter((item) => !item.disabled)
-            .map((item) => (
-              <TabsTrigger
-                key={item.name}
-                value={item.href}
-                onClick={() => navigate(item.href)}
-                className="relative"
-              >
-                <item.icon className="hidden @md:flex" />
-                {item.name}
-              </TabsTrigger>
-            ))}
-        </TabsList>
-        <TabsContent value={activeTab}>
-          <Outlet />
-        </TabsContent>
-      </Tabs>
-
-      {/* Disabled Settings Info */}
-      {settingsNavItems.filter((item) => item.disabled).length > 0 && (
-        <div className="border-t pt-6">
-          <p className="text-muted-foreground mb-3 text-sm font-medium">
-            Coming Soon
-          </p>
-          <div className="flex flex-wrap gap-1">
-            {settingsNavItems
-              .filter((item) => item.disabled)
-              .map((item) => (
-                <Badge key={item.name} variant="outline">
-                  <item.icon />
-                  {item.name}
-                </Badge>
-              ))}
-          </div>
-        </div>
-      )}
+      <SettingsHeader />
+      <SettingsTabs activeTab={activeTab} navigate={navigate} />
+      <UpcomingSettings />
     </div>
   );
 }
+
+function SettingsHeader() {
+  return (
+    <div>
+      <h2 className="text-foreground text-3xl font-bold tracking-tight">
+        Global Settings
+      </h2>
+      <p className="text-muted-foreground italic">
+        Configure your administrative experience and security preferences.
+      </p>
+    </div>
+  );
+}
+
+function SettingsTabs({ activeTab, navigate }: { activeTab: string, navigate: (path: string) => void }) {
+  return (
+    <Tabs value={activeTab}>
+      <TabsList className=" ">
+        {settingsNavItems
+          .filter((item) => !item.disabled)
+          .map((item) => (
+            <TabsTrigger
+              key={item.name}
+              value={item.href}
+              onClick={() => navigate(item.href)}
+              className="relative"
+            >
+              <item.icon className="hidden @md:flex" />
+              {item.name}
+            </TabsTrigger>
+          ))}
+      </TabsList>
+      <TabsContent value={activeTab}>
+        <Outlet />
+      </TabsContent>
+    </Tabs>
+  );
+}
+
+function UpcomingSettings() {
+  const disabledItems = settingsNavItems.filter((item) => item.disabled);
+
+  if (disabledItems.length === 0) return null;
+
+  return (
+    <div className="border-t pt-6">
+      <p className="text-muted-foreground mb-3 text-sm font-medium">
+        Coming Soon
+      </p>
+      <div className="flex flex-wrap gap-1">
+        {disabledItems.map((item) => (
+          <Badge key={item.name} variant="outline">
+            <item.icon />
+            {item.name}
+          </Badge>
+        ))}
+      </div>
+    </div>
+  );
+}
+

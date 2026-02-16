@@ -9,6 +9,89 @@ import { Line, LineChart, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Icon } from "@/assets/icon/icons";
 
 export default function TrafficKpiInsightsPage() {
+  return (
+    <div className="flex flex-col gap-8">
+      <TrafficInsightsHeader />
+      <TrafficInsightsStats />
+      <TrafficSourceTrendsChart />
+    </div>
+  );
+}
+
+function TrafficInsightsHeader() {
+  return (
+    <div>
+      <h1 className="text-3xl font-bold tracking-tight">Traffic & Audience</h1>
+      <p className="text-muted-foreground italic">
+        Understand where your visitors are coming from and how they engage.
+      </p>
+    </div>
+  );
+}
+
+function TrafficInsightsStats() {
+  return (
+    <div className="grid gap-4 md:grid-cols-4">
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
+          <Icon.GlobeIcon className="text-primary h-4 w-4" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">42.5k</div>
+          <p className="text-muted-foreground text-xs">+18% this week</p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm font-medium">Bounce Rate</CardTitle>
+          <Icon.MousePointer2Icon className="h-4 w-4 text-orange-500" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">34.2%</div>
+          <p className="text-muted-foreground text-xs">-2.1% improvement</p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm font-medium">Avg. Duration</CardTitle>
+          <Icon.ClockIcon className="h-4 w-4 text-blue-500" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">4m 32s</div>
+          <p className="text-muted-foreground text-xs">Stable behavior</p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm font-medium">Social Shares</CardTitle>
+          <Icon.Share2Icon className="h-4 w-4 text-pink-500" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">1,204</div>
+          <p className="text-muted-foreground text-xs">+5% viral growth</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+const chartConfig = {
+  organic: {
+    label: "Organic Search",
+    color: "hsl(var(--primary))",
+  },
+  social: {
+    label: "Social Media",
+    color: "hsl(var(--secondary))",
+  },
+  direct: {
+    label: "Direct Traffic",
+    color: "hsl(var(--accent))",
+  },
+} satisfies ChartConfig;
+
+function TrafficSourceTrendsChart() {
   const visitorData = [
     { day: "Mon", organic: 4500, social: 1200, direct: 800 },
     { day: "Tue", organic: 5200, social: 1500, direct: 900 },
@@ -19,123 +102,55 @@ export default function TrafficKpiInsightsPage() {
     { day: "Sun", organic: 5900, social: 2200, direct: 1400 },
   ];
 
-  const chartConfig = {
-    organic: {
-      label: "Organic Search",
-      color: "hsl(var(--primary))",
-    },
-    social: {
-      label: "Social Media",
-      color: "hsl(var(--secondary))",
-    },
-    direct: {
-      label: "Direct Traffic",
-      color: "hsl(var(--accent))",
-    },
-  } satisfies ChartConfig;
-
   return (
-    <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Traffic & Audience
-        </h1>
-        <p className="text-muted-foreground italic">
-          Understand where your visitors are coming from and how they engage.
-        </p>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
-            <Icon.GlobeIcon className="text-primary h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">42.5k</div>
-            <p className="text-muted-foreground text-xs">+18% this week</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Bounce Rate</CardTitle>
-            <Icon.MousePointer2Icon className="h-4 w-4 text-orange-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">34.2%</div>
-            <p className="text-muted-foreground text-xs">-2.1% improvement</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Avg. Duration</CardTitle>
-            <Icon.ClockIcon className="h-4 w-4 text-blue-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">4m 32s</div>
-            <p className="text-muted-foreground text-xs">Stable behavior</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Social Shares</CardTitle>
-            <Icon.Share2Icon className="h-4 w-4 text-pink-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">1,204</div>
-            <p className="text-muted-foreground text-xs">+5% viral growth</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card className="transition-all hover:shadow-md">
-        <CardHeader>
-          <CardTitle>Traffic Source Trends</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer config={chartConfig} className="h-[350px] w-full">
-            <LineChart data={visitorData}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
-              <XAxis
-                dataKey="day"
-                stroke="#888888"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-              />
-              <YAxis
-                stroke="#888888"
-                fontSize={12}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(value) => `${value / 1000}k`}
-              />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Line
-                type="monotone"
-                dataKey="organic"
-                stroke="var(--color-organic)"
-                strokeWidth={2}
-                dot={false}
-              />
-              <Line
-                type="monotone"
-                dataKey="social"
-                stroke="var(--color-social)"
-                strokeWidth={2}
-                dot={false}
-              />
-              <Line
-                type="monotone"
-                dataKey="direct"
-                stroke="var(--color-direct)"
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
-          </ChartContainer>
-        </CardContent>
-      </Card>
-    </div>
+    <Card className="transition-all hover:shadow-md">
+      <CardHeader>
+        <CardTitle>Traffic Source Trends</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig} className="h-[350px] w-full">
+          <LineChart data={visitorData}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="day"
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              stroke="#888888"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={(value) => `${value / 1000}k`}
+            />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Line
+              type="monotone"
+              dataKey="organic"
+              stroke="var(--color-organic)"
+              strokeWidth={2}
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="social"
+              stroke="var(--color-social)"
+              strokeWidth={2}
+              dot={false}
+            />
+            <Line
+              type="monotone"
+              dataKey="direct"
+              stroke="var(--color-direct)"
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
   );
 }
+

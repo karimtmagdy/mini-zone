@@ -20,10 +20,19 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/assets/icon/icons";
 
+interface Order {
+  id: string;
+  customer: string;
+  date: string;
+  total: number;
+  status: string;
+  items: number;
+}
+
 export default function OrdersPage() {
   const [search, setSearch] = useState("");
 
-  const orders = [
+  const orders: Order[] = [
     {
       id: "ORD-7234",
       customer: "Amr Khaled",
@@ -74,138 +83,161 @@ export default function OrdersPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Orders</h1>
-          <p className="text-muted-foreground italic">
-            Monitor and manage customer orders and fulfillment status.
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2">
-            <Icon.DownloadIcon className="h-4 w-4" />
-            Export
-          </Button>
-          <Button className="flex items-center gap-2">
-            <Icon.CalendarIcon className="h-4 w-4" />
-            View Calendar
-          </Button>
-        </div>
-      </div>
+      <OrdersHeader />
+      <OrdersToolbar search={search} setSearch={setSearch} />
+      <OrdersTable orders={filteredOrders} />
+    </div>
+  );
+}
 
-      <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-        <div className="relative w-full md:w-96">
-          <Icon.SearchIcon className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-          <Input
-            placeholder="Search by order ID or customer..."
-            className="pl-10"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-2"
-          >
-            <Icon.FilterIcon className="h-4 w-4" />
-            More Filters
-          </Button>
-        </div>
+function OrdersHeader() {
+  return (
+    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Orders</h1>
+        <p className="text-muted-foreground italic">
+          Monitor and manage customer orders and fulfillment status.
+        </p>
       </div>
-
-      <div className="bg-card overflow-hidden rounded-xl border shadow-xs">
-        <Table>
-          <TableHeader className="bg-muted/50">
-            <TableRow>
-              <TableHead className="w-[150px]">Order ID</TableHead>
-              <TableHead>Customer</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Total</TableHead>
-              <TableHead>Items</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredOrders.map((order) => (
-              <TableRow
-                key={order.id}
-                className="hover:bg-muted/30 transition-colors"
-              >
-                <TableCell className="text-primary font-mono font-bold">
-                  {order.id}
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <Icon.UserIcon className="text-muted-foreground h-3.5 w-3.5" />
-                    <span className="text-sm font-medium">
-                      {order.customer}
-                    </span>
-                  </div>
-                </TableCell>
-                <TableCell className="text-muted-foreground text-sm">
-                  {order.date}
-                </TableCell>
-                <TableCell className="font-semibold">
-                  ${order.total.toFixed(2)}
-                </TableCell>
-                <TableCell>
-                  <Badge variant="ghost" className="bg-muted">
-                    {order.items} items
-                  </Badge>
-                </TableCell>
-                <TableCell>
-                  <Badge
-                    variant={
-                      order.status === "Delivered"
-                        ? "secondary"
-                        : order.status === "Pending"
-                          ? "outline"
-                          : order.status === "Cancelled"
-                            ? "destructive"
-                            : "default"
-                    }
-                    className={
-                      order.status === "Delivered"
-                        ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-600"
-                        : ""
-                    }
-                  >
-                    {order.status}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <Icon.MoreHorizontalIcon className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Order Options</DropdownMenuLabel>
-                      <DropdownMenuItem className="flex items-center gap-2">
-                        <Icon.EyeIcon className="h-4 w-4" /> View Details
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="flex items-center gap-2">
-                        <Icon.FileTextIcon className="h-4 w-4" /> Generate Invoice
-                      </DropdownMenuItem>
-                      <DropdownMenuItem className="text-primary flex items-center gap-2">
-                        <Icon.TruckIcon className="h-4 w-4" /> Update Status
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive flex items-center gap-2">
-                        <Icon.Trash2Icon className="h-4 w-4" /> Delete Record
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <div className="flex items-center gap-2">
+        <Button variant="outline" className="flex items-center gap-2">
+          <Icon.DownloadIcon className="h-4 w-4" />
+          Export
+        </Button>
+        <Button className="flex items-center gap-2">
+          <Icon.CalendarIcon className="h-4 w-4" />
+          View Calendar
+        </Button>
       </div>
     </div>
   );
 }
+
+interface OrdersToolbarProps {
+  search: string;
+  setSearch: (value: string) => void;
+}
+
+function OrdersToolbar({ search, setSearch }: OrdersToolbarProps) {
+  return (
+    <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+      <div className="relative w-full md:w-96">
+        <Icon.SearchIcon className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+        <Input
+          placeholder="Search by order ID or customer..."
+          className="pl-10"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+      <div className="flex items-center gap-2">
+        <Button variant="outline" size="sm" className="flex items-center gap-2">
+          <Icon.FilterIcon className="h-4 w-4" />
+          More Filters
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function OrdersTable({ orders }: { orders: Order[] }) {
+  return (
+    <div className="bg-card overflow-hidden rounded-xl border shadow-xs">
+      <Table>
+        <TableHeader className="bg-muted/50">
+          <TableRow>
+            <TableHead className="w-[150px]">Order ID</TableHead>
+            <TableHead>Customer</TableHead>
+            <TableHead>Date</TableHead>
+            <TableHead>Total</TableHead>
+            <TableHead>Items</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {orders.map((order) => (
+            <OrderRow key={order.id} order={order} />
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+
+function OrderRow({ order }: { order: Order }) {
+  return (
+    <TableRow className="hover:bg-muted/30 transition-colors">
+      <TableCell className="text-primary font-mono font-bold">
+        {order.id}
+      </TableCell>
+      <TableCell>
+        <div className="flex items-center gap-2">
+          <Icon.UserIcon className="text-muted-foreground h-3.5 w-3.5" />
+          <span className="text-sm font-medium">{order.customer}</span>
+        </div>
+      </TableCell>
+      <TableCell className="text-muted-foreground text-sm">
+        {order.date}
+      </TableCell>
+      <TableCell className="font-semibold">${order.total.toFixed(2)}</TableCell>
+      <TableCell>
+        <Badge variant="ghost" className="bg-muted">
+          {order.items} items
+        </Badge>
+      </TableCell>
+      <TableCell>
+        <Badge
+          variant={
+            order.status === "Delivered"
+              ? "secondary"
+              : order.status === "Pending"
+                ? "outline"
+                : order.status === "Cancelled"
+                  ? "destructive"
+                  : "default"
+          }
+          className={
+            order.status === "Delivered"
+              ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-600"
+              : ""
+          }
+        >
+          {order.status}
+        </Badge>
+      </TableCell>
+      <TableCell className="text-right">
+        <OrderActions />
+      </TableCell>
+    </TableRow>
+  );
+}
+
+function OrderActions() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Icon.MoreHorizontalIcon className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>Order Options</DropdownMenuLabel>
+        <DropdownMenuItem className="flex items-center gap-2">
+          <Icon.EyeIcon className="h-4 w-4" /> View Details
+        </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center gap-2">
+          <Icon.FileTextIcon className="h-4 w-4" /> Generate Invoice
+        </DropdownMenuItem>
+        <DropdownMenuItem className="text-primary flex items-center gap-2">
+          <Icon.TruckIcon className="h-4 w-4" /> Update Status
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive flex items-center gap-2">
+          <Icon.Trash2Icon className="h-4 w-4" /> Delete Record
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+

@@ -1,27 +1,44 @@
-const STORAGE_KEY = "hasVisited";
+import { useEffect, useState } from "react";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const welcomeScreen = document.getElementById("welcome-screen") as HTMLDivElement | null;
-  const closeBtn = document.getElementById("close-welcome") as HTMLButtonElement | null;
-
-  if (!welcomeScreen || !closeBtn) return;
-
-  const hasVisited = localStorage.getItem(STORAGE_KEY);
-
-  if (!hasVisited) {
-    welcomeScreen.classList.remove("hidden");
-  }
-
-  closeBtn.addEventListener("click", () => {
-    localStorage.setItem(STORAGE_KEY, "true");
-    welcomeScreen.classList.add("hidden");
-  });
-});
+const STORAGE_KEY = "welcomeExpiry";
+const FIVE_SECONDS = 5000;
+const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
 
 export default function FirstTimeVisitor() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const now = Date.now();
+    const expiry = localStorage.getItem(STORAGE_KEY);
+
+    // Show if never visited or expired
+    if (!expiry || now > Number(expiry)) {
+      setIsVisible(true);
+      document.body.classList.add("overflow-hidden");
+
+      const timer = setTimeout(() => {
+        handleClose();
+      }, FIVE_SECONDS);
+
+      return () => {
+        clearTimeout(timer);
+        document.body.classList.remove("overflow-hidden");
+      };
+    }
+  }, []);
+
+  const handleClose = () => {
+    const expiryDate = Date.now() + SEVEN_DAYS;
+    localStorage.setItem(STORAGE_KEY, expiryDate.toString());
+    document.body.classList.remove("overflow-hidden");
+    setIsVisible(false);
+  };
+
+  if (!isVisible) return null;
+
   return (
     <div
-      className="container mx-auto flex h-dvh items-center justify-center px-4 py-20 sm:px-6 lg:px-8 lg:py-32"
+      className="bg-background no-scrollbar fixed inset-0 z-50 mx-auto flex h-dvh w-full items-center justify-center px-4 py-20 will-change-scroll sm:px-6 lg:px-8 lg:py-32"
       id="welcome-screen"
     >
       <div className="mx-auto max-w-4xl space-y-8 text-center">

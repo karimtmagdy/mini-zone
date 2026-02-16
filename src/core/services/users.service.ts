@@ -1,17 +1,23 @@
 import type { UserDto } from "@/contract/user.dto";
 import type { CreateUser, UpdateUser } from "@/schema/user.schema";
 import { http } from "../interceptors/http";
-import type { ApiResponse, ApiResponseWithPagination } from "@/contract/global.dto";
-export const usersApi = { 
-
+import type {
+  ApiResponse,
+  ApiResponseWithPagination,
+} from "@/contract/global.dto";
+export const usersApi = {
   list: async (params: { page?: number; limit?: number } = {}) => {
     try {
-      const response = await http.get<ApiResponseWithPagination<UserDto[]>>("/admin/users", {
-        params,
-      });
+      const response = await http.get<ApiResponseWithPagination<UserDto[]>>(
+        "/admin/users",
+        {
+          params,
+        },
+      );
       console.log("✅ Full Response:", response);
       console.log("✅ Response Data:", response.data);
       console.log("✅ Status:", response.status);
+
       return response.data;
     } catch (error: any) {
       console.error("❌ API Error:", error);

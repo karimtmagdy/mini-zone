@@ -2,48 +2,43 @@ import * as React from "react";
 import { Slot } from "radix-ui";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-
+// const borders =
+//   "border @md:border-purple-700 @lg:border-green-700 @2xl:border-blue-600 @3xl:border-red-500";
+// ---------------------- PageHead ----------------------
 export function PageHead({
   className,
   asChild = false,
   ref,
   ...props
-}: React.ComponentPropsWithRef<"header"> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : "header";
+}: React.ComponentPropsWithRef<"section"> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot.Root : "section";
   return (
     <Comp
       ref={ref}
-      className={cn(
-        "group/page-head @container flex flex-col gap-6",
-        className,
-      )}
+      className={cn("group/page-head flex w-full flex-col gap-2", className)}
       {...props}
     />
   );
 }
-
-const pageHeadRowVariants = cva(
-  "flex gap-4 min-w-0 transition-all duration-300",
-  {
-    variants: {
-      align: {
-        between: "justify-between",
-        start: "justify-start",
-        end: "justify-end",
-        center: "justify-center",
-      },
-      responsive: {
-        true: "flex-col @lg:flex-row @lg:items-center",
-        false: "flex-row items-center",
-      },
+// ---------------------- Row ----------------------
+const pageHeadRowVariants = cva(["flex gap-2"], {
+  variants: {
+    align: {
+      between: "justify-between",
+      start: "justify-start",
+      end: "justify-end",
+      center: "justify-center",
     },
-    defaultVariants: {
-      align: "between",
-      responsive: true,
+    responsive: {
+      true: "flex-col @2xl:flex-row @2xl:items-center",
+      false: "flex-row items-center",
     },
   },
-);
-
+  defaultVariants: {
+    align: "between",
+    responsive: true,
+  },
+});
 interface PageHeadRowProps
   extends
     React.ComponentPropsWithRef<"div">,
@@ -68,23 +63,7 @@ export function PageHeadRow({
     />
   );
 }
-
-export function PageHeadGroup({
-  className,
-  asChild = false,
-  ref,
-  ...props
-}: React.ComponentPropsWithRef<"div"> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : "div";
-  return (
-    <Comp
-      ref={ref}
-      className={cn("flex min-w-0 flex-col gap-1.5", className)}
-      {...props}
-    />
-  );
-}
-
+// ---------------------- Title ----------------------
 export function PageHeadTitle({
   className,
   asChild = false,
@@ -96,58 +75,60 @@ export function PageHeadTitle({
     <Comp
       ref={ref}
       className={cn(
-        "text-xl font-bold tracking-tight @md:text-2xl @lg:text-3xl",
-        // "text-foreground text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl",
-        // "from-foreground to-foreground/70 bg-linear-to-br bg-clip-text text-transparent",
+        "-mb-1 text-2xl font-bold tracking-tight",
+        "@md:text-3xl @lg:text-4xl",
         className,
       )}
       {...props}
     />
   );
 }
-
+// ---------------------- Description ----------------------
 export function PageHeadDescription({
   className,
   asChild = false,
   ref,
   ...props
-}: React.ComponentPropsWithRef<"p"> & {
-  asChild?: boolean;
-}) {
+}: React.ComponentPropsWithRef<"p"> & { asChild?: boolean }) {
   const Comp = asChild ? Slot.Root : "p";
   return (
     <Comp
       ref={ref}
       className={cn(
-        "text-xxs/relaxed text-muted-foreground max-w-lg tracking-widest text-pretty @md:text-xs/relaxed @lg:text-sm/relaxed",
+        "text-xxs/relaxed text-muted-foreground text-pretty",
+        "@md:text-xs/relaxed @lg:text-sm/relaxed",
         className,
       )}
       {...props}
     />
   );
 }
-
+// ---------------------- Actions ----------------------
 export function PageHeadActions({
   className,
   asChild = false,
-  align,
+  align, //= "end",
+  responsive,
   ref,
   ...props
 }: React.ComponentPropsWithRef<"div"> & {
   asChild?: boolean;
   align?: "between" | "start" | "end" | "center";
+  responsive?: "col" | "row";
 }) {
   const Comp = asChild ? Slot.Root : "div";
   return (
     <Comp
       ref={ref}
       className={cn(
-        "flex items-center gap-3 select-none",
+        "flex gap-2",
+        align === "between" && "self-between",
+        align === "start" && "self-start",
+        align === "end" && "self-end",
+        align === "center" && "self-center",
+        responsive === "col" && "flex-col",
+        responsive === "row" && "flex-row",
         className,
-        align === "between" && "justify-between",
-        align === "start" && "justify-start",
-        align === "end" && "justify-end",
-        align === "center" && "justify-center",
       )}
       {...props}
     />
