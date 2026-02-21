@@ -16,9 +16,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+ import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/assets/icon/icons";
+import {
+  PageHead,
+  PageHeadActions,
+  PageHeadRow,
+ } from "@/components/ui/head-page";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import { TopHeadMeta } from "@/components/common/meta";
 
 interface Product {
   id: string;
@@ -83,26 +94,8 @@ export default function ProductsPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <ProductsHeader />
       <ProductsToolbar search={search} setSearch={setSearch} />
       <ProductsTable products={filteredProducts} />
-    </div>
-  );
-}
-
-function ProductsHeader() {
-  return (
-    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Inventory Catalog</h1>
-        <p className="text-muted-foreground italic">
-          Manage your catalog, track stock levels, and update pricing.
-        </p>
-      </div>
-      <Button>
-        <Icon.PackagePlusIcon />
-        Add New Product
-      </Button>
     </div>
   );
 }
@@ -114,51 +107,66 @@ interface ProductsToolbarProps {
 
 function ProductsToolbar({ search, setSearch }: ProductsToolbarProps) {
   return (
-    <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-      <div className="relative w-full md:w-96">
-        <Icon.SearchIcon className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-        <Input
-          placeholder="Search products by name or category..."
-          className="pl-10"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-      <div className="flex items-center gap-2">
-        <Button variant="outline" size="sm" className="flex items-center gap-2">
-          <Icon.FilterIcon className="h-4 w-4" />
-          Filter
-        </Button>
-        <Button variant="outline" size="sm" className="flex items-center gap-2">
-          <Icon.ArrowUpDownIcon className="h-4 w-4" />
-          Sort
-        </Button>
-      </div>
-    </div>
+    <PageHead>
+      <PageHeadRow>
+        <TopHeadMeta />
+
+        <PageHeadActions>
+          <Button>
+            <Icon.PackagePlusIcon />
+            Add New Product
+          </Button>
+        </PageHeadActions>
+      </PageHeadRow>
+      <PageHeadRow responsive align="between">
+        <PageHeadActions resource="search" align="between">
+          <InputGroup className="w-full @lg:w-sm">
+            <InputGroupAddon>
+              <InputGroupButton>
+                <Icon.SearchIcon />
+              </InputGroupButton>
+            </InputGroupAddon>
+            <InputGroupInput
+              placeholder="Search products by name or category..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </InputGroup>
+        </PageHeadActions>
+        <PageHeadActions>
+          <Button variant="outline">
+            <Icon.FilterIcon />
+            Filter
+          </Button>
+          <Button variant="outline">
+            <Icon.ArrowUpDownIcon />
+            Sort
+          </Button>
+        </PageHeadActions>
+      </PageHeadRow>
+    </PageHead>
   );
 }
 
 function ProductsTable({ products }: { products: Product[] }) {
   return (
-    <div className="bg-card overflow-hidden rounded-xl border shadow-xs">
-      <Table>
-        <TableHeader className="bg-muted/50">
-          <TableRow>
-            <TableHead className="w-[300px]">Product</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Stock</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {products.map((product) => (
-            <ProductRow key={product.id} product={product} />
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+    <Table>
+      <TableHeader className="bg-muted/50">
+        <TableRow>
+          <TableHead className="w-[300px]">Product</TableHead>
+          <TableHead>Category</TableHead>
+          <TableHead>Price</TableHead>
+          <TableHead>Stock</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {products.map((product) => (
+          <ProductRow key={product.id} product={product} />
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 
@@ -221,7 +229,7 @@ function ProductActions() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Icon.MoreHorizontalIcon className="h-4 w-4" />
+          <Icon.MoreHorizontalIcon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -234,7 +242,7 @@ function ProductActions() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive flex items-center gap-2">
-          <Icon.Trash2Icon className="h-4 w-4" /> Delete
+          <Icon.Trash2Icon /> Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

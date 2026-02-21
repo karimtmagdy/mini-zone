@@ -8,7 +8,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Icon } from "@/assets/icon/icons";
-
+import {
+  PageHead,
+  PageHeadActions,
+  PageHeadRow,
+} from "@/components/ui/head-page";
+import { TopHeadMeta } from "@/components/common/meta";
 interface Delivery {
   id: string;
   customer: string;
@@ -53,11 +58,10 @@ export default function OrderTrackingPage() {
   return (
     <div className="flex flex-col gap-6">
       <OrderTrackingHeader />
-      
+
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
         <OrderTrackingStats />
         <OrderTrackingMap deliveries={activeDeliveries} />
-        
         <div className="space-y-4">
           <OrderTrackingFeed />
           <SecureTrackingCard />
@@ -69,56 +73,53 @@ export default function OrderTrackingPage() {
 
 function OrderTrackingHeader() {
   return (
-    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight italic">
-          Real-time Command Hub
-        </h1>
-        <p className="text-muted-foreground">
-          Monitor your global fleet and active fulfillment streams.
-        </p>
-      </div>
-      <div className="flex gap-3">
-        <Badge variant="success" className="gap-2">
-          <Icon.ShieldCheckIcon className="h-3 w-3" /> System Online
-        </Badge>
-        <Badge variant="info" className="gap-2">
-          Live Updates
-        </Badge>
-      </div>
-    </div>
+    <PageHead>
+      <PageHeadRow>
+        <TopHeadMeta />
+        <PageHeadActions responsive="col" align="end">
+          <div className="flex items-center gap-2">
+            <Badge variant="success">
+              <Icon.ShieldCheckIcon /> System Online
+            </Badge>
+            <Badge variant="info">
+              <Icon.ShieldCheckIcon /> Live Updates
+            </Badge>
+          </div>
+        </PageHeadActions>
+      </PageHeadRow>
+    </PageHead>
   );
 }
 
 function OrderTrackingStats() {
   return (
     <>
-      <StatCard 
-        icon={Icon.TruckIcon} 
+      <StatCard
+        icon={Icon.TruckIcon}
         iconColor="text-primary"
-        title="Active Fleet" 
-        value="42 / 50" 
+        title="Active Fleet"
+        value="42 / 50"
         description="Vehicles currently operational"
         className="bg-primary/5 border-primary/20"
       />
-      <StatCard 
-        icon={Icon.PackageIcon} 
+      <StatCard
+        icon={Icon.PackageIcon}
         iconColor="text-blue-500"
-        title="Pending Dispatch" 
-        value="14" 
+        title="Pending Dispatch"
+        value="14"
         description="Orders in queue for pickup"
       />
-      <StatCard 
-        icon={Icon.ClockIcon} 
+      <StatCard
+        icon={Icon.ClockIcon}
         iconColor="text-amber-500"
-        title="Avg. Fulfillment" 
-        value="28 min" 
+        title="Avg. Fulfillment"
+        value="28 min"
         description="From capture to last mile"
       />
-      <StatCard 
+      <StatCard
         themeColor="text-emerald-600"
-        title="Status Level" 
-        value="Peak" 
+        title="Status Level"
+        value="Peak"
         description="High efficiency operations"
         className="border-emerald-500/10 bg-emerald-500/5"
       />
@@ -126,21 +127,35 @@ function OrderTrackingStats() {
   );
 }
 
-function StatCard({ icon: IconComponent, iconColor, title, value, description, className, themeColor }: any) {
+function StatCard({
+  icon: IconComponent,
+  iconColor,
+  title,
+  value,
+  description,
+  className,
+  themeColor,
+}: any) {
   return (
     <Card className={className}>
       <CardHeader className="pb-2">
-        <CardTitle className={cn("flex items-center gap-2 text-xs font-bold tracking-wider uppercase", themeColor ? themeColor : "text-muted-foreground")}>
-          {IconComponent && <IconComponent className={cn("h-3.5 w-3.5", iconColor)} />} {title}
+        <CardTitle
+          className={cn(
+            "flex items-center gap-2 text-xs font-bold tracking-wider uppercase",
+            themeColor ? themeColor : "text-muted-foreground",
+          )}
+        >
+          {IconComponent && (
+            <IconComponent className={cn("h-3.5 w-3.5", iconColor)} />
+          )}{" "}
+          {title}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className={cn("text-2xl font-bold italic", themeColor)}>
           {value}
         </div>
-        <p className="text-muted-foreground mt-1 text-[10px]">
-          {description}
-        </p>
+        <p className="text-muted-foreground mt-1 text-[10px]">{description}</p>
       </CardContent>
     </Card>
   );
@@ -198,9 +213,7 @@ function OrderTrackingMap({ deliveries }: { deliveries: Delivery[] }) {
                     <span className="text-muted-foreground text-xs font-medium">
                       Driver
                     </span>
-                    <span className="text-sm font-bold">
-                      {delivery.driver}
-                    </span>
+                    <span className="text-sm font-bold">{delivery.driver}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground text-xs font-medium">
@@ -213,7 +226,9 @@ function OrderTrackingMap({ deliveries }: { deliveries: Delivery[] }) {
                   <div className="border-t pt-3">
                     <Badge
                       className="w-full justify-center py-1 font-bold italic"
-                      variant={delivery.status === "Delivered" ? "success" : "info"}
+                      variant={
+                        delivery.status === "Delivered" ? "success" : "info"
+                      }
                     >
                       {delivery.status.toUpperCase()}
                     </Badge>
@@ -232,7 +247,11 @@ function OrderTrackingFeed() {
   const logs = [
     { time: "12:04", msg: "TRK-9901 entered Cairo Sector", type: "info" },
     { time: "11:58", msg: "TRK-5520 delayed (Heavy Traffic)", type: "warning" },
-    { time: "11:45", msg: "TRK-1104 marked as Near Destination", type: "success" },
+    {
+      time: "11:45",
+      msg: "TRK-1104 marked as Near Destination",
+      type: "success",
+    },
     { time: "11:30", msg: "Fleet dispatch alpha complete", type: "info" },
   ];
 
@@ -273,4 +292,3 @@ function SecureTrackingCard() {
     </Card>
   );
 }
-

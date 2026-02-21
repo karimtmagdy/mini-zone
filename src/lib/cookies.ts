@@ -1,31 +1,11 @@
 import Cookies from "js-cookie";
-type CookieOptions = {
-  expires?: number;
-  path?: string;
-  domain?: string;
-  secure?: boolean;
-  sameSite?: "strict" | "Strict" | "lax" | "Lax" | "none" | "None";
-};
 
 export class CookiesService {
   constructor() {}
-  //   public readonly value: string,
-  // public this.name: string;
-  public readonly options?: CookieOptions;
-  set() {}
-  get() {}
-  remove() {
-    return Cookies.remove(this.remove.name);
+  
+  remove(name: string = "refreshToken") {
+    Cookies.remove(name, { path: "/" });
   }
-  // set() {
-  //   Cookies.set(this.name, this.value, this.options);
-  // }
-  // get(): string | undefined {
-  //   return Cookies.get(this.name);
-  // }
-  // remove(): void {
-  //   Cookies.remove(this.name, this.options);
-  // }
 }
 export const cookiesService = new CookiesService()
 // export const cookiesService = new CookiesService("refreshToken", "", {

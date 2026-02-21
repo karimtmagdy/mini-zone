@@ -20,7 +20,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
@@ -36,7 +36,8 @@
       "@/layouts/*": ["./src/layouts/*"],
       "@/schema/*": ["./src/schema/*"],
       "@/lib/*": ["./src/lib/*"],
-      "@/pages/*": ["./src/pages/*"]
+      "@/pages/*": ["./src/pages/*"],
+      "@/dev-tools/*": ["./src/dev-tools/*"]
     }
   },
   "include": ["src"]

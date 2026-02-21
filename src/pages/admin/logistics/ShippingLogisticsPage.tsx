@@ -93,49 +93,46 @@ export default function ShippingLogisticsPage() {
 
 function ShippingLogisticsHeader() {
   return (
-    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Shipping & Logistics
-        </h1>
-        <p className="text-muted-foreground italic">
-          Monitor carrier performance and real-time order tracking.
-        </p>
-      </div>
-      <Button className="flex items-center gap-2">
-        <Icon.TruckIcon className="h-4 w-4" />
-        Manage Carriers
-      </Button>
-    </div>
+    <PageHead>
+      <PageHeadRow>
+        <TopHeadMeta />
+        <PageHeadActions responsive="col" align="end">
+          <Button className="flex items-center gap-2">
+            <Icon.TruckIcon className="h-4 w-4" />
+            Manage Carriers
+          </Button>
+        </PageHeadActions>
+      </PageHeadRow>
+    </PageHead>
   );
 }
 
 function ShippingLogisticsStats() {
   return (
     <div className="grid gap-4 md:grid-cols-4">
-      <StatCard 
-        icon={Icon.PackageIcon} 
+      <StatCard
+        icon={Icon.PackageIcon}
         iconColor="text-primary"
-        title="Active Shipments" 
-        value="128" 
+        title="Active Shipments"
+        value="128"
       />
-      <StatCard 
-        icon={Icon.ClockIcon} 
+      <StatCard
+        icon={Icon.ClockIcon}
         iconColor="text-amber-500"
-        title="Average Lead Time" 
-        value="3.2 Days" 
+        title="Average Lead Time"
+        value="3.2 Days"
       />
-      <StatCard 
-        icon={Icon.CheckCircleIcon} 
+      <StatCard
+        icon={Icon.CheckCircleIcon}
         iconColor="text-emerald-500"
-        title="Delivery Success" 
-        value="99.4%" 
+        title="Delivery Success"
+        value="99.4%"
       />
-      <StatCard 
-        icon={Icon.NavigationIcon} 
+      <StatCard
+        icon={Icon.NavigationIcon}
         iconColor="text-blue-500"
-        title="Carrier Hubs" 
-        value="12" 
+        title="Carrier Hubs"
+        value="12"
       />
     </div>
   );
@@ -153,8 +150,20 @@ function StatCard({ icon: IconComponent, iconColor, title, value }: any) {
 }
 
 import { cn } from "@/lib/utils";
+import {
+  PageHead,
+  PageHeadActions,
+  PageHeadRow,
+} from "@/components/ui/head-page";
+import { TopHeadMeta } from "@/components/common/meta";
 
-function ShippingLogisticsToolbar({ search, setSearch }: { search: string, setSearch: (v: string) => void }) {
+function ShippingLogisticsToolbar({
+  search,
+  setSearch,
+}: {
+  search: string;
+  setSearch: (v: string) => void;
+}) {
   return (
     <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
       <div className="relative w-full md:w-96">
@@ -269,4 +278,3 @@ function ShipmentActions() {
     </DropdownMenu>
   );
 }
-

@@ -9,15 +9,17 @@ export default function FirstTimeVisitor() {
 
   useEffect(() => {
     const now = Date.now();
-    const expiry = localStorage.getItem(STORAGE_KEY);
+    const expiry = sessionStorage.getItem(STORAGE_KEY);
 
     // Show if never visited or expired
     if (!expiry || now > Number(expiry)) {
-      setIsVisible(true);
+      const expiryDate = Date.now() + SEVEN_DAYS;
+      sessionStorage.setItem(STORAGE_KEY, expiryDate.toString());
+      // setIsVisible(true);
       document.body.classList.add("overflow-hidden");
-
       const timer = setTimeout(() => {
-        handleClose();
+        document.body.classList.remove("overflow-hidden");
+        setIsVisible(false);
       }, FIVE_SECONDS);
 
       return () => {
@@ -26,13 +28,6 @@ export default function FirstTimeVisitor() {
       };
     }
   }, []);
-
-  const handleClose = () => {
-    const expiryDate = Date.now() + SEVEN_DAYS;
-    localStorage.setItem(STORAGE_KEY, expiryDate.toString());
-    document.body.classList.remove("overflow-hidden");
-    setIsVisible(false);
-  };
 
   if (!isVisible) return null;
 

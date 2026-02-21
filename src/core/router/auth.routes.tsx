@@ -1,6 +1,6 @@
 import { type RouteObject } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import LayoutAuth from "@/layouts/LayoutAuth";
+import AuthLayout from "@/layouts/AuthLayout";
 import { Spinner } from "@/components/ui/spinner";
 
 const PageChangePassowrd = lazy(() =>
@@ -28,11 +28,16 @@ const PageLogin = lazy(() =>
     default: module.PageLogin,
   })),
 );
+const PageVerificationOTP = lazy(() =>
+  import("@/pages/auth/PageVerificationOTP").then((module) => ({
+    default: module.default,
+  })),
+);
 
 export const PagesAuth = [
   {
     path: "auth",
-    Component: LayoutAuth,
+    Component: AuthLayout,
     children: [
       {
         path: "register",
@@ -70,6 +75,15 @@ export const PagesAuth = [
           <Suspense
             fallback={<AuthFallback />}
             children={<PageResetPassword />}
+          />
+        ),
+      },
+      {
+        path: "verify",
+        element: (
+          <Suspense
+            fallback={<AuthFallback />}
+            children={<PageVerificationOTP />}
           />
         ),
       },

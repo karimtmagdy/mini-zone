@@ -8,7 +8,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { PATH_SIGNIN, PATH_SIGNUP } from "@/lib/links/paths.routes";
+import { PATH_AUTH } from "@/lib/links";
 import { HomeIcon, LogInIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -28,7 +28,7 @@ export default function PageUnauthorized() {
       </EmptyHeader>
       <EmptyContent>
         <ButtonGroup>
-          <Button onClick={() => navigate(PATH_SIGNIN)}>
+          <Button onClick={() => navigate(PATH_AUTH.SIGNIN)}>
             <LogInIcon /> Sign In
           </Button>
           <Button variant="outline" onClick={() => navigate("/")}>
@@ -37,7 +37,7 @@ export default function PageUnauthorized() {
         </ButtonGroup>
         <EmptyDescription className="text-sm">
           <br />
-          Don&apos;t have an account? <Link to={PATH_SIGNUP}>Sign up</Link> to
+          Don&apos;t have an account? <Link to={PATH_AUTH.SIGNUP}>Sign up</Link> to
           get started.
         </EmptyDescription>
       </EmptyContent>

@@ -16,7 +16,7 @@ export default function ProfileSettingsPage() {
   const { user } = useAuthGetMe();
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 w-fit">
       <ProfileHeader />
 
       <div className="flex flex-col items-start gap-8 md:flex-row">
@@ -30,7 +30,7 @@ export default function ProfileSettingsPage() {
 
       <div className="flex justify-end pt-6">
         <Button className="gap-2 px-8">
-          <Icon.SaveIcon className="h-4 w-4" /> Save Global Changes
+          <Icon.SaveIcon className="h-4 w-4" /> Save Changes
         </Button>
       </div>
     </div>

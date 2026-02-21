@@ -1,0 +1,18 @@
+import type { At, Image } from "./global.dto";
+
+export const BRAND_STATUS = ["active", "inactive", "archived"] as const;
+export type BrandStatus = (typeof BRAND_STATUS)[number];
+export enum BrandStatusEnum {
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  ARCHIVED = "archived",
+}
+export type BrandDto = At & {
+  id: string;
+  name: string;
+  image: Image;
+  status: BrandStatus;
+  slug: string;
+  productsCount: number;
+  deletedAt: Date | null;
+};

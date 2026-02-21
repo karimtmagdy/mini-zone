@@ -1,57 +1,62 @@
-// type PaginationTableState,
-// type PaginationState,
-// type TableState,
-// type Column,
-// type ColumnDefBase,
-// type OnChangeFn,
-import * as React from "react";
+import type { TableOption } from "@/contract/table.dto";
 import {
   getCoreRowModel,
-  useReactTable,
-  type ColumnDef,
-  type ColumnFiltersState,
-  type SortingState,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  getFilteredRowModel,
-  // type Table,
+  useReactTable,
 } from "@tanstack/react-table";
 
-interface props<TData> {
-  data: TData[];
-  state: any;
-  columns: ColumnDef<TData, any>[];
-  // onPaginationChange: OnChangeFn<PaginationState>;
-  manualPagination?: boolean;
-}
-
 export function useTable<TData>({
-  data,
   columns,
-  // state,
-  // onPaginationChange,
-  // manualPagination
-}: props<TData>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    [],
-  );
-
-  return useReactTable({
-    data,
+  data,
+  state,
+  pageCount,
+  rowCount,
+  manualSorting,
+}: TableOption<TData>) {
+  const table = useReactTable<TData>({
     columns,
-    manualPagination: true,
+    data,
+    pageCount,
+    rowCount,
+    getRowId: (row: any) => row.id || row._id,
+
     state: {
-      sorting,
-      columnFilters,
+      pagination: state.pagination,
+      columnFilters: state.columnFilters,
+      columnVisibility: state.columnVisibility,
+      sorting: state.sorting,
+      globalFilter: state.globalFilter,
+      rowSelection: state.rowSelection,
     },
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    // rowCount: totalRows,
-    // onPaginationChange,
+    onPaginationChange: state.setPagination,
+    onColumnFiltersChange: state.setColumnFilters,
+    onColumnVisibilityChange: state.setColumnVisibility,
+    onSortingChange: state.setSorting,
+    onGlobalFilterChange: state.setGlobalFilter,
+    onRowSelectionChange: state.setRowSelection,
+    meta: {
+      onEdit: state.onEdit,
+      onDelete: state.onDelete,
+      onView: state.onView,
+      data: data,
+    },
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    manualPagination: true,
+    manualSorting: manualSorting ?? true,
+    manualFiltering: true,
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getRowCanExpand: () => true,
+    enableRowSelection: true,
+    enableSubRowSelection: true,
+    getFilteredRowModel: getFilteredRowModel(),
   });
+
+  return table;
 }

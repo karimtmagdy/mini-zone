@@ -17,7 +17,7 @@ function NavItem({
         <div
           className={cn(
             isActive &&
-              "*:bg-foreground *:hover:text-background *:[&>svg]:text-background *:hover:bg-foreground *:hover:[&>svg]:text-background *:active:bg-foreground *:active:[&>svg]:text-background *:active:text-background *:text-background font-semibold",
+              "*:bg-foreground *:hover:text-background *:[&>svg]:text-background *:hover:bg-foreground *:hover:[&>svg]:text-background *:active:bg-foreground *:active:[&>svg]:text-background *:active:text-background *:text-background",
           )}
         >
           {children}

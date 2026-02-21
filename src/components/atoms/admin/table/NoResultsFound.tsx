@@ -1,15 +1,11 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import type { Table } from "@tanstack/react-table";
 import { Icon } from "@/assets/icon/icons";
-export default function NoResultsFound<TData>({
+import type { DataTableBodyProps } from "@/contract/table.dto";
+export function NoResultsFound<TData>({
   loading,
   name,
   table,
-}: {
-  loading: boolean;
-  name: string;
-  table: Table<TData>;
-}) {
+}: DataTableBodyProps<TData>) {
   return (
     <TableRow className="overflow-hidden select-none hover:bg-transparent">
       <TableCell

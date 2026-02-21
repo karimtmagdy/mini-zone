@@ -1,31 +1,6 @@
 import { Icon } from "@/assets/icon/icons";
 
-import {
-  KPI_ANALYTICS,
-  KPI_DASHBOARD,
-  KPI_LOGS,
-  KPI_NOTIFICATIONS,
-  KPI_ORDERS,
-  KPI_PRODUCTS,
-  KPI_REVENUE,
-  KPI_SALES,
-  KPI_TRAFFIC,
-  KPI_USERS,
-  PATH_BRANDS,
-  PATH_CATEGORIES,
-  PATH_COUPONS,
-  PATH_ORDERS,
-  PATH_PRODUCTS,
-  PATH_SUBCATEGORIES,
-  PATH_USERS,
-  PATH_INVOICES,
-  PATH_SHIPPING,
-  PATH_TRACKING,
-  PATH_SUPPORT_INBOX,
-  PATH_SETTINGS_PROFILE,
-  PATH_SETTINGS_SECURITY,
-  PATH_SETTINGS_APPEARANCE,
-} from "./paths.routes";
+import { PATH_KPI, PATH_SETTINGS, PATH_ADMIN } from ".";
 
 export const data = {
   user: {
@@ -49,52 +24,52 @@ export const data = {
       items: [
         {
           title: "Executive Summary",
-          url: KPI_DASHBOARD,
+          url: PATH_KPI.DASHBOARD,
           icon: Icon.LayoutDashboardIcon,
         },
         {
           title: "Market Intelligence",
-          url: KPI_ANALYTICS,
+          url: PATH_KPI.ANALYTICS,
           icon: Icon.LineChartIcon,
         },
         {
           title: "Sales Analytics",
-          url: KPI_SALES,
+          url: PATH_KPI.SALES,
           icon: Icon.BadgeDollarSignIcon,
         },
         {
           title: "Revenue Tracking",
-          url: KPI_REVENUE,
+          url: PATH_KPI.REVENUE,
           icon: Icon.DollarSignIcon,
         },
         {
           title: "Audience Insights",
-          url: KPI_TRAFFIC,
+          url: PATH_KPI.TRAFFIC,
           icon: Icon.ActivityIcon,
         },
         {
           title: "Inventory Health",
-          url: KPI_PRODUCTS,
+          url: PATH_KPI.PRODUCTS,
           icon: Icon.PackageIcon,
         },
         {
           title: "Fulfillment Stats",
-          url: KPI_ORDERS,
+          url: PATH_KPI.ORDERS,
           icon: Icon.ShoppingCartIcon,
         },
         {
           title: "User Growth",
-          url: KPI_USERS,
+          url: PATH_KPI.USERS,
           icon: Icon.UsersIcon,
         },
         {
           title: "Activity Logs",
-          url: KPI_LOGS,
+          url: PATH_KPI.LOGS,
           icon: Icon.HistoryIcon,
         },
         {
           title: "System Alerts",
-          url: KPI_NOTIFICATIONS,
+          url: PATH_KPI.NOTIFICATIONS,
           icon: Icon.BellIcon,
         },
       ],
@@ -107,37 +82,37 @@ export const data = {
       items: [
         {
           title: "Inventory Catalog",
-          url: PATH_PRODUCTS,
+          url: PATH_ADMIN.PRODUCTS,
           icon: Icon.BoxIcon,
         },
         {
           title: "Sales Orders",
-          url: PATH_ORDERS,
+          url: PATH_ADMIN.ORDERS,
           icon: Icon.ShoppingBagIcon,
         },
         {
           title: "User Management",
-          url: PATH_USERS,
+          url: PATH_ADMIN.USERS,
           icon: Icon.UserCogIcon,
         },
         {
           title: "Categories",
-          url: PATH_CATEGORIES,
+          url: PATH_ADMIN.CATEGORIES,
           icon: Icon.LayersIcon,
         },
         {
           title: "Sub-Categories",
-          url: PATH_SUBCATEGORIES,
+          url: PATH_ADMIN.SUBCATEGORIES,
           icon: Icon.TagsIcon,
         },
         {
           title: "Brand Partners",
-          url: PATH_BRANDS,
+          url: PATH_ADMIN.BRANDS,
           icon: Icon.AwardIcon,
         },
         {
           title: "Promotions",
-          url: PATH_COUPONS,
+          url: PATH_ADMIN.COUPONS,
           icon: Icon.TicketPercentIcon,
         },
       ],
@@ -149,17 +124,17 @@ export const data = {
       items: [
         {
           title: "Invoices & Billing",
-          url: PATH_INVOICES,
+          url: PATH_ADMIN.INVOICES,
           icon: Icon.ReceiptTextIcon,
         },
         {
           title: "Shipping Logistics",
-          url: PATH_SHIPPING,
+          url: PATH_ADMIN.SHIPPING,
           icon: Icon.TruckIcon,
         },
         {
           title: "Real-time Tracking",
-          url: PATH_TRACKING,
+          url: PATH_ADMIN.TRACKING,
           icon: Icon.NavigationIcon,
         },
       ],
@@ -171,7 +146,7 @@ export const data = {
       items: [
         {
           title: "Support Inbox",
-          url: PATH_SUPPORT_INBOX,
+          url: PATH_ADMIN.SUPPORT_INBOX,
           icon: Icon.MessageSquareIcon,
         },
       ],
@@ -183,17 +158,17 @@ export const data = {
       items: [
         {
           title: "My Profile",
-          url: PATH_SETTINGS_PROFILE,
+          url: PATH_SETTINGS.PROFILE,
           icon: Icon.UserIcon,
         },
         {
           title: "Security & Keys",
-          url: PATH_SETTINGS_SECURITY,
+          url: PATH_SETTINGS.SECURITY,
           icon: Icon.ShieldCheckIcon,
         },
         {
           title: "Visual Theme",
-          url: PATH_SETTINGS_APPEARANCE,
+          url: PATH_SETTINGS.APPEARANCE,
           icon: Icon.PaletteIcon,
         },
       ],

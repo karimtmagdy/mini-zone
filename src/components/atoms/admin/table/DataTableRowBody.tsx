@@ -1,20 +1,19 @@
-import { flexRender, type Table } from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import { TableCell, TableRow, TableBody } from "@/components/ui/table";
-import NoResultsFound from "./NoResultsFound";
+import { NoResultsFound } from "./NoResultsFound";
+import type { DataTableBodyProps } from "@/contract/table.dto";
 
-interface DataTableRowBodyProps<TData> {
-  table: Table<TData>;
-  isLoading: boolean;
-  name: string;
-}
-
-export default function DataTableRowBody<TData>({
+export function DataTableRowBody<T>({
   table,
-  isLoading,
+  loading,
   name,
-}: DataTableRowBodyProps<TData>) {
+}: DataTableBodyProps<T>) {
   return (
-    <TableBody>
+    <TableBody
+      className={
+        loading ? "opacity-50 transition-opacity" : "transition-opacity"
+      }
+    >
       {table.getRowModel().rows.length ? (
         table.getRowModel().rows.map((row) => (
           <TableRow key={row.id}>
@@ -26,7 +25,7 @@ export default function DataTableRowBody<TData>({
           </TableRow>
         ))
       ) : (
-        <NoResultsFound loading={isLoading} name={name} table={table} />
+        <NoResultsFound loading={loading} name={name} table={table} />
       )}
     </TableBody>
   );

@@ -1,8 +1,8 @@
 import type { AxiosInstance } from "axios";
-import { PATH_REFRESH_TOKEN, PATH_SIGNIN } from "@/lib/links/paths.routes";
+import { PATH_AUTH } from "@/lib/links";
 import { storageUtils } from "@/lib/tokens";
-import { authApi } from "@/core/services/auth.service";
-import { cookiesService }from '@/lib/cookies'
+import { authApi } from "@/core/api/auth.api";
+import { cookiesService } from "@/lib/cookies";
 let isRefreshing = false;
 let failedQueue: any[] = [];
 
@@ -29,8 +29,22 @@ export function setupInterceptors(axiosInstance: AxiosInstance) {
       }
 
       const isAuthRequest =
-        originalRequest.url === PATH_SIGNIN ||
-        originalRequest.url === PATH_REFRESH_TOKEN;
+        originalRequest.url === PATH_AUTH.SIGNIN ||
+        originalRequest.url === PATH_AUTH.REFRESH_TOKEN;
+
+      // ✅ If the refresh token request fails with 401, the session is dead
+      if (error.response.status === 401 && originalRequest.url === PATH_AUTH.REFRESH_TOKEN) {
+        console.error("🛑 Session expired. Clearing everything...");
+        storageUtils.removeToken();
+        storageUtils.removeUser();
+        cookiesService.remove();
+        
+        // Redirect if we are in the browser
+        if (typeof window !== "undefined") {
+          window.location.href = PATH_AUTH.SIGNIN;
+        }
+        return Promise.reject(error);
+      }
 
       if (
         error.response.status === 401 &&
@@ -56,37 +70,30 @@ export function setupInterceptors(axiosInstance: AxiosInstance) {
         try {
           console.log("🔄 Attempting to refresh token...");
           const res = await authApi.refresh();
-          console.log("✅ Refresh response:", res.data);
-
+          
           if (res.data.status === "success") {
             const newToken = res.data.data?.token;
 
             if (newToken) {
-              console.log(
-                "🔑 New token received, retrying request:",
-                originalRequest.url,
-              );
+              console.log("✅ Token refreshed successfully.");
               storageUtils.setToken(newToken);
-              axiosInstance.defaults.headers.common["Authorization"] =
-                `Bearer ${newToken}`;
+              axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
               originalRequest.headers.Authorization = `Bearer ${newToken}`;
               processQueue(null, newToken);
               return axiosInstance(originalRequest);
             }
           }
 
-          console.error("❌ Refresh failed: Invalid response status", res.data);
           throw new Error("Refresh failed");
         } catch (refreshError: any) {
-          console.error("❌ Refresh token process error:", {
-            status: refreshError?.response?.status,
-            message: refreshError?.message,
-            data: refreshError?.response?.data,
-          });
           processQueue(refreshError, null);
           storageUtils.removeToken();
           storageUtils.removeUser();
-          cookiesService.remove()
+          cookiesService.remove();
+
+          if (typeof window !== "undefined") {
+            window.location.href = PATH_AUTH.SIGNIN;
+          }
 
           return Promise.reject(refreshError);
         } finally {

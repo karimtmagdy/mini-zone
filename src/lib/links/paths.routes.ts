@@ -1,43 +1,64 @@
-export const KPI_DASHBOARD = "/admin/dashboard";
-export const KPI_SALES = "/admin/dashboard/sales";
-export const KPI_LOGS = "/admin/dashboard/logs";
-export const KPI_ANALYTICS = "/admin/dashboard/analytics";
-export const KPI_ORDERS = "/admin/dashboard/orders-kpi";
-export const KPI_PRODUCTS = "/admin/dashboard/inventory-kpi";
-export const KPI_NOTIFICATIONS = "/admin/dashboard/notifications";
-export const KPI_TRAFFIC = "/admin/dashboard/traffic";
-export const KPI_USERS = "/admin/dashboard/users-kpi";
-export const KPI_REVENUE = "/admin/dashboard/revenue";
-
-export const PATH_CATEGORIES = "/admin/catalog/categories";
-export const PATH_SUBCATEGORIES = "/admin/catalog/subcategories";
-export const PATH_BRANDS = "/admin/catalog/brands";
-export const PATH_PRODUCTS = "/admin/inventory";
-export const PATH_ORDERS = "/admin/sales-orders";
-export const PATH_USERS = "/admin/management/users";
-export const PATH_COUPONS = "/admin/marketing/promotions";
-
-// New Routes
-export const PATH_INVOICES = "/admin/billing/invoices";
-export const PATH_SHIPPING = "/admin/logistics/shipping";
-export const PATH_TRACKING = "/admin/logistics/tracking";
-export const PATH_SUPPORT_INBOX = "/admin/support/inbox";
-
+// Admin Routes
+export const PATH_ADMIN = {
+  CATEGORIES: "/admin/catalog/categories",
+  SUBCATEGORIES: "/admin/catalog/subcategories",
+  BRANDS: "/admin/catalog/brands",
+  PRODUCTS: "/admin/inventory",
+  ORDERS: "/admin/sales-orders",
+  USERS: "/admin/management/users",
+  COUPONS: "/admin/marketing/promotions",
+  CUSTOMERS: "/admin/management/customers",
+  REPORTS: "/admin/reports",
+  SUPPORT_INBOX: "/admin/support/inbox",
+  INVOICES: "/admin/billing/invoices",
+  SHIPPING: "/admin/logistics/shipping",
+  TRACKING: "/admin/logistics/tracking",
+};
+// SEO Routes
+export const PATH_SEO = {
+  BASE: "/seo",
+  TITLE: "/seo/title",
+  DESCRIPTION: "/seo/description",
+  KEYWORDS: "/seo/keywords",
+  OG: "/seo/og",
+  TWITTER: "/seo/twitter",
+  CANONICAL: "/seo/canonical",
+  ROBOTS: "/seo/robots",
+  SITEMAP: "/seo/sitemap",
+  FAQ: "/seo/faq",
+  FAQ_SCHEMA: "/seo/faq-schema",
+};
+// KPI Routes
+export const PATH_KPI = {
+  //   DASHBOARD: "/kpi/dashboard",
+  DASHBOARD: "/admin/dashboard",
+  SALES: "/admin/dashboard/sales",
+  LOGS: "/admin/dashboard/logs",
+  ORDERS: "/admin/dashboard/orders-kpi",
+  PRODUCTS: "/admin/dashboard/inventory-kpi",
+  USERS: "/admin/dashboard/users-kpi",
+  ANALYTICS: "/admin/dashboard/analytics",
+  NOTIFICATIONS: "/admin/dashboard/notifications",
+  TRAFFIC: "/admin/dashboard/traffic",
+  REVENUE: "/admin/dashboard/revenue",
+};
+// Auth Routes
+export const PATH_AUTH = {
+  SIGNIN: "/auth/login",
+  SIGNUP: "/auth/register",
+  SIGNOUT: "/auth/logout",
+  SIGNOUT_DEVICES: "/auth/logout-devices",
+  FORGOT_PASSWORD: "/auth/forgot-password",
+  RESET_PASSWORD: "/auth/reset-password",
+  VERIFY_EMAIL: "/auth/verify-email",
+  REFRESH_TOKEN: "/auth/refresh-token",
+  ME: "/users/me",
+  CHANGE_PASSWORD: "/users/change-password",
+};
 // Settings Nested Routes
-export const PATH_SETTINGS = "/admin/settings";
-export const PATH_SETTINGS_PROFILE = "/admin/settings/profile";
-export const PATH_SETTINGS_SECURITY = "/admin/settings/security";
-export const PATH_SETTINGS_APPEARANCE = "/admin/settings/appearance";
-
-export const PATH_CUSTOMERS = "/admin/management/customers";
-export const PATH_REPORTS = "/admin/reports";
-
-
-export const PATH_SIGNIN = "/auth/login";
-export const PATH_SIGNUP = "/auth/register";
-export const PATH_FORGOT_PASSWORD = "/auth/forgot-password";
-export const PATH_RESET_PASSWORD = "/auth/reset-password";
-export const PATH_VERIFY_EMAIL = "/auth/verify-email";
-export const PATH_REFRESH_TOKEN = "/auth/refresh-token";
-export const PATH_ME = "/users/me";
-
+export const PATH_SETTINGS = {
+  BASE: "/admin/settings",
+  PROFILE: "/admin/settings/profile",
+  SECURITY: "/admin/settings/security",
+  APPEARANCE: "/admin/settings/appearance",
+};

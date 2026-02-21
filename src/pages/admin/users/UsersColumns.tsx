@@ -1,37 +1,16 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import type { UserDto } from "@/contract/user.dto";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/assets/icon/icons";
 import { DataTableCellViewer } from "@/components/atoms/admin/table";
 import {
-  formatRelativeTime,
-  formatShortDate,
-  formatTimestamp,
-} from "@/lib/date";
-
+  CreatedAtColumn,
+  UpdatedAtColumn,
+  ActionsColumn,
+  SelectColumn,
+} from "@/lib/columns";
 export const usersColumns: ColumnDef<UserDto>[] = [
-  {
-    accessorKey: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() || table.getIsSomePageRowsSelected()
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false, //disable sorting
-    enableHiding: false, //hide column
-  },
+  SelectColumn<UserDto>(),
   {
     accessorKey: "email",
     header: ({ column }) => {
@@ -126,69 +105,16 @@ export const usersColumns: ColumnDef<UserDto>[] = [
       );
     },
   },
-  {
-    accessorKey: "createdAt",
-    header: ({ column }) => {
-      return <DataTableCellViewer column={column} title="createdAt" />;
-    },
-    cell: ({ row }) => {
-      const date = new Date(row.original.createdAt);
-      return (
-        <div className="flex items-center gap-2">
-          <Icon.CalendarIcon />
-          <div className="flex flex-col -space-y-1">
-            <span className="text-sm">{formatShortDate(date)}</span>
-            <span className="text-muted-foreground text-xs">
-              {formatTimestamp(date, "h:mm a")}
-            </span>
-          </div>
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "updatedAt",
-    header: ({ column }) => {
-      return (
-        <DataTableCellViewer
-          column={column}
-          title="updatedAt"
-          className="hidden @2xl:flex"
-        />
-      );
-    },
-    cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
-      const updatedAt = row.original.updatedAt;
-      if (createdAt === updatedAt) {
-        return (
-          <small className="text-muted-foreground hidden w-full select-none @2xl:flex @2xl:justify-center">
-            --
-          </small>
-        );
-      }
-      const date = new Date(updatedAt);
-      return (
-        <div className="hidden @2xl:flex @2xl:items-center @2xl:gap-2">
-          <Icon.CalendarIcon />
-          <div className="flex flex-col -space-y-1">
-            <span className="text-sm">{formatShortDate(date)}</span>
-            <span className="text-muted-foreground text-xs">
-              {formatRelativeTime(date)}
-            </span>
-          </div>
-        </div>
-      );
-    },
-    sortingFn: "datetime",
-  },
-  {
-    id: "actions",
-    header: () => (
-      <span className="flex justify-center select-none">Actions</span>
-    ),
-  },
+  CreatedAtColumn<UserDto>({
+    getCreatedAt: (row) => row.createdAt,
+  }),
+  UpdatedAtColumn<UserDto>({
+    getCreatedAt: (row) => row.createdAt,
+    getUpdatedAt: (row) => row.updatedAt,
+  }),
+  ActionsColumn<UserDto>(),
 ];
+
 {
   /* <TableBody>
           {filteredUsers.map((user) => (

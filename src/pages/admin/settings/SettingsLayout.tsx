@@ -1,24 +1,21 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Icon } from "@/assets/icon/icons";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-
-import {
-  PATH_SETTINGS_PROFILE,
-  PATH_SETTINGS_SECURITY,
-  PATH_SETTINGS_APPEARANCE,
-} from "@/lib/links/paths.routes";
+import { PATH_SETTINGS } from "@/lib/links";
 import { Badge } from "@/components/ui/badge";
+import { PageHead, PageHeadRow } from "@/components/ui/head-page";
+import { TopHeadMeta } from "@/components/common/meta";
 
 const settingsNavItems = [
-  { name: "My Profile", href: PATH_SETTINGS_PROFILE, icon: Icon.UserIcon },
+  { name: "My Profile", href: PATH_SETTINGS.PROFILE, icon: Icon.UserIcon },
   {
     name: "Security & Login",
-    href: PATH_SETTINGS_SECURITY,
+    href: PATH_SETTINGS.SECURITY,
     icon: Icon.ShieldCheckIcon,
   },
   {
     name: "Theme & Interface",
-    href: PATH_SETTINGS_APPEARANCE,
+    href: PATH_SETTINGS.APPEARANCE,
     icon: Icon.PaletteIcon,
   },
   { name: "Notifications", href: "#", icon: Icon.BellRingIcon, disabled: true },
@@ -38,7 +35,7 @@ export default function SettingsLayout() {
   // Determine active tab based on current route
   const activeTab =
     settingsNavItems.find((item) => location.pathname.includes(item.href))
-      ?.href || PATH_SETTINGS_PROFILE;
+      ?.href || PATH_SETTINGS.PROFILE;
 
   return (
     <div className="flex flex-col gap-8">
@@ -51,21 +48,24 @@ export default function SettingsLayout() {
 
 function SettingsHeader() {
   return (
-    <div>
-      <h2 className="text-foreground text-3xl font-bold tracking-tight">
-        Global Settings
-      </h2>
-      <p className="text-muted-foreground italic">
-        Configure your administrative experience and security preferences.
-      </p>
-    </div>
+    <PageHead>
+      <PageHeadRow>
+        <TopHeadMeta />
+      </PageHeadRow>
+    </PageHead>
   );
 }
 
-function SettingsTabs({ activeTab, navigate }: { activeTab: string, navigate: (path: string) => void }) {
+function SettingsTabs({
+  activeTab,
+  navigate,
+}: {
+  activeTab: string;
+  navigate: (path: string) => void;
+}) {
   return (
     <Tabs value={activeTab}>
-      <TabsList className=" ">
+      <TabsList variant="default" className="bg-background border">
         {settingsNavItems
           .filter((item) => !item.disabled)
           .map((item) => (
@@ -108,4 +108,3 @@ function UpcomingSettings() {
     </div>
   );
 }
-

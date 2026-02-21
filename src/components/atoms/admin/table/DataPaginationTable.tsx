@@ -1,4 +1,3 @@
-import { type Table } from "@tanstack/react-table";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -9,17 +8,14 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/assets/icon/icons";
-export default function DataPaginationTable<TData>({
-  table,
-}: {
-  table: Table<TData>;
-}) {
+import type { DefTableProps } from "@/contract/table.dto";
+import { TableSelectionInfo } from ".";
+export function DataPaginationTable<T>({ table }: DefTableProps<T>) {
   return (
     <div className="mt-2 flex items-center justify-between px-4">
       <div className="text-muted-foreground @lg:wrap-balance hidden flex-1 items-center gap-2 text-sm select-none lg:flex">
         <span>
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          <TableSelectionInfo table={table}/>
         </span>
       </div>
       <div className="flex w-full items-center gap-8 lg:w-fit">

@@ -1,31 +1,5 @@
-import LayoutAdmin from "@/layouts/LayoutAdmin";
-import {
-  KPI_ANALYTICS,
-  KPI_DASHBOARD,
-  KPI_LOGS,
-  KPI_NOTIFICATIONS,
-  KPI_ORDERS,
-  KPI_PRODUCTS,
-  KPI_REVENUE,
-  KPI_SALES,
-  KPI_TRAFFIC,
-  KPI_USERS,
-  PATH_BRANDS,
-  PATH_CATEGORIES,
-  PATH_COUPONS,
-  PATH_INVOICES,
-  PATH_ORDERS,
-  PATH_PRODUCTS,
-  PATH_SETTINGS,
-  PATH_SETTINGS_APPEARANCE,
-  PATH_SETTINGS_PROFILE,
-  PATH_SETTINGS_SECURITY,
-  PATH_SHIPPING,
-  PATH_SUBCATEGORIES,
-  PATH_TRACKING,
-  PATH_SUPPORT_INBOX,
-  PATH_USERS,
-} from "@/lib/links/paths.routes";
+import AdminLayout from "@/layouts/AdminLayout";
+import { PATH_SETTINGS, PATH_KPI, PATH_ADMIN } from "@/lib/links";
 
 // Page Imports
 import BrandsPage from "@/pages/admin/brands/BrandsPage";
@@ -60,52 +34,52 @@ import SupportInboxPage from "@/pages/admin/support/SupportInboxPage";
 
 const kpiRoutes = [
   {
-    path: KPI_DASHBOARD,
+    path: PATH_KPI.DASHBOARD,
     Component: DashboardPage,
     handle: { crumb: () => "Dashboard" },
   },
   {
-    path: KPI_ANALYTICS,
+    path: PATH_KPI.ANALYTICS,
     Component: AnalyticsKpiInsightsPage,
     handle: { crumb: () => "Intelligence" },
   },
   {
-    path: KPI_SALES,
+    path: PATH_KPI.SALES,
     Component: SalesKpiInsightsPage,
     handle: { crumb: () => "Sales Metrics" },
   },
   {
-    path: KPI_TRAFFIC,
+    path: PATH_KPI.TRAFFIC,
     Component: TrafficKpiInsightsPage,
     handle: { crumb: () => "Audience" },
   },
   {
-    path: KPI_NOTIFICATIONS,
+    path: PATH_KPI.NOTIFICATIONS,
     Component: NotificationsKpiInsightsPage,
     handle: { crumb: () => "Alerts" },
   },
   {
-    path: KPI_LOGS,
+    path: PATH_KPI.LOGS,
     Component: ActivityLogsPage,
     handle: { crumb: () => "System Logs" },
   },
   {
-    path: KPI_PRODUCTS,
+    path: PATH_KPI.PRODUCTS,
     Component: ProductsKpiInsightsPage,
     handle: { crumb: () => "Inventory Health" },
   },
   {
-    path: KPI_ORDERS,
+    path: PATH_KPI.ORDERS,
     Component: OrdersKpiInsightsPage,
     handle: { crumb: () => "Fulfillment Stats" },
   },
   {
-    path: KPI_USERS,
+    path: PATH_KPI.USERS,
     Component: UsersKpiInsightsPage,
     handle: { crumb: () => "User Growth" },
   },
   {
-    path: KPI_REVENUE,
+    path: PATH_KPI.REVENUE,
     Component: RevenueKpisInsightsPage,
     handle: { crumb: () => "Financial Highlights" },
   },
@@ -113,37 +87,37 @@ const kpiRoutes = [
 
 const managementRoutes = [
   {
-    path: PATH_USERS,
+    path: PATH_ADMIN.USERS,
     Component: UsersPage,
     handle: { crumb: () => "User Management" },
   },
   {
-    path: PATH_PRODUCTS,
+    path: PATH_ADMIN.PRODUCTS,
     Component: ProductsPage,
     handle: { crumb: () => "Inventory Catalog" },
   },
   {
-    path: PATH_ORDERS,
+    path: PATH_ADMIN.ORDERS,
     Component: OrdersPage,
     handle: { crumb: () => "Sales Orders" },
   },
   {
-    path: PATH_CATEGORIES,
+    path: PATH_ADMIN.CATEGORIES,
     Component: CategoriesPage,
     handle: { crumb: () => "Categories" },
   },
   {
-    path: PATH_SUBCATEGORIES,
+    path: PATH_ADMIN.SUBCATEGORIES,
     Component: SubcategoriesPage,
     handle: { crumb: () => "Sub-Categories" },
   },
   {
-    path: PATH_BRANDS,
+    path: PATH_ADMIN.BRANDS,
     Component: BrandsPage,
     handle: { crumb: () => "Brand Partners" },
   },
   {
-    path: PATH_COUPONS,
+    path: PATH_ADMIN.COUPONS,
     Component: CouponsPage,
     handle: { crumb: () => "Promotions" },
   },
@@ -151,7 +125,7 @@ const managementRoutes = [
 
 const billingRoutes = [
   {
-    path: PATH_INVOICES,
+    path: PATH_ADMIN.INVOICES,
     Component: InvoicesPage,
     handle: { crumb: () => "Billing Records" },
   },
@@ -159,12 +133,12 @@ const billingRoutes = [
 
 const logisticsRoutes = [
   {
-    path: PATH_SHIPPING,
+    path: PATH_ADMIN.SHIPPING,
     Component: ShippingLogisticsPage,
     handle: { crumb: () => "Shipping & Logistics" },
   },
   {
-    path: PATH_TRACKING,
+    path: PATH_ADMIN.TRACKING,
     Component: OrderTrackingPage,
     handle: { crumb: () => "Real-time Tracking" },
   },
@@ -172,7 +146,7 @@ const logisticsRoutes = [
 
 const supportRoutes = [
   {
-    path: PATH_SUPPORT_INBOX,
+    path: PATH_ADMIN.SUPPORT_INBOX,
     Component: SupportInboxPage,
     handle: { crumb: () => "Support Hub" },
   },
@@ -180,26 +154,26 @@ const supportRoutes = [
 
 const settingsRoutes = [
   {
-    path: PATH_SETTINGS,
+    path: PATH_SETTINGS.BASE,
     Component: SettingsLayout,
     handle: { crumb: () => "Settings" },
     children: [
       {
         index: true,
-        element: <Navigate to={PATH_SETTINGS_PROFILE} replace />,
+        element: <Navigate to={PATH_SETTINGS.PROFILE} replace />,
       },
       {
-        path: PATH_SETTINGS_PROFILE,
+        path: PATH_SETTINGS.PROFILE,
         Component: ProfileSettingsPage,
         handle: { crumb: () => "Profile" },
       },
       {
-        path: PATH_SETTINGS_SECURITY,
+        path: PATH_SETTINGS.SECURITY,
         Component: SecuritySettingsPage,
         handle: { crumb: () => "Security" },
       },
       {
-        path: PATH_SETTINGS_APPEARANCE,
+        path: PATH_SETTINGS.APPEARANCE,
         Component: AppearanceSettingsPage,
         handle: { crumb: () => "Appearance" },
       },
@@ -210,11 +184,11 @@ const settingsRoutes = [
 export const PagesAdmin = [
   {
     path: "admin",
-    Component: LayoutAdmin,
+    Component: AdminLayout,
     children: [
       {
         index: true,
-        element: <Navigate to={KPI_DASHBOARD} replace />,
+        element: <Navigate to={PATH_KPI.DASHBOARD} replace />,
       },
       ...kpiRoutes,
       ...managementRoutes,

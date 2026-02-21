@@ -18,18 +18,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/assets/icon/icons";
-// import {
-//   PageHeadActions,
-//   PageHeadDescription,
-//   PageHeadRow,
-//   PageHeadTitle,
-// } from "@/components/ui/head-page";
+import {
+  PageHeadActions,
+  PageHeadRow,
+  PageHead,
+} from "@/components/ui/head-page";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { TopHeadMeta } from "@/components/common/meta";
 
 interface Coupon {
   id: string;
@@ -103,61 +103,56 @@ function CouponsHeader({
   setSearch: (v: string) => void;
 }) {
   return (
-    <div className="flex flex-col gap-4">
-      {/* <PageHeadRow responsive align="between">
-        <article>
-          <PageHeadTitle>Promotions & Coupons</PageHeadTitle>
-          <PageHeadDescription>
-            Create and track discount codes and marketing promotions.
-          </PageHeadDescription>
-        </article>
+    <PageHead>
+      <PageHeadRow responsive align="between">
+        <TopHeadMeta />
         <PageHeadActions align="end">
-          <Button className="flex items-center gap-2">
-            <Icon.PlusCircleIcon className="h-4 w-4" />
+          <Button>
+            <Icon.PlusCircleIcon />
             Create New Coupon
           </Button>
         </PageHeadActions>
       </PageHeadRow>
-      <PageHeadActions resource="search" align="between">
-        <InputGroup className="w-full @lg:w-sm">
-          <InputGroupAddon>
-            <InputGroupButton>
-              <Icon.SearchIcon />
-            </InputGroupButton>
-          </InputGroupAddon>
-          <InputGroupInput
-            placeholder="Search by coupon code..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </InputGroup>
-      </PageHeadActions> */}
-    </div>
+      <PageHeadRow responsive align="between">
+        <PageHeadActions resource="search" align="between">
+          <InputGroup className="w-full @lg:w-sm">
+            <InputGroupAddon>
+              <InputGroupButton>
+                <Icon.SearchIcon />
+              </InputGroupButton>
+            </InputGroupAddon>
+            <InputGroupInput
+              placeholder="Search by coupon code..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </InputGroup>
+        </PageHeadActions>
+      </PageHeadRow>
+    </PageHead>
   );
 }
 
 function CouponsTable({ coupons }: { coupons: Coupon[] }) {
   return (
-    <div className="bg-card overflow-hidden rounded-xl border shadow-xs">
-      <Table>
-        <TableHeader className="bg-muted/50">
-          <TableRow>
-            <TableHead className="w-[200px]">Coupon Code</TableHead>
-            <TableHead>Discount</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Expiry Date</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Total Usage</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {coupons.map((coupon) => (
-            <CouponRow key={coupon.id} coupon={coupon} />
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+    <Table>
+      <TableHeader className="bg-muted/50">
+        <TableRow>
+          <TableHead className="w-[200px]">Coupon Code</TableHead>
+          <TableHead>Discount</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Expiry Date</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Total Usage</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {coupons.map((coupon) => (
+          <CouponRow key={coupon.id} coupon={coupon} />
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 
@@ -235,4 +230,3 @@ function CouponActions() {
     </DropdownMenu>
   );
 }
-

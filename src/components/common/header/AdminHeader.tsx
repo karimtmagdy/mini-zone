@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import RootHeader from "./RootHeader";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import BreadcrumbHeader from "@/components/admin/sidebar/BreadcrumbSidebar";
+import BreadcrumbHeader from "@/components/atoms/admin/sidebar/BreadcrumbSidebar";
 import {
   ToggleAdminIndicator,
   ToggleThemeIndicator,

@@ -1,43 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldLabel,
-  FieldTitle,
-} from "@/components/ui/field";
-import { Icon } from "@/assets/icon/icons";
-import { useTheme, type Theme } from "@/context/ThemeContext";
-import { Progress } from "@/components/ui/progress";
 
-const themeOptions = [
-  {
-    id: "light" as const,
-    name: "Light Mode",
-    icon: Icon.SunIcon,
-    desc: "Classic high-contrast brightness",
-  },
-  {
-    id: "dark" as const,
-    name: "Dark Mode",
-    icon: Icon.MoonIcon,
-    desc: "Eye-soothing professional dark theme",
-  },
-  {
-    id: "system" as const,
-    name: "System",
-    icon: Icon.MonitorIcon,
-    desc: "Follow your OS preferences",
-  },
-];
+import { Icon } from "@/assets/icon/icons";
+import { Progress } from "@/components/ui/progress";
+import AppearanceChoiceCardTheme from "@/components/common/AppearanceChoiceCardTheme";
 
 export default function AppearanceSettingsPage() {
   return (
     <div className="space-y-10">
       <AppearanceHeader />
-      <RadioGroupChoiceCardTheme />
+      <AppearanceChoiceCardTheme />
       <div className="space-y-8">
         <VisualPreferenceSection />
         <FullscreenExperienceToggle />
@@ -49,41 +21,14 @@ export default function AppearanceSettingsPage() {
 function AppearanceHeader() {
   return (
     <div>
-      <h2 className="mb-1 text-xl font-bold italic">Theme & Visual Experience</h2>
+      <h2 className="mb-1 text-xl font-bold italic">
+        Theme & Visual Experience
+      </h2>
       <p className="text-muted-foreground text-sm">
         Customize how you see the world of Mini-Zone.
       </p>
     </div>
-  );
-}
-
-function RadioGroupChoiceCardTheme() {
-  const { theme, setTheme } = useTheme();
-
-  return (
-    <div className="space-y-1">
-      <Label className="mb-4 block text-sm font-bold">Theme Preference</Label>
-      <RadioGroup
-        value={theme}
-        onValueChange={(value) => setTheme(value as Theme)}
-        className="flex flex-col @2xl:flex-row"
-      >
-        {themeOptions.map((option) => (
-          <FieldLabel key={option.id} htmlFor={option.id}>
-            <Field orientation="horizontal">
-              <FieldContent>
-                <FieldTitle className="flex items-center gap-2">
-                  <option.icon />
-                  {option.name}
-                </FieldTitle>
-                <FieldDescription>{option.desc}</FieldDescription>
-              </FieldContent>
-              <RadioGroupItem value={option.id} id={option.id} />
-            </Field>
-          </FieldLabel>
-        ))}
-      </RadioGroup>
-    </div>
+       
   );
 }
 
@@ -100,7 +45,9 @@ function VisualPreferenceSection() {
       </div>
 
       <div>
-        <Label className="mb-2 block text-sm font-bold">Density preference</Label>
+        <Label className="mb-2 block text-sm font-bold">
+          Density preference
+        </Label>
         <div className="flex gap-2">
           <Button
             variant="outline"
@@ -149,4 +96,3 @@ function FullscreenExperienceToggle() {
     </div>
   );
 }
-

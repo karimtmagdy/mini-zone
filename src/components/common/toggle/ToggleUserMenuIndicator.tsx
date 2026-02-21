@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { PATH_SIGNIN, PATH_SIGNUP } from "@/lib/links/paths.routes";
+import { PATH_AUTH } from "@/lib/links";
 import { useNavigate } from "react-router-dom";
 import { useAuthGetMe } from "@/hooks/use-auth";
 import { cn } from "@/lib/utils";
@@ -53,13 +53,13 @@ export default function ToggleUserMenuIndicator() {
             <>
               <DropdownMenuItem
                 className="flex justify-center"
-                onClick={() => navigate(PATH_SIGNIN)}
+                onClick={() => navigate(PATH_AUTH.SIGNIN)}
               >
                 Login
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex justify-center"
-                onClick={() => navigate(PATH_SIGNUP)}
+                onClick={() => navigate(PATH_AUTH.SIGNUP)}
               >
                 Register
               </DropdownMenuItem>

@@ -19,12 +19,13 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/assets/icon/icons";
 import { invoices } from "@/core/data/insights-data-invoices";
-// import {
-//   PageHeadActions,
-//   PageHeadRow,
-//   PageHeadTitle,
-//   PageHeadDescription,
-// } from "@/components/ui/head-page";
+import {
+  PageHeadActions,
+  PageHeadRow,
+  PageHead,
+} from "@/components/ui/head-page";
+import { cn } from "@/lib/utils";
+import { TopHeadMeta } from "@/components/common/meta";
 
 interface Invoice {
   id: string;
@@ -55,57 +56,62 @@ export default function InvoicesPage() {
 }
 
 function InvoicesHeader() {
-  return (<></>
-    // <PageHeadRow responsive align="between">
-    //   <article>
-    //     <PageHeadTitle>Billing & Invoices</PageHeadTitle>
-    //     <PageHeadDescription>
-    //       Manage your customer billing cycles and financial records.
-    //     </PageHeadDescription>
-    //   </article>
-    //   <PageHeadActions>
-    //     <Button variant="outline">
-    //       <Icon.DownloadIcon className="h-4 w-4" />
-    //       Export CSV
-    //     </Button>
-    //     <Button>
-    //       <Icon.FileTextIcon className="h-4 w-4" />
-    //       Create Invoice
-    //     </Button>
-    //   </PageHeadActions>
-    // </PageHeadRow>
+  return (
+    <PageHead>
+      <PageHeadRow responsive align="between">
+        <TopHeadMeta />
+        <PageHeadActions align="end">
+          <Button variant="outline">
+            <Icon.DownloadIcon className="h-4 w-4" />
+            Export CSV
+          </Button>
+          <Button>
+            <Icon.FileTextIcon className="h-4 w-4" />
+            Create Invoice
+          </Button>
+        </PageHeadActions>
+      </PageHeadRow>
+    </PageHead>
   );
 }
 
 function InvoicesStats() {
   return (
     <div className="grid gap-4 @md:grid-cols-3">
-      <StatCard 
-        icon={Icon.CreditCardIcon} 
-        title="Total Revenue" 
-        value="$42,560.00" 
+      <StatCard
+        icon={Icon.CreditCardIcon}
+        title="Total Revenue"
+        value="$42,560.00"
         trend="+12.5% vs last month"
         trendIcon={Icon.ArrowUpRightIcon}
       />
-      <StatCard 
-        icon={Icon.FileTextIcon} 
+      <StatCard
+        icon={Icon.FileTextIcon}
         iconColor="text-amber-500"
-        title="Pending Invoices" 
-        value="14" 
+        title="Pending Invoices"
+        value="14"
         description="Awaiting payment confirmation"
       />
-      <StatCard 
-        icon={Icon.CreditCardIcon} 
+      <StatCard
+        icon={Icon.CreditCardIcon}
         iconColor="text-blue-500"
-        title="Average Ticket" 
-        value="$184.20" 
+        title="Average Ticket"
+        value="$184.20"
         description="Across all successful transactions"
       />
     </div>
   );
 }
 
-function StatCard({ icon: IconComponent, iconColor, title, value, trend, trendIcon: TrendIcon, description }: any) {
+function StatCard({
+  icon: IconComponent,
+  iconColor,
+  title,
+  value,
+  trend,
+  trendIcon: TrendIcon,
+  description,
+}: any) {
   return (
     <div className="bg-card rounded-xl border p-4 shadow-xs">
       <div className="text-muted-foreground mb-1 flex items-center gap-2 text-sm">
@@ -118,17 +124,19 @@ function StatCard({ icon: IconComponent, iconColor, title, value, trend, trendIc
         </div>
       )}
       {description && (
-        <div className="text-muted-foreground mt-1 text-xs">
-          {description}
-        </div>
+        <div className="text-muted-foreground mt-1 text-xs">{description}</div>
       )}
     </div>
   );
 }
 
-import { cn } from "@/lib/utils";
-
-function InvoicesToolbar({ search, setSearch }: { search: string, setSearch: (v: string) => void }) {
+function InvoicesToolbar({
+  search,
+  setSearch,
+}: {
+  search: string;
+  setSearch: (v: string) => void;
+}) {
   return (
     <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
       <div className="relative w-full md:w-96">
@@ -230,4 +238,3 @@ function InvoiceActions() {
     </DropdownMenu>
   );
 }
-

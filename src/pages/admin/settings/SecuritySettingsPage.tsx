@@ -1,8 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Icon } from "@/assets/icon/icons";
+ import { Icon } from "@/assets/icon/icons";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
 
 export default function SecuritySettingsPage() {
   return (
@@ -34,20 +41,24 @@ function SecurityHeader() {
 
 function TwoFactorSection() {
   return (
-    <div className="bg-muted/30 flex items-center justify-between rounded-xl border border-dashed p-4">
-      <div className="flex items-center gap-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
-          <Icon.SmartphoneIcon className="h-5 w-5" />
-        </div>
-        <div>
-          <p className="text-sm font-semibold">Two-Factor Authentication</p>
-          <p className="text-muted-foreground text-xs">
+    <>
+      <Item variant="outline">
+        <ItemMedia variant="icon">
+          <Icon.SmartphoneIcon />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Two-Factor Authentication</ItemTitle>
+          <ItemDescription>
             Currently active via Google Authenticator
-          </p>
-        </div>
-      </div>
-      <Badge variant="success">Active</Badge>
-    </div>
+          </ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button variant="outline" size="sm">
+            Action
+          </Button>
+        </ItemActions>
+      </Item>
+    </>
   );
 }
 
@@ -63,7 +74,7 @@ function AccessControlSection() {
           <Input type="password" value="••••••••••••••••" disabled />
         </div>
         <Button variant="outline" size="sm" className="gap-2">
-          <Icon.KeyRoundIcon className="h-3.5 w-3.5" /> Rotate Password
+          <Icon.KeyRoundIcon /> Rotate Password
         </Button>
       </div>
     </div>
@@ -97,7 +108,7 @@ function DeviceAuthorizationSection() {
             className="hover:bg-muted/50 flex items-center justify-between rounded-lg p-2 text-sm transition-colors"
           >
             <div className="flex items-center gap-3">
-              <Icon.HistoryIcon className="h-4 w-4 opacity-50" />
+              <Icon.HistoryIcon className="opacity-50" />
               <div>
                 <span className="font-medium">{sess.device}</span>
                 <span className="text-muted-foreground ml-2 text-xs">
@@ -117,20 +128,21 @@ function DeviceAuthorizationSection() {
 
 function AdvancedGuardhouseSection() {
   return (
-    <div className="flex items-center justify-between border-t pt-6">
-      <div className="text-destructive flex items-center gap-3">
-        <Icon.ShieldAlertIcon className="h-5 w-5" />
-        <div className="text-sm">
-          <p className="font-bold">Advanced Guardhouse</p>
-          <p className="text-xs opacity-70">
-            Require biometric re-authentication for sensitive actions
-          </p>
-        </div>
-      </div>
-      <Button variant="ghost" size="sm" className="text-xs">
-        Configure
-      </Button>
-    </div>
+    <Item variant="outline" className="text-destructive bg-inherit">
+      <ItemMedia variant="icon">
+        <Icon.ShieldAlertIcon />
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Advanced Guardhouse</ItemTitle>
+        <ItemDescription className="text-current/80">
+          Require biometric re-authentication for sensitive actions
+        </ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Button variant="outline" size="sm">
+          Enable
+        </Button>
+      </ItemActions>
+    </Item>
   );
 }
-

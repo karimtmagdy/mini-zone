@@ -16,9 +16,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/assets/icon/icons";
+import { TopHeadMeta } from "@/components/common/meta";
+import {
+  PageHead,
+  PageHeadRow,
+  PageHeadActions,
+} from "@/components/ui/head-page";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group";
+import { Calendar } from "@/components/ui/calendar";
 
 interface Order {
   id: string;
@@ -83,32 +95,8 @@ export default function OrdersPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <OrdersHeader />
       <OrdersToolbar search={search} setSearch={setSearch} />
       <OrdersTable orders={filteredOrders} />
-    </div>
-  );
-}
-
-function OrdersHeader() {
-  return (
-    <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Orders</h1>
-        <p className="text-muted-foreground italic">
-          Monitor and manage customer orders and fulfillment status.
-        </p>
-      </div>
-      <div className="flex items-center gap-2">
-        <Button variant="outline" className="flex items-center gap-2">
-          <Icon.DownloadIcon className="h-4 w-4" />
-          Export
-        </Button>
-        <Button className="flex items-center gap-2">
-          <Icon.CalendarIcon className="h-4 w-4" />
-          View Calendar
-        </Button>
-      </div>
     </div>
   );
 }
@@ -119,49 +107,79 @@ interface OrdersToolbarProps {
 }
 
 function OrdersToolbar({ search, setSearch }: OrdersToolbarProps) {
+  const [date, setDate] = useState<Date | undefined>(new Date());
   return (
-    <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-      <div className="relative w-full md:w-96">
-        <Icon.SearchIcon className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
-        <Input
-          placeholder="Search by order ID or customer..."
-          className="pl-10"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-      <div className="flex items-center gap-2">
-        <Button variant="outline" size="sm" className="flex items-center gap-2">
-          <Icon.FilterIcon className="h-4 w-4" />
-          More Filters
-        </Button>
-      </div>
-    </div>
+    <PageHead>
+      <PageHeadRow>
+        <TopHeadMeta />
+        <PageHeadActions>
+          <Button variant="outline">
+            <Icon.DownloadIcon />
+            Export
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button>
+                <Icon.CalendarIcon />
+                View Calendar
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              sideOffset={10}
+              className="bg-background w-full"
+            >
+              <Calendar mode="single" selected={date} onSelect={setDate} />
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </PageHeadActions>
+      </PageHeadRow>
+      <PageHeadRow>
+        <PageHeadActions>
+          <InputGroup className="w-full @lg:w-sm">
+            <InputGroupAddon>
+              <InputGroupButton size="icon-xs">
+                <Icon.SearchIcon />
+              </InputGroupButton>
+            </InputGroupAddon>
+            <InputGroupInput
+              placeholder="Search by order ID or customer..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </InputGroup>
+        </PageHeadActions>
+        <PageHeadActions>
+          <Button variant="outline">
+            <Icon.FilterIcon />
+            More Filters
+          </Button>
+        </PageHeadActions>
+      </PageHeadRow>
+    </PageHead>
   );
 }
 
 function OrdersTable({ orders }: { orders: Order[] }) {
   return (
-    <div className="bg-card overflow-hidden rounded-xl border shadow-xs">
-      <Table>
-        <TableHeader className="bg-muted/50">
-          <TableRow>
-            <TableHead className="w-[150px]">Order ID</TableHead>
-            <TableHead>Customer</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead>Total</TableHead>
-            <TableHead>Items</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {orders.map((order) => (
-            <OrderRow key={order.id} order={order} />
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+    <Table>
+      <TableHeader className="bg-muted/50">
+        <TableRow>
+          <TableHead className="w-[150px]">Order ID</TableHead>
+          <TableHead>Customer</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead>Total</TableHead>
+          <TableHead>Items</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {orders.map((order) => (
+          <OrderRow key={order.id} order={order} />
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 
@@ -240,4 +258,3 @@ function OrderActions() {
     </DropdownMenu>
   );
 }
-

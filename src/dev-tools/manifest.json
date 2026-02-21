@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Dev Page Inspector",
+  "version": "1.0",
+  "description": "Page Inspector Overlay",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}

@@ -4,7 +4,6 @@ export const USER_STATE = ["online", "offline"] as const;
 export type UserState = (typeof USER_STATE)[number];
 export const USER_GENDERS = ["male", "female"] as const;
 export type UserGender = (typeof USER_GENDERS)[number];
-export type UserAccountStatus = (typeof USER_ACCOUNT_STATUS)[number];
 export const USER_ACCOUNT_STATUS = [
   "active",
   "inactive",
@@ -16,6 +15,18 @@ export const USER_ACCOUNT_STATUS = [
   "deactivated",
   "locked",
 ] as const;
+export type UserAccountStatus = (typeof USER_ACCOUNT_STATUS)[number];
+export enum UserAccountStatusEnum {
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  SUSPENDED = "suspended",
+  BANNED = "banned",
+  PENDING = "pending",
+  VERIFIED = "verified",
+  ARCHIVED = "archived",
+  DEACTIVATED = "deactivated",
+  LOCKED = "locked",
+}
 export const USER_ROLES = [
   "admin",
   "user",
@@ -28,6 +39,22 @@ export const USER_ROLES = [
   //   "manager",
   //   "viewer",
 ] as const;
+export enum UserRoleEnum {
+  ADMIN = "admin",
+  USER = "user",
+  // GUEST = "guest",
+  // EDITOR = "editor",
+  // MODERATOR = "moderator",
+  // CONTRIBUTOR = "contributor",
+  // SUBSCRIBER = "subscriber",
+  // OWNER = "owner",
+  // MANAGER = "manager",
+  // VIEWER = "viewer",
+  // VERIFIED = "verified",
+  // ARCHIVED = "archived",
+  // DEACTIVATED = "deactivated",
+  // LOCKED = "locked",
+}
 export type UserRole = (typeof USER_ROLES)[number];
 
 export type UserDto = At & {
@@ -59,9 +86,3 @@ export type UserDto = At & {
   //   }[];
   //   wishlist?: any[];
 };
-
-export interface BrandWithIdProps {
-  id: string | null;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}

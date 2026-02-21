@@ -24,6 +24,7 @@ export default function EmailField<TValues extends FieldValues>({
           aria-invalid={fieldState.invalid}
           autoComplete="off"
           placeholder="Enter your email"
+          disabled={control._formState.isSubmitting}
         />
         <InputGroupAddon>
           <Icon.MailIcon />

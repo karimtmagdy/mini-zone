@@ -8,7 +8,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { PATH_SIGNIN } from "@/lib/links/paths.routes";
+import { PATH_AUTH } from "@/lib/links";
 import { HomeIcon, LogIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -30,7 +30,7 @@ export default function PageForbidden() {
       </EmptyHeader>
       <EmptyContent className="flex-row justify-center gap-2">
         <ButtonGroup>
-          <Button onClick={() => navigate(PATH_SIGNIN)}>
+          <Button onClick={() => navigate(PATH_AUTH.SIGNIN)}>
             <LogIn /> Sign In
           </Button>
           <Button variant="outline" onClick={() => navigate("/")}>

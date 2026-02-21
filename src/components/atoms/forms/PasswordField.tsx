@@ -22,6 +22,7 @@ export default function PasswordField<TValues extends FieldValues>({
           aria-invalid={fieldState.invalid}
           autoComplete="off"
           placeholder="••••••"
+          disabled={control._formState.isSubmitting}
         />
         <ToggleShowPasswordIndicator show={show} toggle={toggle} />
       </InputGroup>

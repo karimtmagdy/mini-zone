@@ -14,9 +14,10 @@ import {
   // useForgotPassword,
   // useGetMe,
   useLogin,
+  useLogout,
   // useLogout,
   // useRegister,
-} from "@/core/api/auth.queries";
+} from "@/core/services/auth.service";
 import { storageUtils } from "@/lib/tokens";
 // import { storageUtils } from "@/lib/tokens";
 
@@ -32,39 +33,6 @@ export function useAuthFormLogin() {
   });
   const onSubmit = async (data: FormSignInSchema) => {
     await loginMutation.mutateAsync(data);
-    // try {
-    //   const response =
-
-    //   // Handle business logic errors in 200/Success responses if applicable
-    //   const result = response.data;
-    //   if (result.status !== "success") {
-    //     const msg = result.message || "Authentication failed";
-    //     const target = msg.toLowerCase();
-
-    //     if (target.includes("email") || target.includes("user")) {
-    //       form.setError("email", { message: msg });
-    //     } else if (target.includes("password")) {
-    //       form.setError("password", { message: msg });
-    //     } else {
-    //       form.setError("root", { message: msg });
-    //     }
-    //   }
-    // } catch (error: any) {
-    //   // Handle Axios/Network errors (4xx/5xx)
-    //   const serverResponse = error.response?.data;
-    //   const message = serverResponse?.message || error.message || "An unexpected error occurred";
-    //   const target = message.toLowerCase();
-
-    //   // console.log("Tactical Error Captured:", { message, serverResponse });
-
-    //   if (target.includes("email") || target.includes("user")) {
-    //     form.setError("email", { message });
-    //   } else if (target.includes("password") || target.includes("credential")) {
-    //     form.setError("password", { message });
-    //   } else {
-    //     form.setError("root", { message });
-    //   }
-    // }
   };
   return {
     form,
@@ -94,16 +62,16 @@ export function useAuthFormLogin() {
 //     registerMutation,
 //   };
 // }
-// export function useAuthFormLogout() {
-//   const logoutMutation = useLogout();
-//   const onSubmit = async () => {
-//     await logoutMutation.mutateAsync();
-//   };
-//   return {
-//     onSubmit,
-//     logoutMutation,
-//   };
-// }
+export function useAuthFormLogout() {
+  const logoutMutation = useLogout();
+  const onSubmit = async () => {
+    await logoutMutation.mutateAsync();
+  };
+  return {
+    onSubmit,
+    logoutMutation,
+  };
+}
 // export function useAuthForgotPassword() {
 //   const forgotPasswordMutation = useForgotPassword();
 //   const form = useForm<FormForgotPasswordSchema>({
@@ -127,7 +95,7 @@ export function useAuthGetMe() {
   const token = storageUtils.getToken();
   const localUser = storageUtils.getUser();
   // data is now ResponseType<UserDto> directly (status, message, data)
-  const user = data?.data?.status === "success" ? data.data.data : null;
+  const user = (data?.data?.status === "success" ? data.data.data : null) || localUser;
 
   // Truly authenticated only if we have a token AND (a successful query OR local data while loading)
   const isAuthenticated = (!!token && !!data) || !!localUser;

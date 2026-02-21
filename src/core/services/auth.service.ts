@@ -1,63 +1,125 @@
-// import type { ApiResponse } from "@/contract/global.dto";
-import type { UserDto } from "@/contract/user.dto";
-import { http } from "@/core/interceptors/http";
-import {
-  PATH_ME,
-  PATH_REFRESH_TOKEN,
-  PATH_SIGNIN,
-} from "@/lib/links/paths.routes";
-import type { ApiResponse } from "@/contract/global.dto";
-import type { FormSignInSchema } from "@/schema/user.schema";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { authApi } from "@/core/api/auth.api";
+import { storageUtils } from "@/lib/tokens";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-export const authApi = {
-  // register: async (data: FormSignUpSchema) => {
-  //   const res = await http.post<ResponseDto<UserDto>>(PATH_SIGNUP, data);
-  //   return res;
-  // },
-  login: async (data: FormSignInSchema) => {
-    const res = await http.post<ApiResponse<{ token: string; user: UserDto }>>(
-      PATH_SIGNIN,
-      data,
-    ); //as unknown as ApiResponse<{ token: string; user: UserDto }>;
-    // console.log("✅ Login Response:", res);
-    return res;
-  },
-  //   logout: async () => {
-  //     const res = await http.post(PATH_SIGNOUT);
-  //     return res;
-  //   },
-  //   logoutDevices: async () => {
-  //     const res = await http.post(PATH_SIGNOUT_DEVICES);
-  //     return res;
-  //   },
-  //   forgotPassword: async (data: FormForgotPasswordSchema) => {
-  //     const res = await http.post(PATH_FORGOT_PASSWORD, data);
-  //     return res;
-  //   },
-  //   resetPassword: async (data: FormResetPasswordSchema) => {
-  //     const res = await http.post(PATH_RESET_PASSWORD, data);
-  //     return res;
-  //   },
-  //   changePassword: async (data: FormChangePasswordSchema) => {
-  //     const res = await http.post<ResponseDto<UserDto>>(
-  //       PATH_CHANGE_PASSWORD,
-  //       data,
-  //     );
-  //     return res;
-  //   },
-  refresh: async () => {
-    const res =
-      await http.post<ApiResponse<{ token: string }>>(PATH_REFRESH_TOKEN); //as unknown as ApiResponse<{ token: string }>;
-    console.log("✅ Refresh:", res);
-    return res;
-  },
-  //   verifyEmail: async (data: FormVerifyEmailSchema) => {
-  //     const res = await http.post("/auth/verify-email", data);
-  //     return res.data;
-  //   },
-  getMe: async () => {
-    const res = await http.get<ApiResponse<UserDto>>(PATH_ME); //as unknown as ApiResponse<UserDto>;
-    console.log("✅ GetMe Response:", res.data);
-    return res;
-  },
-};
+export function useRegister() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: authApi.register,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["register"] });
+    },
+  });
+}
+
+export function useLogin() {
+  const qc = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation({
+    mutationKey: ["login"],
+    mutationFn: authApi.login,
+    onSuccess: (response) => {
+      if (response.data.status === "success") {
+        const { token, user } = response.data.data;
+        storageUtils.setToken(token);
+        storageUtils.setUser(user);
+        qc.setQueryData(["user"], user);
+        qc.invalidateQueries({ queryKey: ["user"] });
+        if (user.role === "admin") navigate("/admin");
+        else navigate("/");
+        toast.success(response?.data?.message as string);
+      }
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message);
+      qc.invalidateQueries({ queryKey: ["login"] });
+    },
+  });
+}
+export function useLogout() {
+  const qc = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: authApi.logout,
+    onSuccess: (response:any) => {
+      console.log(response);
+      if (response.data.status === "success") {
+        toast.success(response?.data?.message as string);
+      }
+      qc.invalidateQueries({ queryKey: ["logout"] });
+      storageUtils.removeToken();
+      storageUtils.removeUser();
+      qc.setQueryData(["user"], null); // Manually clear the user data to trigger UI updates
+      qc.clear();
+      navigate("/");
+    },
+  });
+}
+// export function useForgotPassword() {
+//   const qc = useQueryClient();
+
+//   return useMutation({
+//     mutationFn: authApi.forgotPassword,
+//     onSuccess: () => {
+//       qc.invalidateQueries({ queryKey: ["forgot-password"] });
+//     },
+//   });
+// }
+// export function useResetPassword() {
+//   const qc = useQueryClient();
+
+//   return useMutation({
+//     mutationFn: authApi.resetPassword,
+//     onSuccess: () => {
+//       qc.invalidateQueries({ queryKey: ["reset-password"] });
+//     },
+//   });
+// }
+export function useChangePassword() {
+  const qc = useQueryClient();
+
+  return useMutation({
+    mutationFn: authApi.changePassword,
+    onSuccess: (response:any) => {
+      if (response.data.status === "success") {
+        toast.success(response?.data?.message as string);
+      }
+      qc.invalidateQueries({ queryKey: ["change-password"] });
+    },
+    onError: (error: any) => {
+      // console.log(error);
+      toast.error(error?.response?.data?.message);
+      qc.invalidateQueries({ queryKey: ["change-password"] });
+    },
+  });
+}
+// export function useRefresh() {
+//   const qc = useQueryClient();
+
+//   return useMutation({
+//     mutationFn: authApi.refresh,
+//     onSuccess: () => {
+//       qc.invalidateQueries({ queryKey: ["refresh"] });
+//     },
+//   });
+// }
+export function useLogoutDevices() {
+  const qc = useQueryClient();
+
+  return useMutation({
+    mutationFn: authApi.logoutDevices,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["logout-devices"] });
+    },
+  });
+}
+export function useGetMe() {
+  const hasToken = storageUtils.getToken();
+  return useQuery({
+    queryKey: ["user"],
+    queryFn: authApi.getMe,
+    enabled: !!hasToken, //&& !!storageUtils.getUser(),
+  });
+}

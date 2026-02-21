@@ -18,7 +18,8 @@
       "@/layouts/*": ["./src/layouts/*"],
       "@/schema/*": ["./src/schema/*"],
       "@/lib/*": ["./src/lib/*"],
-      "@/pages/*": ["./src/pages/*"]
+      "@/pages/*": ["./src/pages/*"],
+      "@/dev-tools/*": ["./src/dev-tools/*"]
     }
   }
 }
