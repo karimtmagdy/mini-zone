@@ -1,7 +1,6 @@
 import {
   keepPreviousData,
   useMutation,
-  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { brandsApi } from "@/core/api/brands.api";
@@ -9,6 +8,7 @@ import type { UpdateBrand } from "@/schema/brand.schema";
 import toast from "react-hot-toast";
 import type { ResponseZod } from "@/contract/global.dto";
 import type { BrandDto } from "@/contract/brand.dto";
+import { useAppQuery } from "@/hooks/use-app-query";
 
 const brandsKeys = {
   all: ["brands"] as const,
@@ -32,24 +32,24 @@ const brandsKeys = {
   update: (id: string) => [...brandsKeys.all, id] as const,
   delete: (id: string) => [...brandsKeys.all, id] as const,
 };
-
-export function useBrands(params: {
+export function useGetAllBrands(params: {
   page: number;
   limit: number;
   search?: string;
   status?: string;
   sort?: string;
 }) {
-  return useQuery({
-    queryKey: brandsKeys.list(params),
-    queryFn: () => brandsApi.list(params),
-    placeholderData: keepPreviousData,
-  });
+ return useAppQuery(
+    brandsKeys.list(params),
+    () => brandsApi.list(params),
+    {
+      placeholderData: keepPreviousData,
+    },
+  );
 }
+
 export function useBrand(id: string) {
-  return useQuery({
-    queryKey: brandsKeys.get(id),
-    queryFn: () => brandsApi.getId(id),
+  return useAppQuery(brandsKeys.get(id), () => brandsApi.getId(id), {
     enabled: !!id,
   });
 }
@@ -64,7 +64,10 @@ export function useCreateBrand() {
       toast.success(response.message as string);
     },
     onError(error: any) {
-      const message = error?.response?.data?.message || error?.message || "Something went wrong";
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong";
       toast.error(message);
     },
   });
@@ -83,7 +86,10 @@ export function useUpdate() {
     },
     onError(error: any) {
       console.log(error);
-      const message = error?.response?.data?.message || error?.message || "Something went wrong";
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong";
       toast.error(message);
     },
   });
@@ -101,7 +107,10 @@ export function useDelete(id: string) {
       toast.success(response.message as string);
     },
     onError(error: any) {
-      const message = error?.response?.data?.message || error?.message || "Something went wrong";
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong";
       toast.error(message);
     },
   });

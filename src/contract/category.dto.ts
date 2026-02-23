@@ -15,4 +15,5 @@ export type CategoryDto = At & {
   image: Image;
   status: CategoryStatus;
   products: number;
+  deletedAt: Date | null;
 };

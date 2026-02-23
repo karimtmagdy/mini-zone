@@ -68,8 +68,8 @@ export default function BrandsPage() {
   }, [debouncedSearch, setPagination]);
 
   const brandsData = React.useMemo(() => {
-    return query.data?.data ?? [];
-  }, [query.data]);
+    return query?.data?.data ?? [];
+  }, [query?.data]);
 
   const columnsTable = React.useMemo(() => brandColumns, []);
 
@@ -77,42 +77,20 @@ export default function BrandsPage() {
     data: brandsData,
     columns: columnsTable,
     state: tableState,
-    pageCount: query.data?.meta?.pages ?? 0,
-    rowCount: query.data?.meta?.total ?? 0,
+    pageCount: query?.data?.meta?.pages ?? 0,
+    rowCount: query?.data?.meta?.total ?? 0,
     manualSorting: true,
   });
 
   return (
     <div className="flex flex-col gap-6">
-      {/* 1. Header Section */}
       <BrandsHeader query={query} table={table} />
-
-      {/* 2. Reusable Search & Sort Bar */}
       <TableSearchSortBar
         query={query}
         table={table}
         searchPlaceholder="Find brands..."
         onExport={() => window.print()}
-        sortOptions={[
-          {
-            value: "updatedAt",
-            label: "Latest Update",
-            icon: <Icon.HistoryIcon className="opacity-60" />,
-          },
-          {
-            value: "name",
-            label: "Name (A-Z)",
-            icon: <Icon.TypeIcon className="opacity-60" />,
-          },
-          {
-            value: "createdAt",
-            label: "Creation Date",
-            icon: <Icon.CalendarIcon className="opacity-60" />,
-          },
-        ]}
       />
-
-      {/* 3. Reusable Status Tabs */}
       <TableStatusTabs
         value={statusFilter}
         onValueChange={(val) => {
@@ -126,12 +104,8 @@ export default function BrandsPage() {
           { value: BrandStatusEnum.ARCHIVED, label: BrandStatusEnum.ARCHIVED },
         ]}
       />
-
-      {/* 4. Main Table */}
       <DataGlobalTable table={table} name="brands" query={query} />
-
-      {/* 5. Modals Management */}
-      <BrandsModals
+       <BrandsModals
         deletingId={deletingId}
         isDeleteOpen={isDeleteOpen}
         setIsDeleteOpen={setIsDeleteOpen}
@@ -143,8 +117,6 @@ export default function BrandsPage() {
         setIsEditOpen={setIsEditOpen}
         brandsData={brandsData}
       />
-
-      {/* 6. Batch Actions Bar (Floating) */}
       <TableSelectionBar
         table={table}
         actions={[
@@ -164,7 +136,6 @@ export default function BrandsPage() {
             variant: "destructive",
             onClick: (rows) => {
               console.log("Delete rows:", rows);
-              // هنا ممكن نفتح نافذة تأكيد حذف جماعي
             },
           },
         ]}
@@ -173,9 +144,6 @@ export default function BrandsPage() {
   );
 }
 
-/**
- * Components local to BrandsPage that use specialized layout
- */
 function BrandsHeader({ table }: TableStackProps<any>) {
   return (
     <PageHeadRow align="between" responsive className="mb-2">
@@ -223,3 +191,4 @@ function BrandsModals({
     </>
   );
 }
+ 

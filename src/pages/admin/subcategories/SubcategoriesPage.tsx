@@ -10,7 +10,7 @@ import {
   ToolbarResetData,
   TableStatusTabs,
   TableSearchSortBar,
-   TableSelectionBar,
+  TableSelectionBar,
 } from "@/components/atoms/admin/table";
 import AddSubCategory from "./AddSubCategory";
 import DeleteSubCategory from "./DeleteSubCategory";
@@ -36,7 +36,6 @@ export default function SubcategoriesPage() {
     setIsViewOpen,
     tableStateOptions,
   } = useHandleState("subcategories");
-
 
   const [statusFilter, setStatusFilter] = React.useState<string>("all");
 
@@ -95,23 +94,6 @@ export default function SubcategoriesPage() {
         table={table}
         searchPlaceholder="Find sub-categories..."
         onExport={() => window.print()}
-        sortOptions={[
-          {
-            value: "updatedAt",
-            label: "Latest Update",
-            icon: <Icon.HistoryIcon className="opacity-60" />,
-          },
-          {
-            value: "name",
-            label: "Name (A-Z)",
-            icon: <Icon.TypeIcon className="opacity-60" />,
-          },
-          {
-            value: "createdAt",
-            label: "Creation Date",
-            icon: <Icon.CalendarIcon className="opacity-60" />,
-          },
-        ]}
       />
 
       <TableStatusTabs
@@ -121,7 +103,7 @@ export default function SubcategoriesPage() {
           tableState.setPagination((prev) => ({ ...prev, pageIndex: 0 }));
         }}
         options={[
-          { value: "all", label: "All Sub-categories" },
+          { value: "all", label: "All Sub Categories" },
           {
             value: SubCategoryStatusEnum.ACTIVE,
             label: SubCategoryStatusEnum.ACTIVE,

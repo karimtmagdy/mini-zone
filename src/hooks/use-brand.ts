@@ -1,9 +1,9 @@
 import {
-  useBrands,
   useBrand,
   useCreateBrand,
   useDelete,
   useUpdate,
+  useGetAllBrands,
 } from "@/core/services/brands.service";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,7 +21,7 @@ export function useGetBrands(params: {
   status?: string;
   sort?: string;
 }) {
-  const query = useBrands(params);
+  const query = useGetAllBrands(params);
   return query;
 }
 export function useGetBrand(id: string) {

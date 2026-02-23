@@ -13,6 +13,6 @@ export type BrandDto = At & {
   image: Image;
   status: BrandStatus;
   slug: string;
-  productsCount: number;
+  products: number;
   deletedAt: Date | null;
 };

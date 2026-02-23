@@ -25,16 +25,33 @@ interface TableSearchSortBarProps {
   table: Table<any>;
   searchPlaceholder?: string;
   searchColumn?: string;
-  sortOptions: SortOption[];
+  sortOptions?: SortOption[];
   onExport?: () => void;
 }
 
+const DEFAULT_SORT_OPTIONS: SortOption[] = [
+  {
+    value: "updatedAt",
+    label: "Latest Update",
+    icon: <Icon.HistoryIcon className="opacity-60" />,
+  },
+  {
+    value: "name",
+    label: "Name (A-Z)",
+    icon: <Icon.TypeIcon className="opacity-60" />,
+  },
+  {
+    value: "createdAt",
+    label: "Creation Date",
+    icon: <Icon.CalendarIcon className="opacity-60" />,
+  },
+];
 export function TableSearchSortBar({
   query,
   table,
   searchPlaceholder,
   searchColumn = "name",
-  sortOptions,
+  sortOptions = DEFAULT_SORT_OPTIONS,
   onExport,
 }: TableSearchSortBarProps) {
   return (
@@ -65,7 +82,7 @@ export function TableSearchSortBar({
                 table.setSorting([{ id: val, desc: true }]);
               }}
             >
-              {sortOptions.map((opt) => (
+              {/* {sortOptions.map((opt) => (
                 <DropdownMenuRadioItem
                   key={opt.value}
                   value={opt.value}
@@ -74,9 +91,20 @@ export function TableSearchSortBar({
                   {opt.icon}
                   <span>{opt.label}</span>
                 </DropdownMenuRadioItem>
-              ))}
+              ))} */}
+              <DropdownMenuRadioItem value="updatedAt">
+                <Icon.HistoryIcon className="opacity-60" />
+                <span>Latest Update</span>
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="name">
+                <Icon.TypeIcon className="opacity-60" />
+                <span>Name (A-Z)</span>
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="createdAt">
+                <Icon.CalendarIcon className="opacity-60" />
+                <span>Creation Date</span>
+              </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
-
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="text-destructive focus:text-destructive gap-2"

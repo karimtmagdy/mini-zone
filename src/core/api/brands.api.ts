@@ -2,16 +2,27 @@ import type { BrandDto } from "@/contract/brand.dto";
 import type { CreateBrand, UpdateBrand } from "@/schema/brand.schema";
 import { http } from "../interceptors/http";
 import type { ResponseWithMeta, ResponseZod } from "@/contract/global.dto";
+// api/brand.api.ts
+export const getAllBrands = async (params: {
+  page: number;
+  limit: number;
+  search?: string;
+  status?: string;
+  sort?: string;
+}) => {
+  const { data } = await http.get<ResponseWithMeta<BrandDto[]>>("/brands", {
+    params,
+  });
+  return data;
+};
 export const brandsApi = {
-  list: async (
-    params: {
-      page?: number;
-      limit?: number;
-      search?: string;
-      status?: string;
-      sort?: string;
-    } = {},
-  ) => {
+  list: async (params: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    status?: string;
+    sort?: string;
+  }) => {
     const response = await http.get<ResponseWithMeta<BrandDto[]>>(`/brands`, {
       params,
     });
@@ -32,14 +43,14 @@ export const brandsApi = {
       });
       const response = await http.post<ResponseZod<BrandDto>>(
         "/admin/brands",
-        formData
+        formData,
       );
       return response.data;
     }
 
     const response = await http.post<ResponseZod<BrandDto>>(
       "/admin/brands",
-      rest
+      rest,
     );
     return response.data;
   },
@@ -58,7 +69,7 @@ export const brandsApi = {
       });
       const response = await http.patch<ResponseZod<BrandDto>>(
         `/admin/brands/${id}`,
-        formData
+        formData,
       );
       console.log(response.data);
       return response.data;
@@ -66,7 +77,7 @@ export const brandsApi = {
 
     const response = await http.patch<ResponseZod<BrandDto>>(
       `/admin/brands/${id}`,
-      rest
+      rest,
     );
     return response.data;
   },

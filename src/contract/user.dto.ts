@@ -2,8 +2,16 @@ import type { At, Image } from "./global.dto";
 
 export const USER_STATE = ["online", "offline"] as const;
 export type UserState = (typeof USER_STATE)[number];
+export enum UserStateEnum {
+  ONLINE = "online",
+  OFFLINE = "offline",
+}
 export const USER_GENDERS = ["male", "female"] as const;
 export type UserGender = (typeof USER_GENDERS)[number];
+export enum UserGenderEnum {
+  MALE = "male",
+  FEMALE = "female",
+}
 export const USER_ACCOUNT_STATUS = [
   "active",
   "inactive",
@@ -16,6 +24,7 @@ export const USER_ACCOUNT_STATUS = [
   "locked",
 ] as const;
 export type UserAccountStatus = (typeof USER_ACCOUNT_STATUS)[number];
+
 export enum UserAccountStatusEnum {
   ACTIVE = "active",
   INACTIVE = "inactive",
@@ -30,14 +39,20 @@ export enum UserAccountStatusEnum {
 export const USER_ROLES = [
   "admin",
   "user",
-  //   "guest",
-  //   "editor",
-  //   "moderator",
-  //   "contributor",
-  //   "subscriber",
-  //   "owner",
-  //   "manager",
-  //   "viewer",
+  // "guest",
+  // "editor",
+  // "moderator",
+  // "contributor",
+  // "subscriber",
+  // "owner",
+  // "manager",
+  // "viewer",
+  // "seller",
+  // "delivery-boy",
+  // "super-admin",
+  // "staff",
+  // "customer-support",
+  "vendor",
 ] as const;
 export enum UserRoleEnum {
   ADMIN = "admin",
@@ -51,7 +66,6 @@ export enum UserRoleEnum {
   // MANAGER = "manager",
   // VIEWER = "viewer",
   // VERIFIED = "verified",
-  // ARCHIVED = "archived",
   // DEACTIVATED = "deactivated",
   // LOCKED = "locked",
 }
