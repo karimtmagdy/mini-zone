@@ -2,7 +2,7 @@ import AdminLayout from "@/layouts/AdminLayout";
 import { PATH_SETTINGS, PATH_KPI, PATH_ADMIN } from "@/lib/links";
 
 // Page Imports
-import BrandsPage from "@/pages/admin/brands/BrandsPage";
+
 import CategoriesPage from "@/pages/admin/categories/CategoriesPage";
 import CouponsPage from "@/pages/admin/coupons/CouponsPage";
 import AnalyticsKpiInsightsPage from "@/pages/admin/insights/analytics/AnalyticsKpiInsightsPage";
@@ -30,7 +30,7 @@ import SecuritySettingsPage from "@/pages/admin/settings/SecuritySettingsPage";
 import AppearanceSettingsPage from "@/pages/admin/settings/AppearanceSettingsPage";
 
 import { Navigate } from "react-router-dom";
-import SupportInboxPage from "@/pages/admin/support/SupportInboxPage";
+
 
 const kpiRoutes = [
   {
@@ -111,11 +111,7 @@ const managementRoutes = [
     Component: SubcategoriesPage,
     handle: { crumb: () => "Sub-Categories" },
   },
-  {
-    path: PATH_ADMIN.BRANDS,
-    Component: BrandsPage,
-    handle: { crumb: () => "Brand Partners" },
-  },
+
   {
     path: PATH_ADMIN.COUPONS,
     Component: CouponsPage,
@@ -144,13 +140,7 @@ const logisticsRoutes = [
   },
 ];
 
-const supportRoutes = [
-  {
-    path: PATH_ADMIN.SUPPORT_INBOX,
-    Component: SupportInboxPage,
-    handle: { crumb: () => "Support Hub" },
-  },
-];
+
 
 const settingsRoutes = [
   {
@@ -194,7 +184,6 @@ export const PagesAdmin = [
       ...managementRoutes,
       ...billingRoutes,
       ...logisticsRoutes,
-      ...supportRoutes,
       ...settingsRoutes,
     ],
   },
