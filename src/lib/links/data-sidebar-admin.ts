@@ -174,21 +174,4 @@ export const data = {
       ],
     },
   ],
-  projects: [
-    {
-      name: "Market Research",
-      url: "#",
-      icon: Icon.LineChartIcon,
-    },
-    {
-      name: "Brand Assets",
-      url: "#",
-      icon: Icon.AwardIcon,
-    },
-    {
-      name: "Strategic Planning",
-      url: "#",
-      icon: Icon.LayoutDashboardIcon,
-    },
-  ],
 };
