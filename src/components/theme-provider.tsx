@@ -111,6 +111,7 @@ export function ThemeProvider({
 
       root.classList.remove("light", "dark")
       root.classList.add(resolvedTheme)
+      root.setAttribute("data-theme", resolvedTheme)
 
       if (restoreTransitions) {
         restoreTransitions()
