@@ -1,21 +1,49 @@
-import { Button } from "@/components/ui/button"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { RootLayout } from "@/components/layout/RootLayout"
+import { AuthLayout } from "@/components/layout/AuthLayout"
+import { PageForbidden } from "@/pages/error/PageForbidden"
+import { PageUnauthorized } from "@/pages/error/PageUnauthorized"
+import { PageNotFound } from "@/pages/error/PageNotFound"
+import { PATHS } from "@/lib/router/basic.routes"
+import { UserLayout } from "@/components/layout/UserLayout"
+import { HomePage } from "@/pages/home/HomePage"
+import { LoginPage } from "@/pages/auth/LoginPage"
+import { RegisterPage } from "@/pages/auth/RegisterPage"
+import { Panel } from "@/lib/router/panel.routes"
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { path: PATHS.error.notFound, element: <PageNotFound /> },
+      { path: PATHS.error.unauthorized, element: <PageUnauthorized /> },
+      { path: PATHS.error.forbidden, element: <PageForbidden /> },
+      {
+        path: "",
+        element: <UserLayout />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />,
+          },
+        ],
+      },
+      {
+        path: PATHS.auth.base,
+        element: <AuthLayout />,
+        children: [
+          { path: PATHS.auth.register, element: <RegisterPage /> },
+          { path: PATHS.auth.login, element: <LoginPage /> },
+        ],
+      },
+      ...Panel,
+    ],
+  },
+])
 
 export function App() {
-  return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App
