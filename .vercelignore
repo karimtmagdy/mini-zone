@@ -1,7 +1,6 @@
-# Don't upload local environment variables
+# Environment files (never part of the build)
 .env
-.env.local
-.env.*.local
+.env.*
 
 # Build artifacts
 .next
@@ -16,8 +15,11 @@ pnpm-lock.yaml
 yarn.lock
 
 # Tests & coverage (never needed to build the bundle)
-*.test.ts
-*.test.tsx
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+**/__tests__/**
 coverage
 
 # Operating System Files
