@@ -12,4 +12,9 @@ export default defineConfig({
       "@": resolve(import.meta.dirname, "./src"),
     },
   },
+  build: {
+    /** Minify the bundle that Vercel ships to production. */
+    minify: "oxc",
+    sourcemap: false,
+  },
 })

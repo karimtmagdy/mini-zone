@@ -1,21 +1,23 @@
-// import { TriggerAuth } from "./TriggerAuth";
-// import { PATHS } from "@/lib/router/basic.routes"
 import { TriggerAuth } from "./TriggerAuth"
 import { TriggerCart } from "./TriggerCart"
 import { TriggerNotifications } from "./TriggerNotifications"
 import { TriggerPanel } from "./TriggerPanel"
 import { TriggerTheme } from "./TriggerTheme"
-// import { useCurrentAccount } from "@/modules/auth/services/current-account.service";
+import { useCurrentAccount } from "@/features/auth/hooks/use-current-account"
+import { PANEL_ROLES } from "@/features/auth/model/auth.menu"
 
 export function TriggersToolbar() {
-  // const account = useCurrentAccount();
+  const { data: account } = useCurrentAccount()
+  const canAccessPanel = account?.role
+    ? PANEL_ROLES.includes(account.role)
+    : false
+
   return (
     <div className="ml-auto flex gap-x-1">
       <TriggerCart />
       <TriggerNotifications />
       <TriggerTheme />
-      <TriggerPanel />
-      {/* {account?.data?.role === "admin" && <TriggerPanel />} */}
+      {canAccessPanel && <TriggerPanel />}
       <TriggerAuth />
     </div>
   )
