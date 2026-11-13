@@ -12,14 +12,30 @@ dist
 dist-ssr
 *.local
 
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# Test / tooling caches
+coverage
+.vite
+
+# Vercel CLI (project + org ids)
+.vercel
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-*.test
+
+# Local environment variables (never commit real values)
+.env
+.env.local
+.env.*.local
+!.env.example
