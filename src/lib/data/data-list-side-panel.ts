@@ -80,17 +80,17 @@ export const data = {
       items: [
         {
           title: "Warehouses",
-          // url: PATHS.panel.warehouses,
+          url: PATHS.panel.warehouses,
           icon: Warehouse,
         },
         {
           title: "Stock Adjustments",
-          // url: PATHS.panel.stockAdjustments,
+          url: PATHS.panel.stockAdjustments,
           icon: Package,
         },
         {
           title: "Stock Transfers",
-          // url: PATHS.panel.stockTransfers,
+          url: PATHS.panel.stockTransfers,
           icon: ArrowLeftRight,
         },
       ],
@@ -102,17 +102,17 @@ export const data = {
       items: [
         {
           title: "Sales Orders",
-          // url: PATHS.panel.salesOrders,
+          url: PATHS.panel.salesOrders,
           icon: ClipboardList,
         },
         {
           title: "Purchase Orders",
-          // url: PATHS.panel.purchase,
+          url: PATHS.panel.purchase,
           icon: PackageOpen,
         },
         {
           title: "Promotions",
-          // url: PATHS.panel.promotions,
+          url: PATHS.panel.promotions,
           icon: BadgePercent,
         },
       ],
@@ -124,12 +124,12 @@ export const data = {
       items: [
         {
           title: "User Management",
-          // url: PATHS.panel.users,
+          url: PATHS.panel.users,
           icon: Users,
         },
         {
           title: "Employee Management",
-          // url: PATHS.panel.employees,
+          url: PATHS.panel.employees,
           icon: UserCog,
         },
       ],
@@ -141,22 +141,22 @@ export const data = {
       items: [
         {
           title: "Inventory Catalog",
-          // url: PATHS.panel.inventory,
+          url: PATHS.panel.inventory,
           icon: Boxes,
         },
         {
           title: "Products",
-          // url: PATHS.panel.products,
+          url: PATHS.panel.products,
           icon: Package,
         },
         {
           title: "Categories",
-          // url: PATHS.panel.categories,
+          url: PATHS.panel.categories,
           icon: FolderTree,
         },
         {
           title: "Sub Categories",
-          // url: PATHS.panel.subcategories,
+          url: PATHS.panel.subcategories,
           icon: Shapes,
         },
         {

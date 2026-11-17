@@ -19,7 +19,9 @@ export function DashboardPage() {
     <div className="flex min-h-[160dvh] flex-col gap-6">
       {/* Top Welcome Section */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight">Dashboard Overview</h1>
+        <h1 className="text-2xl font-bold tracking-tight">
+          Dashboard Overview
+        </h1>
         <p className="text-sm text-muted-foreground">
           Welcome back! Here is a summary of your recent system activity.
         </p>
@@ -34,8 +36,8 @@ export function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-              <span className="text-emerald-500 font-medium inline-flex items-center">
+            <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+              <span className="inline-flex items-center font-medium text-emerald-500">
                 +20.1% <ArrowUpRight className="size-3" />
               </span>
               from last month
@@ -50,8 +52,8 @@ export function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">+2,350</div>
-            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-              <span className="text-emerald-500 font-medium inline-flex items-center">
+            <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+              <span className="inline-flex items-center font-medium text-emerald-500">
                 +180.1% <ArrowUpRight className="size-3" />
               </span>
               from last month
@@ -66,8 +68,8 @@ export function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">+12,234</div>
-            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-              <span className="text-emerald-500 font-medium inline-flex items-center">
+            <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+              <span className="inline-flex items-center font-medium text-emerald-500">
                 +19% <ArrowUpRight className="size-3" />
               </span>
               from last month
@@ -82,8 +84,8 @@ export function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">+573</div>
-            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-              <span className="text-emerald-500 font-medium inline-flex items-center">
+            <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+              <span className="inline-flex items-center font-medium text-emerald-500">
                 +201 <TrendingUp className="size-3" />
               </span>
               since last hour
@@ -111,25 +113,50 @@ export function DashboardPage() {
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle>Recent Sales</CardTitle>
-            <CardDescription>
-              You made 265 sales this month.
-            </CardDescription>
+            <CardDescription>You made 265 sales this month.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
               {[
-                { name: "Olivia Martin", email: "olivia.martin@email.com", amount: "+$1,999.00" },
-                { name: "Jackson Lee", email: "jackson.lee@email.com", amount: "+$39.00" },
-                { name: "Isabella Nguyen", email: "isabella.nguyen@email.com", amount: "+$299.00" },
-                { name: "William Kim", email: "will@email.com", amount: "+$99.00" },
-                { name: "Sofia Davis", email: "sofia.davis@email.com", amount: "+$39.00" },
+                {
+                  name: "Olivia Martin",
+                  email: "olivia.martin@email.com",
+                  amount: "+$1,999.00",
+                },
+                {
+                  name: "Jackson Lee",
+                  email: "jackson.lee@email.com",
+                  amount: "+$39.00",
+                },
+                {
+                  name: "Isabella Nguyen",
+                  email: "isabella.nguyen@email.com",
+                  amount: "+$299.00",
+                },
+                {
+                  name: "William Kim",
+                  email: "will@email.com",
+                  amount: "+$99.00",
+                },
+                {
+                  name: "Sofia Davis",
+                  email: "sofia.davis@email.com",
+                  amount: "+$39.00",
+                },
               ].map((item) => (
-                <div key={item.email} className="flex items-center justify-between">
+                <div
+                  key={item.email}
+                  className="flex items-center justify-between"
+                >
                   <div className="space-y-1">
-                    <p className="text-sm font-medium leading-none">{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{item.email}</p>
+                    <p className="text-sm leading-none font-medium">
+                      {item.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {item.email}
+                    </p>
                   </div>
-                  <div className="font-medium text-sm">{item.amount}</div>
+                  <div className="text-sm font-medium">{item.amount}</div>
                 </div>
               ))}
             </div>
@@ -143,10 +170,12 @@ export function DashboardPage() {
           <Card key={index}>
             <CardHeader>
               <CardTitle>Metric Section #{index + 1}</CardTitle>
-              <CardDescription>Detailed statistical report and telemetry data.</CardDescription>
+              <CardDescription>
+                Detailed statistical report and telemetry data.
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-44 rounded-md border border-dashed flex items-center justify-center text-xs text-muted-foreground">
+              <div className="flex h-44 items-center justify-center rounded-md border border-dashed text-xs text-muted-foreground">
                 Data Block #{index + 1}
               </div>
             </CardContent>
@@ -155,10 +184,9 @@ export function DashboardPage() {
       </div>
 
       {/* Bottom Footer Section inside Page */}
-      <div className="rounded-lg border border-dashed p-8 text-center text-muted-foreground text-sm">
+      <div className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
         End of Dashboard Page (Scroll test area - height exceeds 160dvh)
       </div>
     </div>
   )
 }
-

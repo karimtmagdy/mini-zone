@@ -1,6 +1,21 @@
 const PANEL_PATHS = {
   base: "/panel",
   brands: "brands",
+  categories: "categories",
+  products: "products",
+  subcategories: "subcategories",
+  inventory: "inventory",
+  sales: "sales",
+  purchase: "purchase",
+  promotions: "promotions",
+  // people: "people",
+  users: "users",
+  employees: "employees",
+  warehouses: "warehouses",
+  stockAdjustments: "stock-adjustments",
+  stockTransfers: "stock-transfers",
+  salesOrders: "sales-orders",
+  purchaseOrders: "purchase-orders",
 } as const
 
 const AUTH_PATHS = {
