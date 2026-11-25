@@ -15,7 +15,19 @@ import {
   type TLoginEX,
 } from "@/features/auth/model/auth.schema"
 
-export function useAuthLogin() {
+export type AuthLoginMode = "store" | "admin"
+
+function resolveAfterLogin(
+  mode: AuthLoginMode,
+  role: string | null
+): string {
+  if (role === "employee" || role === "supplier") return PATHS.panel.base
+  if (mode === "admin") return PATHS.auth.setup_admin
+  if (role === "customer") return PATHS.auth.setup_admin
+  return PATHS.base
+}
+
+export function useAuthLogin(mode: AuthLoginMode = "store") {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
@@ -30,7 +42,7 @@ export function useAuthLogin() {
   })
 
   const mutation = useMutation({
-    mutationKey: queryKeys.auth.login(),
+    mutationKey: [...queryKeys.auth.login(), mode],
     mutationFn: async (values: TLoginEX) => {
       const result = await authApi.login({
         email: values.email,
@@ -40,15 +52,19 @@ export function useAuthLogin() {
       return result
     },
     onSuccess: (result) => {
-      queryClient.setQueryData(
-        queryKeys.auth.me(),
-        buildCurrentAccount(result.user, result.token)
-      )
-      navigate(PATHS.base, { replace: true })
+      const account = buildCurrentAccount(result.user, result.token)
+      queryClient.setQueryData(queryKeys.auth.me(), account)
+
+      const next = resolveAfterLogin(mode, account.role)
+      navigate(next, { replace: true })
+
       toast.add({
         type: "success",
         title: "Logged in successfully",
-        description: `Welcome back, ${result.user.username}`,
+        description:
+          next === PATHS.auth.setup_admin
+            ? "Finish Setup Admin to open the panel."
+            : `Welcome back, ${result.user.username}`,
       })
     },
     onError: (error) => {

@@ -40,7 +40,7 @@ export function useAuthRegister() {
       toast.add({
         type: "success",
         title: "Account created",
-        description: "Please sign in to continue.",
+        description: "Sign in, then finish Setup Admin to open the panel.",
       })
       navigate(PATHS.auth.login, { replace: true })
     },

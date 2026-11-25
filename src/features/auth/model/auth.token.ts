@@ -2,14 +2,16 @@ import { jwtDecode } from "jwt-decode"
 
 import type {
   CurrentAccount,
+  Permission,
   UserEntity,
   UserRole,
 } from "@/features/auth/model/auth.entity"
 
 /** Claims carried by the backend access token. */
-interface AccessTokenClaims {
+export interface AccessTokenClaims {
   sub: string
   role: UserRole
+  permissions?: Permission[]
   type: "access"
 }
 
@@ -24,10 +26,16 @@ export function readTokenClaims(token: string | null): AccessTokenClaims | null 
   }
 }
 
-/** Combines a user with the role carried by the matching access token. */
+/** Combines a user with the role/permissions carried by the matching access token. */
 export function buildCurrentAccount(
   user: UserEntity,
   token: string | null
 ): CurrentAccount {
-  return { user, role: readTokenClaims(token)?.role ?? null }
+  const claims = readTokenClaims(token)
+
+  return {
+    user,
+    role: claims?.role ?? null,
+    permissions: claims?.permissions ?? [],
+  }
 }

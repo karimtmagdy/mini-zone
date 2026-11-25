@@ -31,7 +31,11 @@ export function SelectControl({
   const { name, value, onChange } = field
 
   return (
-    <Select value={value ?? ""} onValueChange={onChange} disabled={disabled}>
+    <Select
+      value={(value as string | null | undefined) ?? null}
+      onValueChange={(next) => onChange(next ?? "")}
+      disabled={disabled}
+    >
       <SelectTrigger id={name} aria-invalid={!!error} className="w-full">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>

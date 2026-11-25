@@ -78,6 +78,7 @@ const AUTH_PATHS = {
   base: "/auth",
   login: "/auth/login",
   register: "/auth/register",
+  setup_admin: "/auth/setup-admin",
   login_admin: "/auth/login-admin",
   forgot_password: "/auth/forgot-password",
   reset_password: "/auth/reset-password",

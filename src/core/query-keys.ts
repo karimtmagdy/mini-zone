@@ -6,4 +6,10 @@ export const queryKeys = {
     register: () => [...queryKeys.auth.all, "register"] as const,
     logout: () => [...queryKeys.auth.all, "logout"] as const,
   },
+  employees: {
+    all: ["employees"] as const,
+    list: (params?: object) =>
+      [...queryKeys.employees.all, "list", params ?? {}] as const,
+    bootstrap: () => [...queryKeys.employees.all, "bootstrap"] as const,
+  },
 } as const

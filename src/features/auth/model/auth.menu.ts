@@ -1,4 +1,4 @@
-import { PATHS } from "@/lib/router/basic.routes"
+import { PATHS, panelUrl } from "@/lib/router/basic.routes"
 import type { UserRole } from "@/features/auth/model/auth.entity"
 
 export interface IAccountMenuItem {
@@ -15,11 +15,12 @@ export const ACCOUNT_MENU: Record<UserRole, IAccountMenuItem[]> = {
     { label: "Profile" },
     { label: "My Orders" },
     { label: "Wishlist" },
+    { label: "Setup Admin", url: PATHS.auth.setup_admin },
   ],
   employee: [
     { label: "Profile" },
     { label: "Dashboard", url: PATHS.panel.base },
-    { label: "Employees" },
+    { label: "Employees", url: panelUrl(PATHS.panel.employees) },
   ],
   supplier: [
     { label: "Profile" },

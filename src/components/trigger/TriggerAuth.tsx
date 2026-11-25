@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import { PATHS } from "@/lib/router/basic.routes"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import { Button } from "../ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,8 +26,9 @@ function getInitials(username: string) {
     .slice(0, 2)
     .map((part) => part.charAt(0))
     .join("")
+    .toUpperCase()
 
-  return (initials || username.slice(0, 2)).toUpperCase()
+  return initials || username.slice(0, 2).toUpperCase()
 }
 
 export function TriggerAuth() {
@@ -39,22 +39,20 @@ export function TriggerAuth() {
   if (!account) {
     return (
       <DropdownMenu>
-        <Tooltip>
-          <TooltipTrigger
-            render={
-              <DropdownMenuTrigger
-                render={
-                  <Button variant="outline" size="icon-xs">
-                    <UserCircleIcon />
-                  </Button>
-                }
-              />
-            }
-          />
-          <TooltipContent sideOffset={17}>Sign in</TooltipContent>
-        </Tooltip>
-        <DropdownMenuContent align="end">
-          <DropdownMenuGroup>
+        <DropdownMenuTrigger
+          render={
+            <Button
+              variant="outline"
+              size="icon-xs"
+              aria-label="Sign in"
+              title="Sign in"
+            >
+              <UserCircleIcon />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end" side="bottom" sideOffset={8}>
+          <DropdownMenuGroup className="*:justify-center">
             <DropdownMenuItem onClick={() => navigate(PATHS.auth.login)}>
               Login
             </DropdownMenuItem>
@@ -67,7 +65,9 @@ export function TriggerAuth() {
     )
   }
 
-  const items = account.role ? ACCOUNT_MENU[account.role] : []
+  const items: IAccountMenuItem[] = account.role
+    ? ACCOUNT_MENU[account.role]
+    : [{ label: "Setup Admin", url: PATHS.auth.setup_admin }]
 
   const onSelect = (item: IAccountMenuItem) => {
     if (item.url) navigate(item.url)
@@ -75,27 +75,24 @@ export function TriggerAuth() {
 
   return (
     <DropdownMenu>
-      <Tooltip>
-        <TooltipTrigger
-          render={
-            <DropdownMenuTrigger
-              render={
-                <Button variant="ghost" size="icon-xs" className="rounded-full">
-                  <Avatar size="sm">
-                    <AvatarFallback>
-                      {getInitials(account.user.username)}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              }
-            />
-          }
-        />
-        <TooltipContent sideOffset={17}>
-          {account.user.username} account
-        </TooltipContent>
-      </Tooltip>
-      <DropdownMenuContent align="end">
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            className="rounded-full"
+            aria-label={`${account.user.username} account`}
+            title={`${account.user.username} account`}
+          >
+            <Avatar size="sm">
+              <AvatarFallback>
+                {getInitials(account.user.username)}
+              </AvatarFallback>
+            </Avatar>
+          </Button>
+        }
+      />
+      <DropdownMenuContent align="end" side="bottom" sideOffset={8}>
         <DropdownMenuGroup>
           <DropdownMenuLabel>{account.user.username}</DropdownMenuLabel>
           <DropdownMenuSeparator />

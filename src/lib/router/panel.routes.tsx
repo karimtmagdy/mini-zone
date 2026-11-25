@@ -4,6 +4,7 @@ import { PATHS } from "./basic.routes"
 import { BrandsPage } from "@/pages/admin/brands/BrandsPage"
 import { DashboardPage } from "@/pages/admin/dashboard/DashboardPage"
 import { RequireRole } from "@/features/auth/components/require-role"
+import { RequirePermission } from "@/features/auth/components/require-permission"
 import { PANEL_ROLES } from "@/features/auth/model/auth.menu"
 
 import { CategoriesPage } from "@/pages/admin/categories/CategoriesPage"
@@ -91,7 +92,11 @@ export const Panel = [
       },
       {
         path: PATHS.panel.employees,
-        element: <EmployeesPage />,
+        element: (
+          <RequirePermission any={["employee:read"]}>
+            <EmployeesPage />
+          </RequirePermission>
+        ),
         handle: {
           crumb: () => "employees & staff directory",
         },

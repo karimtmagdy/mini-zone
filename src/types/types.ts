@@ -59,6 +59,8 @@ export interface NavItemData {
   url?: string
   icon?: LucideIcon
   isActive?: boolean
+  /** Hide the item unless the account owns at least one of these. */
+  anyOf?: string[]
   items?: NavItemData[]
 }
 

@@ -23,14 +23,27 @@ function fakeToken(payload: Record<string, unknown>): string {
 const user = { id: "u1", username: "admin", email: "admin@gmail.com" }
 
 describe("buildCurrentAccount", () => {
-  it("reads the role carried by the access token", () => {
-    const token = fakeToken({ sub: "u1", role: "employee", type: "access" })
+  it("reads the role and permissions carried by the access token", () => {
+    const token = fakeToken({
+      sub: "u1",
+      role: "employee",
+      permissions: ["employee:read", "brand:read"],
+      type: "access",
+    })
 
-    expect(buildCurrentAccount(user, token)).toEqual({ user, role: "employee" })
+    expect(buildCurrentAccount(user, token)).toEqual({
+      user,
+      role: "employee",
+      permissions: ["employee:read", "brand:read"],
+    })
   })
 
-  it("returns a null role when the token is missing", () => {
-    expect(buildCurrentAccount(user, null).role).toBeNull()
+  it("returns a null role and empty permissions when the token is missing", () => {
+    expect(buildCurrentAccount(user, null)).toEqual({
+      user,
+      role: null,
+      permissions: [],
+    })
   })
 })
 

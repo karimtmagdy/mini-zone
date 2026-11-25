@@ -30,6 +30,11 @@ export const API = {
   },
   brands: rest("/brands"),
   categories: rest("/categories"),
+  employees: {
+    ...rest("/employees"),
+    bootstrap: "/employees/bootstrap",
+    hire: "/employees/hire",
+  },
 
   /* ===== planned ===== */
   cart: rest("/cart"),

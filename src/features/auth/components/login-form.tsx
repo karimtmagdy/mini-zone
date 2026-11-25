@@ -58,6 +58,15 @@ export function LoginForm() {
           Sign up
         </Link>
       </p>
+      <p className="text-center text-sm text-muted-foreground">
+        First-time admin setup?{" "}
+        <Link
+          to={PATHS.auth.setup_admin}
+          className="underline underline-offset-4 hover:text-foreground"
+        >
+          Setup Admin
+        </Link>
+      </p>
     </CardForm>
   )
 }

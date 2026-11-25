@@ -29,6 +29,8 @@ function PopoverContent({
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
+        positionMethod="fixed"
+        collisionPadding={8}
         className="isolate z-50"
       >
         <PopoverPrimitive.Popup

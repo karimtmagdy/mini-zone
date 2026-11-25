@@ -6,7 +6,7 @@ import { authSession } from "@/features/auth/api/auth.session"
 import { buildCurrentAccount } from "@/features/auth/model/auth.token"
 
 /**
- * The signed-in account (user + role).
+ * The signed-in account (user + role + permissions from the access token).
  * Seeds from the stored session so the UI renders instantly, and only hits
  * `/auth/me` when an access token is present.
  */
