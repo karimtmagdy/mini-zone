@@ -65,14 +65,14 @@ export const Panel = [
         path: PATHS.panel.inventory,
         element: <InventoryPage />,
         handle: {
-          crumb: () => "inventory",
+          crumb: () => "inventory catalog",
         },
       },
       {
         path: PATHS.panel.salesOrders,
         element: <SalesOrdersPage />,
         handle: {
-          crumb: () => "salesOrders",
+          crumb: () => "sales orders",
         },
       },
       {
@@ -93,21 +93,21 @@ export const Panel = [
         path: PATHS.panel.employees,
         element: <EmployeesPage />,
         handle: {
-          crumb: () => "employees",
+          crumb: () => "employees & staff directory",
         },
       },
       {
         path: PATHS.panel.users,
         element: <UsersPage />,
         handle: {
-          crumb: () => "users",
+          crumb: () => "users management",
         },
       },
       {
         path: PATHS.panel.stockAdjustments,
         element: <StockAdjustmentsPage />,
         handle: {
-          crumb: () => "stockAdjustments",
+          crumb: () => "stock Adjustments",
         },
       },
       {
