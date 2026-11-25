@@ -40,7 +40,6 @@ function DropdownMenuContent({
         side={side}
         sideOffset={sideOffset}
         positionMethod="fixed"
-        collisionBoundary="viewport"
         collisionPadding={8}
       >
         <MenuPrimitive.Popup
