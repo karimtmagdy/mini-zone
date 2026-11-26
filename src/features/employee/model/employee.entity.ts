@@ -60,6 +60,14 @@ export interface ICreateEmployeePayload {
   status?: EmployeeStatus
 }
 
+export interface IUpdateEmployeePayload {
+  department?: EmpDepartment
+  job?: EmpJob
+  jobRole?: EmpJobRole
+  salary?: number
+  status?: EmployeeStatus
+}
+
 export interface IHireEmployeePayload {
   username: string
   email: string

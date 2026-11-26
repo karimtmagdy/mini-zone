@@ -12,4 +12,9 @@ export const queryKeys = {
       [...queryKeys.employees.all, "list", params ?? {}] as const,
     bootstrap: () => [...queryKeys.employees.all, "bootstrap"] as const,
   },
+  brands: {
+    all: ["brands"] as const,
+    list: (params?: object) =>
+      [...queryKeys.brands.all, "list", params ?? {}] as const,
+  },
 } as const

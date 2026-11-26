@@ -6,6 +6,7 @@ import {
   SidebarHeader,
 } from "../ui/sidebar"
 import { NavMain } from "./NavMain"
+import { NavUser } from "./NavUser"
 import { data } from "@/lib/data/data-list-side-panel"
 import { Logo } from "../header/HeaderLogo"
 
@@ -18,7 +19,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>f</SidebarFooter>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
     </Sidebar>
   )
 }

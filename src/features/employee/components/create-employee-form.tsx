@@ -10,6 +10,7 @@ import {
   JOB_OPTIONS,
   JOB_ROLE_OPTIONS,
 } from "@/features/employee/model/employee.schema"
+import { CardForm } from "@/components/common/card-form"
 
 interface ICreateEmployeeFormProps {
   onCreated?: () => void
@@ -20,12 +21,11 @@ export function CreateEmployeeForm({ onCreated }: ICreateEmployeeFormProps) {
   const { visible, toggle } = useVisibility(["password", "confirm"] as const)
 
   return (
-    <form
-      noValidate
+    <CardForm
       onSubmit={createSubmit}
       className="grid gap-3 rounded-lg border p-4 md:grid-cols-2"
     >
-      <p className="md:col-span-2 text-sm text-muted-foreground">
+      <p className="text-sm text-muted-foreground md:col-span-2">
         Creates a login account, then links an employee profile with the chosen
         job role and permissions.
       </p>
@@ -109,6 +109,6 @@ export function CreateEmployeeForm({ onCreated }: ICreateEmployeeFormProps) {
           {mutation.isPending ? "Creating employee…" : "Add employee"}
         </Button>
       </div>
-    </form>
+    </CardForm>
   )
 }

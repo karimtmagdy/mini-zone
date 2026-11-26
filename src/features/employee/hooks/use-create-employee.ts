@@ -4,7 +4,7 @@ import { useZod } from "@/hooks/use-zod"
 import { queryKeys } from "@/core/query-keys"
 import { getErrorMessage } from "@/core/http-error"
 import { toast } from "@/components/ui/toast"
-import { employeeApi } from "@/features/employee/api/employee.api"
+import { employeeService } from "@/features/employee/api/employee.api"
 import {
   createEmployeeZod,
   type TCreateEmployeeDTO,
@@ -33,7 +33,7 @@ export function useCreateEmployee(onCreated?: () => void) {
   const mutation = useMutation({
     mutationKey: [...queryKeys.employees.all, "hire"],
     mutationFn: async (values: TCreateEmployeeEX) =>
-      employeeApi.hire({
+      employeeService.hire({
         username: values.username,
         email: values.email,
         password: values.password,

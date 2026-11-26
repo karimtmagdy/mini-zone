@@ -2,6 +2,7 @@ import { UserCircleIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 import { PATHS } from "@/lib/router/basic.routes"
+import { getInitials } from "@/lib/utils"
 import { Avatar, AvatarFallback } from "../ui/avatar"
 import { Button } from "../ui/button"
 import {
@@ -14,27 +15,15 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu"
 import { useCurrentAccount } from "@/features/auth/hooks/use-current-account"
-import { useAuthLogout } from "@/features/auth/hooks/use-auth-logout"
 import {
   ACCOUNT_MENU,
   type IAccountMenuItem,
 } from "@/features/auth/model/auth.menu"
-
-function getInitials(username: string) {
-  const parts = username.split(/[\s._-]+/).filter(Boolean)
-  const initials = parts
-    .slice(0, 2)
-    .map((part) => part.charAt(0))
-    .join("")
-    .toUpperCase()
-
-  return initials || username.slice(0, 2).toUpperCase()
-}
+import { LogoutMenuItem } from "../sidebar/LogoutMenuItem"
 
 export function TriggerAuth() {
   const navigate = useNavigate()
   const { data: account } = useCurrentAccount()
-  const { logout, mutation } = useAuthLogout()
 
   if (!account) {
     return (
@@ -102,13 +91,7 @@ export function TriggerAuth() {
             </DropdownMenuItem>
           ))}
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            variant="destructive"
-            disabled={mutation.isPending}
-            onClick={logout}
-          >
-            Logout
-          </DropdownMenuItem>
+          <LogoutMenuItem />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -8,7 +8,7 @@ import { PATHS, panelUrl } from "@/lib/router/basic.routes"
 import { authApi } from "@/features/auth/api/auth.api"
 import { authSession } from "@/features/auth/api/auth.session"
 import { buildCurrentAccount } from "@/features/auth/model/auth.token"
-import { employeeApi } from "@/features/employee/api/employee.api"
+import { employeeService } from "@/features/employee/api/employee.api"
 import type { IBootstrapAdminPayload } from "@/features/employee/model/employee.entity"
 
 /**
@@ -22,7 +22,7 @@ export function useBootstrapAdmin() {
   return useMutation({
     mutationKey: queryKeys.employees.bootstrap(),
     mutationFn: async (payload: IBootstrapAdminPayload) => {
-      const employee = await employeeApi.bootstrap(payload)
+      const employee = await employeeService.bootstrap(payload)
       const session = await authApi.refresh()
       authSession.replace(session)
       return { employee, session }

@@ -29,6 +29,16 @@ const JOB_ROLES = [
   "accountant",
 ] as const
 
+const STATUSES = [
+  "pending",
+  "active",
+  "suspended",
+  "inactive",
+  "terminated",
+  "banned",
+  "archive",
+] as const
+
 export const createEmployeeZod = z
   .object({
     username: z
@@ -61,8 +71,18 @@ export const createEmployeeZod = z
     path: ["confirm"],
   })
 
+export const updateEmployeeZod = z.object({
+  department: z.enum(DEPARTMENTS, { message: "department is required" }),
+  job: z.enum(JOBS, { message: "job is required" }),
+  jobRole: z.enum(JOB_ROLES, { message: "job role is required" }),
+  salary: z.coerce.number().nonnegative().default(0),
+  status: z.enum(STATUSES, { message: "status is required" }),
+})
+
 export type TCreateEmployeeDTO = z.input<typeof createEmployeeZod>
 export type TCreateEmployeeEX = z.output<typeof createEmployeeZod>
+export type TUpdateEmployeeDTO = z.input<typeof updateEmployeeZod>
+export type TUpdateEmployeeEX = z.output<typeof updateEmployeeZod>
 
 export const DEPARTMENT_OPTIONS = DEPARTMENTS.map((value) => ({
   label: value,
@@ -75,6 +95,11 @@ export const JOB_OPTIONS = JOBS.map((value) => ({
 }))
 
 export const JOB_ROLE_OPTIONS = JOB_ROLES.map((value) => ({
+  label: value,
+  value,
+}))
+
+export const STATUS_OPTIONS = STATUSES.map((value) => ({
   label: value,
   value,
 }))
